@@ -124,6 +124,40 @@
       + '</div></div>';
   }
 
+  /* ---------- صفحة عنّي: تعبئة البيانات من window.ABOUT (لو موجودة) ---------- */
+  function renderAbout() {
+    var A = window.ABOUT || {};
+    function setText(id, v) {
+      if (!v) return;
+      var el = document.getElementById(id);
+      if (el) el.textContent = v;
+    }
+    function setList(id, arr) {
+      if (!arr || !arr.length) return;
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('');
+    }
+    var av = document.getElementById('aboutAvatar');
+    if (av && A.photo) av.innerHTML = '<img src="' + esc(A.photo) + '" alt="صورة شخصية">';
+    setText('aboutName', A.name);
+    setText('aboutRole', A.role);
+    setText('aboutTagline', A.tagline);
+    setText('aboutWhoami', A.whoami);
+    setText('aboutStory', A.story);
+    setList('aboutMilestones', A.milestones);
+    setList('aboutDoing', A.doing);
+
+    var socials = A.socials || {};
+    [['socFacebook', socials.facebook], ['socLinkedin', socials.linkedin]].forEach(function (pair) {
+      var el = document.getElementById(pair[0]);
+      if (!el) return;
+      if (pair[1]) { el.href = pair[1]; el.target = '_blank'; el.rel = 'noopener'; }
+      else if (el.getAttribute('href') === '#') { el.style.display = 'none'; }
+    });
+    var em = document.getElementById('socEmail');
+    if (em && socials.email) em.href = 'mailto:' + socials.email;
+  }
+
   /* ---------- تشغيل ---------- */
   function boot() {
     /* الرسم الأول عشان مراقب الظهور يشوف الكروت الجديدة */
@@ -131,6 +165,7 @@
     var productRoot = document.getElementById('productRoot');
     if (productsRoot) renderProductsPage(productsRoot);
     if (productRoot) renderProductPage(productRoot);
+    if (document.getElementById('aboutAvatar')) renderAbout();
     initCommon();
     /* أزرار الواتساب اللي عليها data-wa-msg (زي صفحة عنّي) */
     document.querySelectorAll('[data-wa-msg]').forEach(function (el) {
