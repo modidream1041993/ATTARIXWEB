@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>لوحة التحكم — ATTARIX</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f5b301'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='bold' text-anchor='middle' fill='%23332600' font-family='Arial'%3E⚙%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .admin-wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  .panel{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:24px;margin-bottom:20px}
+  .panel > h2{font-size:1.25rem;font-weight:900;color:#dbe7ff;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.fgrid{grid-template-columns:1fr}}
+  .f{display:flex;flex-direction:column;gap:6px;font-weight:800;font-size:.88rem;color:#c8d4ec}
+  .f.full{grid-column:1/-1}
+  .f input,.f select,.f textarea{border:1px solid var(--line);border-radius:11px;padding:11px 13px;font-family:inherit;
+    font-size:.98rem;background:rgba(255,255,255,.05);color:var(--ink)}
+  .f textarea{min-height:74px;resize:vertical;line-height:1.6}
+  .f input:focus,.f select:focus,.f textarea:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+  .f select option{background:#0a1020}
+  .f .tip{font-weight:600;color:var(--muted);font-size:.78rem}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .item-card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:15px;margin-bottom:12px;overflow:hidden}
+  .item-card summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:14px 16px;font-weight:800;flex-wrap:wrap}
+  .item-card summary::-webkit-details-marker{display:none}
+  .item-card summary .sec-badge{font-size:.72rem;color:#8fd3ff;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);border-radius:999px;padding:2px 10px;font-weight:700}
+  .item-card summary .grow{flex:1}
+  .item-card .body{padding:16px;border-top:1px solid var(--line)}
+  .icon-btn{background:var(--glass2);border:1px solid var(--line);color:#fff;border-radius:9px;width:34px;height:34px;
+    cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:.15s;flex-shrink:0}
+  .icon-btn:hover{border-color:rgba(96,165,250,.5)}
+  .icon-btn.del:hover{border-color:#ef4444;color:#ef4444}
+  .thumb-mini{width:46px;height:46px;border-radius:10px;object-fit:cover;border:1px solid var(--line)}
+  .savebar{position:sticky;bottom:0;z-index:50;background:rgba(7,11,20,.92);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);padding:14px 0;margin-top:10px}
+  .savebar .admin-wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  #status{font-weight:800;font-size:.92rem}
+  #status.ok{color:var(--ok)} #status.err{color:#f87171} #status.busy{color:var(--warn)}
+  .token-note{background:rgba(245,179,1,.08);border:1px solid rgba(245,179,1,.3);border-radius:13px;padding:14px 16px;
+    color:#ffe9b0;font-size:.9rem;margin-top:12px}
+  .token-note ol{padding-inline-start:20px;margin-top:8px}
+  .token-note a{color:var(--gold2);text-decoration:underline}
+  details.help summary{cursor:pointer;font-weight:800;color:#8fd3ff}
+  .dirty-dot{display:none;width:10px;height:10px;border-radius:50%;background:var(--warn)}
+  .dirty .dirty-dot{display:inline-block}
+</style>
+</head>
+<body>
+
+<div class="orb orb-a"></div><div class="orb orb-b"></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark" style="background:linear-gradient(135deg,var(--gold),var(--gold2));color:#332600">⚙</span> لوحة التحكم</a>
+    <nav class="nav-links">
+      <a href="products.html" target="_blank" rel="noopener">👁️ شوف صفحة المنتجات</a>
+      <a href="index.html">الرئيسية</a>
+    </nav>
+  </div>
+</header>
+
+<main style="padding:34px 0">
+<div class="admin-wrap">
+
+  <!-- ===== 1) ربط GitHub ===== -->
+  <div class="panel">
+    <h2>🔑 الربط بـ GitHub <span class="tip" style="font-weight:600;color:var(--muted);font-size:.8rem">(مرة واحدة بس)</span></h2>
+    <div class="fgrid">
+      <label class="f full">مفتاح GitHub (Token)
+        <input id="ghToken" type="password" placeholder="github_pat_..." autocomplete="off" />
+        <span class="tip">بيتحفظ في متصفحك أنت بس — محدش غيرك يقدر يحفظ تعديلات من غيره.</span>
+      </label>
+    </div>
+    <details class="help" style="margin-top:10px">
+      <summary>إزاي أجيب المفتاح؟ (خطوات بسيطة)</summary>
+      <div class="token-note">
+        <ol>
+          <li>افتح <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">صفحة إنشاء المفتاح في GitHub</a> (لازم تكون مسجّل دخول بحسابك modidream1041993).</li>
+          <li>اكتب أي اسم (مثلاً: attarix-admin) واختار مدة انتهاء طويلة (سنة).</li>
+          <li>في <b>Repository access</b> اختار <b>Only select repositories</b> واختار <b>ATTARIXWEB</b> بس.</li>
+          <li>في <b>Permissions → Repository permissions → Contents</b> اختار <b>Read and write</b>.</li>
+          <li>اضغط <b>Generate token</b> وانسخ المفتاح والصقه هنا فوق.</li>
+        </ol>
+        ⚠️ متشاركش المفتاح ده مع حد، ومتحطوش في أي ملف بترفعه على النت.
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 2) بيانات التواصل ===== -->
+  <div class="panel">
+    <h2>📞 بيانات التواصل</h2>
+    <div class="fgrid">
+      <label class="f">الاسم اللي بيظهر في الرسايل
+        <input id="cOwner" />
+      </label>
+      <label class="f">رقم الواتساب (دولي بدون +)
+        <input id="cWhatsapp" inputmode="tel" placeholder="201090246299" />
+      </label>
+      <label class="f">رقم التليفون (بصيغة +20...)
+        <input id="cPhone" inputmode="tel" placeholder="+201090246299" />
+      </label>
+    </div>
+  </div>
+
+  <!-- ===== 3) الأقسام ===== -->
+  <div class="panel">
+    <h2>📂 الأقسام <span class="tip" style="font-weight:600;color:var(--muted);font-size:.8rem">(عدّل اسم المحل من هنا)</span></h2>
+    <div id="sectionsList"></div>
+    <button class="btn btn-ghost btn-sm" id="addSection" type="button">➕ ضيف قسم جديد</button>
+  </div>
+
+  <!-- ===== 4) المنتجات ===== -->
+  <div class="panel">
+    <h2>🛍️ المنتجات والمشاريع</h2>
+    <div id="productsList"></div>
+    <button class="btn btn-blue btn-sm" id="addProduct" type="button">➕ ضيف منتج جديد</button>
+  </div>
+
+</div>
+</main>
+
+<div class="savebar">
+  <div class="admin-wrap">
+    <button class="btn btn-gold" id="saveAll" type="button">💾 احفظ وانشر على الموقع</button>
+    <span class="dirty-dot" title="في تعديلات لسه متتحفظتش"></span>
+    <span id="status"></span>
+  </div>
+</div>
+
+<!-- بيانات الموقع الحالية -->
+<script src="products-data.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- إعدادات الريبو ---------- */
+  var GH_OWNER = 'modidream1041993';
+  var GH_REPO = 'ATTARIXWEB';
+  var GH_BRANCH = 'main';
+  var DATA_PATH = 'products-data.js';
+  var TOKEN_KEY = 'attarix_gh_token';
+
+  /* ---------- الحالة (نسخة من بيانات الموقع) ---------- */
+  var state = {
+    contact: JSON.parse(JSON.stringify(window.SITE_CONTACT || { whatsapp: '', phone: '', owner: '' })),
+    sections: JSON.parse(JSON.stringify(window.SECTIONS || [])),
+    products: JSON.parse(JSON.stringify(window.PRODUCTS || []))
+  };
+  var dirty = false;
+
+  function markDirty() { dirty = true; document.body.classList.add('dirty'); }
+  window.addEventListener('beforeunload', function (e) {
+    if (dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  function $(id) { return document.getElementById(id); }
+  function setStatus(msg, cls) { var s = $('status'); s.textContent = msg; s.className = cls || ''; }
+
+  /* ---------- التوكن ---------- */
+  var tokenInput = $('ghToken');
+  tokenInput.value = localStorage.getItem(TOKEN_KEY) || '';
+  tokenInput.addEventListener('input', function () {
+    localStorage.setItem(TOKEN_KEY, tokenInput.value.trim());
+  });
+
+  /* ---------- بيانات التواصل ---------- */
+  function bindContact(id, key) {
+    var el = $(id);
+    el.value = state.contact[key] || '';
+    el.addEventListener('input', function () { state.contact[key] = el.value.trim(); markDirty(); });
+  }
+  bindContact('cOwner', 'owner');
+  bindContact('cWhatsapp', 'whatsapp');
+  bindContact('cPhone', 'phone');
+
+  /* ---------- الأقسام ---------- */
+  function renderSections() {
+    var list = $('sectionsList');
+    list.innerHTML = '';
+    state.sections.forEach(function (s, i) {
+      var card = document.createElement('div');
+      card.className = 'item-card';
+      card.innerHTML =
+        '<div class="body" style="border-top:none">'
+        + '<div class="fgrid">'
+        + '<label class="f">اسم القسم<input data-k="title" /></label>'
+        + '<label class="f">الأيقونة (إيموجي)<input data-k="icon" style="max-width:120px" /></label>'
+        + '<label class="f full">سطر وصف تحت الاسم (اختياري)<input data-k="note" /></label>'
+        + '</div>'
+        + '<div class="row" style="margin-top:10px">'
+        + '<button class="icon-btn" data-act="up" title="فوق" type="button">⬆️</button>'
+        + '<button class="icon-btn" data-act="down" title="تحت" type="button">⬇️</button>'
+        + '<button class="icon-btn del" data-act="del" title="حذف القسم" type="button">🗑️</button>'
+        + '<span class="tip" style="color:var(--muted);font-size:.78rem">المنتجات اللي جوا القسم ده: <b>' + state.products.filter(function (p) { return p.section === s.id; }).length + '</b></span>'
+        + '</div></div>';
+
+      card.querySelectorAll('input[data-k]').forEach(function (inp) {
+        var k = inp.getAttribute('data-k');
+        inp.value = s[k] || '';
+        inp.addEventListener('input', function () { s[k] = inp.value; markDirty(); if (k === 'title') renderProducts(); });
+      });
+      card.querySelectorAll('button[data-act]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var act = b.getAttribute('data-act');
+          if (act === 'del') {
+            var used = state.products.filter(function (p) { return p.section === s.id; }).length;
+            if (used && !confirm('القسم ده فيه ' + used + ' منتج — لو مسحته المنتجات دي مش هتظهر. متأكد؟')) return;
+            state.sections.splice(i, 1);
+          }
+          if (act === 'up' && i > 0) { state.sections.splice(i - 1, 0, state.sections.splice(i, 1)[0]); }
+          if (act === 'down' && i < state.sections.length - 1) { state.sections.splice(i + 1, 0, state.sections.splice(i, 1)[0]); }
+          markDirty(); renderSections(); renderProducts();
+        });
+      });
+      list.appendChild(card);
+    });
+  }
+
+  $('addSection').addEventListener('click', function () {
+    state.sections.push({ id: 'sec-' + Date.now(), icon: '📂', title: 'قسم جديد', note: '' });
+    markDirty(); renderSections();
+  });
+
+  /* ---------- المنتجات ---------- */
+  function sectionTitle(id) {
+    var s = state.sections.find(function (x) { return x.id === id; });
+    return s ? s.title : '(قسم محذوف)';
+  }
+
+  function renderProducts() {
+    var list = $('productsList');
+    var openIds = {};
+    list.querySelectorAll('details[open]').forEach(function (d) { openIds[d.getAttribute('data-id')] = true; });
+    list.innerHTML = '';
+
+    state.products.forEach(function (p, i) {
+      var card = document.createElement('details');
+      card.className = 'item-card';
+      card.setAttribute('data-id', p.id);
+      if (openIds[p.id]) card.open = true;
+
+      card.innerHTML =
+        '<summary>'
+        + (p.image ? '<img class="thumb-mini" alt="">' : '<span style="font-size:1.3rem">' + '</span>')
+        + '<span class="p-name grow"></span>'
+        + '<span class="sec-badge"></span>'
+        + '<button class="icon-btn" data-act="up" title="فوق" type="button">⬆️</button>'
+        + '<button class="icon-btn" data-act="down" title="تحت" type="button">⬇️</button>'
+        + '<button class="icon-btn del" data-act="del" title="حذف" type="button">🗑️</button>'
+        + '</summary>'
+        + '<div class="body"><div class="fgrid">'
+        + '<label class="f">اسم المنتج<input data-k="name" /></label>'
+        + '<label class="f">القسم<select data-k="section"></select></label>'
+        + '<label class="f">الأيقونة (إيموجي — لو مفيش صورة)<input data-k="icon" style="max-width:120px" /></label>'
+        + '<label class="f">السعر (اكتبه زي ما تحب يظهر)<input data-k="price" placeholder="مثال: 150 ج.م" /></label>'
+        + '<label class="f full">وصف قصير (بيظهر على الكارت)<textarea data-k="short" style="min-height:56px"></textarea></label>'
+        + '<label class="f full">الوصف الكامل (بيظهر في صفحة المنتج)<textarea data-k="description"></textarea></label>'
+        + '<label class="f full">المميزات — كل ميزة في سطر لوحدها<textarea data-k="features"></textarea></label>'
+        + '<label class="f">صورة المنتج<input type="file" accept="image/*" data-k="__upload" /><span class="tip up-tip"></span></label>'
+        + '<label class="f">أو مسار الصورة يدوي<input data-k="image" placeholder="images/item.jpg" /></label>'
+        + '<label class="f"><span>شارة «جديد»</span><select data-k="isNew"><option value="">لأ</option><option value="1">أيوه ✨</option></select></label>'
+        + '</div></div>';
+
+      /* عناصر الملخص */
+      card.querySelector('.p-name').textContent = p.name || '(بدون اسم)';
+      card.querySelector('.sec-badge').textContent = sectionTitle(p.section);
+      if (p.image) { var im = card.querySelector('.thumb-mini'); im.src = p.image; }
+      else { card.querySelector('summary span').textContent = p.icon || '📦'; }
+
+      /* قائمة الأقسام */
+      var sel = card.querySelector('select[data-k="section"]');
+      state.sections.forEach(function (s) {
+        var o = document.createElement('option');
+        o.value = s.id; o.textContent = s.title;
+        sel.appendChild(o);
+      });
+
+      /* ربط الحقول */
+      card.querySelectorAll('[data-k]').forEach(function (inp) {
+        var k = inp.getAttribute('data-k');
+        if (k === '__upload') {
+          inp.addEventListener('change', function () { if (inp.files[0]) uploadImage(inp.files[0], p, card); });
+          return;
+        }
+        if (k === 'features') inp.value = (p.features || []).join('\n');
+        else if (k === 'isNew') inp.value = p.isNew ? '1' : '';
+        else inp.value = p[k] || '';
+
+        inp.addEventListener('input', function () {
+          if (k === 'features') p.features = inp.value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean);
+          else if (k === 'isNew') p.isNew = inp.value === '1';
+          else p[k] = inp.value;
+          if (k === 'name') card.querySelector('.p-name').textContent = p.name || '(بدون اسم)';
+          if (k === 'section') card.querySelector('.sec-badge').textContent = sectionTitle(p.section);
+          markDirty();
+        });
+      });
+
+      /* أزرار الترتيب والحذف */
+      card.querySelectorAll('button[data-act]').forEach(function (b) {
+        b.addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation();
+          var act = b.getAttribute('data-act');
+          if (act === 'del') {
+            if (!confirm('تمسح «' + (p.name || 'المنتج ده') + '»؟')) return;
+            state.products.splice(i, 1);
+          }
+          if (act === 'up' && i > 0) { state.products.splice(i - 1, 0, state.products.splice(i, 1)[0]); }
+          if (act === 'down' && i < state.products.length - 1) { state.products.splice(i + 1, 0, state.products.splice(i, 1)[0]); }
+          markDirty(); renderProducts();
+        });
+      });
+
+      list.appendChild(card);
+    });
+  }
+
+  $('addProduct').addEventListener('click', function () {
+    var p = {
+      id: 'p-' + Date.now(),
+      section: state.sections.length ? state.sections[0].id : '',
+      icon: '📦', name: '', short: '', description: '',
+      features: [], price: '', image: ''
+    };
+    state.products.push(p);
+    markDirty(); renderProducts();
+    var card = document.querySelector('details[data-id="' + p.id + '"]');
+    if (card) { card.open = true; card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  });
+
+  /* ---------- GitHub API ---------- */
+  function ghHeaders() {
+    return {
+      'Authorization': 'Bearer ' + (localStorage.getItem(TOKEN_KEY) || ''),
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    };
+  }
+  function apiUrl(path) {
+    return 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + path;
+  }
+  function b64FromUtf8(str) {
+    var bytes = new TextEncoder().encode(str);
+    var bin = '';
+    bytes.forEach(function (b) { bin += String.fromCharCode(b); });
+    return btoa(bin);
+  }
+  function b64FromArrayBuffer(buf) {
+    var bytes = new Uint8Array(buf);
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+  function getSha(path) {
+    return fetch(apiUrl(path) + '?ref=' + GH_BRANCH, { headers: ghHeaders() })
+      .then(function (r) {
+        if (r.status === 404) return null;
+        if (!r.ok) throw new Error('GitHub ' + r.status);
+        return r.json().then(function (j) { return j.sha; });
+      });
+  }
+  function putFile(path, contentB64, message, sha) {
+    var body = { message: message, content: contentB64, branch: GH_BRANCH };
+    if (sha) body.sha = sha;
+    return fetch(apiUrl(path), { method: 'PUT', headers: ghHeaders(), body: JSON.stringify(body) })
+      .then(function (r) {
+        if (!r.ok) return r.json().then(function (j) { throw new Error(j.message || ('GitHub ' + r.status)); });
+        return r.json();
+      });
+  }
+  function requireToken() {
+    if (!(localStorage.getItem(TOKEN_KEY) || '').trim()) {
+      alert('لازم تحط مفتاح GitHub الأول — شوف خطوات «إزاي أجيب المفتاح؟» فوق.');
+      tokenInput.focus();
+      return false;
+    }
+    return true;
+  }
+
+  /* ---------- رفع صورة ---------- */
+  function uploadImage(file, p, card) {
+    if (!requireToken()) return;
+    if (file.size > 3 * 1024 * 1024) { alert('الصورة أكبر من 3 ميجا — صغّرها الأول عشان الموقع يفضل سريع.'); return; }
+    var tip = card.querySelector('.up-tip');
+    tip.textContent = '⏳ بيرفع الصورة...';
+    var ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+    var path = 'images/' + p.id + '-' + Date.now() + '.' + ext;
+    file.arrayBuffer()
+      .then(function (buf) { return putFile(path, b64FromArrayBuffer(buf), 'رفع صورة: ' + (p.name || p.id)); })
+      .then(function () {
+        p.image = path;
+        markDirty();
+        tip.textContent = '✅ اترفعت — متنساش تضغط «احفظ وانشر»';
+        var imgInput = card.querySelector('input[data-k="image"]');
+        if (imgInput) imgInput.value = path;
+        renderProducts();
+      })
+      .catch(function (e) { tip.textContent = ''; alert('فشل رفع الصورة: ' + e.message); });
+  }
+
+  /* ---------- توليد الملف والحفظ ---------- */
+  function serialize() {
+    return '/* ملف بيانات المنتجات — بيتولّد تلقائيًا من لوحة التحكم (admin.html)\n'
+      + '   عدّل من اللوحة، أو يدوي من هنا لو حابب. */\n\n'
+      + 'window.SITE_CONTACT = ' + JSON.stringify(state.contact, null, 2) + ';\n\n'
+      + 'window.SECTIONS = ' + JSON.stringify(state.sections, null, 2) + ';\n\n'
+      + 'window.PRODUCTS = ' + JSON.stringify(state.products, null, 2) + ';\n';
+  }
+
+  $('saveAll').addEventListener('click', function () {
+    if (!requireToken()) return;
+    var bad = state.products.filter(function (p) { return !(p.name || '').trim(); });
+    if (bad.length && !confirm('في ' + bad.length + ' منتج من غير اسم — يتحفظوا برضه؟')) return;
+
+    var btn = $('saveAll');
+    btn.disabled = true;
+    setStatus('⏳ بيحفظ على GitHub...', 'busy');
+    getSha(DATA_PATH)
+      .then(function (sha) {
+        return putFile(DATA_PATH, b64FromUtf8(serialize()), 'تحديث المنتجات من لوحة التحكم', sha);
+      })
+      .then(function () {
+        dirty = false;
+        document.body.classList.remove('dirty');
+        setStatus('✅ اتحفظ! الموقع بيتحدث تلقائيًا خلال دقيقة تقريبًا.', 'ok');
+      })
+      .catch(function (e) {
+        setStatus('❌ فشل الحفظ: ' + e.message, 'err');
+      })
+      .then(function () { btn.disabled = false; });
+  });
+
+  /* ---------- تشغيل ---------- */
+  renderSections();
+  renderProducts();
+})();
+</script>
+</body>
+</html>
