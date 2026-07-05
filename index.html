@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ATTARIX — نظام إدارة المحلات الذكي: كاشير، مخزون، محاسبة، تقارير</title>
+<meta name="description" content="ATTARIX نظام عربي ذكي لإدارة المتجر: كاشير سريع، مخزون بالكرتونة والقطعة، محاسبة قيد مزدوج، مساعد شراء ذكي، تذكيرات واتساب للتحصيل — يعمل بدون إنترنت وبدون اشتراك إجباري." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="ATTARIX — نظام إدارة المحلات الذكي" />
+<meta property="og:description" content="كاشير + مخزون + محاسبة + ذكاء يفكر معاك. عربي 100%، يعمل أوفلاين، بدون اشتراك إجباري." />
+<meta property="og:locale" content="ar_EG" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ATTARIX",
+  "operatingSystem": "Windows",
+  "applicationCategory": "BusinessApplication",
+  "description": "نظام عربي ذكي لإدارة المتاجر: نقاط بيع، مخزون، محاسبة قيد مزدوج، تقارير وذكاء تجاري.",
+  "inLanguage": "ar",
+  "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "EGP" }
+}
+</script>
+<!-- ====== بيانات التواصل ====== -->
+<script>
+  window.ATTARIX_WHATSAPP = "201090246299"; // واتساب (دولي بدون +)
+  window.ATTARIX_PHONE = "+201090246299";
+  window.ATTARIX_OWNER = "م. محمود العطار";
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070b14; --bg2:#0a1020; --ink:#eef3ff; --muted:#93a1bd;
+    --blue:#3b82f6; --blue2:#1d4ed8; --violet:#7c3aed; --gold:#f5b301; --gold2:#ffcf40;
+    --glass:rgba(255,255,255,.045); --glass2:rgba(255,255,255,.08); --line:rgba(255,255,255,.09);
+    --ok:#34d399; --warn:#fbbf24;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Cairo',system-ui,Arial,sans-serif;color:var(--ink);background:var(--bg);
+    line-height:1.75;overflow-x:hidden;
+    background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1px);
+    background-size:26px 26px;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  /* ===== glow orbs ===== */
+  .orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none;z-index:0}
+  .orb-a{width:520px;height:520px;background:#1d4ed8;top:-140px;inset-inline-end:-120px;animation:drift 16s ease-in-out infinite alternate}
+  .orb-b{width:420px;height:420px;background:#7c3aed;top:48%;inset-inline-start:-160px;animation:drift 20s ease-in-out infinite alternate-reverse}
+  .orb-c{width:380px;height:380px;background:#0ea5e9;bottom:-140px;inset-inline-end:22%;animation:drift 24s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(-60px,50px) scale(1.12)}}
+  @media (prefers-reduced-motion: reduce){
+    .orb{animation:none}
+    *{animation-duration:.001s !important;transition-duration:.001s !important}
+  }
+  main,header,footer{position:relative;z-index:1}
+
+  /* ===== buttons ===== */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;border-radius:14px;
+    padding:14px 26px;cursor:pointer;border:0;font-size:1.02rem;transition:.22s;font-family:inherit}
+  .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#332600;
+    box-shadow:0 0 0 1px rgba(245,179,1,.4),0 10px 34px rgba(245,179,1,.28)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(245,179,1,.55),0 16px 44px rgba(245,179,1,.4)}
+  .btn-ghost{background:var(--glass);color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:var(--glass2);border-color:rgba(255,255,255,.22)}
+  .btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 10px 30px rgba(29,78,216,.35)}
+  .btn-blue:hover{transform:translateY(-2px)}
+
+  /* ===== header ===== */
+  header{position:sticky;top:0;z-index:60;background:rgba(7,11,20,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.4rem}
+  .logo .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--blue2));
+    display:grid;place-items:center;color:#fff;font-size:1.05rem;box-shadow:0 0 22px rgba(59,130,246,.55)}
+  .nav-links{display:flex;gap:22px;font-weight:700;color:var(--muted);font-size:.95rem}
+  .nav-links a:hover{color:#fff}
+  .menu-btn{display:none;background:var(--glass);border:1px solid var(--line);color:#fff;font-size:1.3rem;
+    width:42px;height:42px;border-radius:11px;cursor:pointer;line-height:1;flex-shrink:0}
+  @media(max-width:920px){
+    .menu-btn{display:grid;place-items:center}
+    .nav-links{display:none;position:absolute;top:68px;inset-inline:0;flex-direction:column;gap:0;
+      background:rgba(7,11,20,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:6px 0}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:13px 24px;border-bottom:1px solid rgba(255,255,255,.05);font-size:1.02rem}
+    .nav-links a:last-child{border-bottom:none}
+    .nav .btn-gold{padding:9px 14px;font-size:.85rem}
+  }
+
+  /* ===== hero ===== */
+  .hero{padding:64px 0 40px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  @media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
+  .offer{display:inline-flex;align-items:center;gap:8px;background:rgba(245,179,1,.12);color:var(--gold2);
+    border:1px solid rgba(245,179,1,.35);font-weight:800;border-radius:999px;padding:8px 18px;font-size:.92rem;margin-bottom:20px}
+  .hero h1{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:900;line-height:1.28}
+  .hero h1 .grad{background:linear-gradient(90deg,#60a5fa,#a78bfa 55%,#f5b301);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{font-size:1.15rem;color:var(--muted);margin-top:16px;max-width:560px}
+  .hero .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .badges{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+  .badge{background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.82rem;font-weight:700;color:#c8d4ec}
+
+  /* ===== 3D mockup ===== */
+  .stage{perspective:1400px;position:relative;padding:20px 6px}
+  .laptop{transform:rotateY(-12deg) rotateX(7deg);transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform}
+  .screen{background:#0c1426;border:1px solid rgba(120,160,255,.25);border-radius:16px;overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 60px rgba(29,78,216,.28),inset 0 0 0 1px rgba(255,255,255,.04)}
+  .titlebar{height:30px;background:#0a1020;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line)}
+  .dot{width:9px;height:9px;border-radius:50%}
+  .app{display:flex;height:320px}
+  .m-side{width:88px;background:linear-gradient(180deg,#1e3a8a,#0b1220);padding:10px 8px;display:flex;flex-direction:column;gap:7px}
+  .m-side .it{height:16px;border-radius:6px;background:rgba(255,255,255,.14)}
+  .m-side .it.on{background:#fff}
+  .m-main{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;background:#0d1526}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .kpi{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:8px}
+  .kpi b{display:block;font-size:.78rem;color:#8fd3ff}
+  .kpi span{font-size:.6rem;color:var(--muted)}
+  .kpi:nth-child(2) b{color:#86efac}.kpi:nth-child(3) b{color:#c4b5fd}.kpi:nth-child(4) b{color:#fcd34d}
+  .chart{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;display:flex;align-items:flex-end;gap:7px;padding:12px}
+  .bar{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#60a5fa,#1d4ed8);animation:grow 1.4s ease both}
+  .bar:nth-child(odd){background:linear-gradient(180deg,#a78bfa,#6d28d9)}
+  @keyframes grow{from{height:6% !important}}
+  .rows{display:flex;flex-direction:column;gap:6px}
+  .rows .r{height:11px;border-radius:5px;background:rgba(255,255,255,.08)}
+  .rows .r:nth-child(2){width:86%}.rows .r:nth-child(3){width:70%}
+  .float{position:absolute;background:rgba(10,16,32,.92);border:1px solid rgba(120,160,255,.35);border-radius:13px;
+    padding:10px 14px;font-size:.82rem;font-weight:800;backdrop-filter:blur(6px);
+    box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 24px rgba(59,130,246,.25);white-space:nowrap}
+  .float small{display:block;font-weight:600;color:var(--muted);font-size:.7rem}
+  .f1{top:2%;inset-inline-start:-4%;animation:bob 5s ease-in-out infinite}
+  .f2{bottom:12%;inset-inline-start:-8%;animation:bob 6s ease-in-out infinite reverse;color:#86efac}
+  .f3{top:34%;inset-inline-end:-5%;animation:bob 7s ease-in-out infinite;color:#8fd3ff}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @media(max-width:640px){.f1,.f2,.f3{display:none}.laptop{transform:none}}
+
+  /* ===== counters ===== */
+  .trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:44px 0 8px}
+  .t{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center;transition:.25s}
+  .t:hover{border-color:rgba(96,165,250,.4);transform:translateY(-3px)}
+  .t b{display:block;font-size:1.7rem;color:#8fd3ff;font-weight:900}
+  .t span{color:var(--muted);font-size:.86rem;font-weight:600}
+
+  /* ===== sections ===== */
+  section{padding:74px 0;position:relative}
+  .sec-head{text-align:center;max-width:720px;margin:0 auto 44px}
+  .kicker{display:inline-block;color:#8fd3ff;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);
+    border-radius:999px;padding:5px 16px;font-size:.85rem;font-weight:800;margin-bottom:14px}
+  .sec-head h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:900}
+  .sec-head p{color:var(--muted);margin-top:10px;font-size:1.05rem}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:18px}
+  .card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:24px;position:relative;
+    transition:border-color .25s, box-shadow .25s;transform-style:preserve-3d;will-change:transform}
+  .card:hover{border-color:rgba(96,165,250,.45);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 34px rgba(29,78,216,.15)}
+  .card .ic{font-size:1.6rem;width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(59,130,246,.22),rgba(124,58,237,.18));
+    border:1px solid rgba(96,165,250,.3);display:grid;place-items:center;margin-bottom:14px}
+  .card h3{font-size:1.16rem;font-weight:800}
+  .card ul{margin-top:10px;padding-inline-start:18px;color:var(--muted);font-size:.94rem}
+  .card ul li{margin:5px 0}
+  .card p.d{color:var(--muted);font-size:.95rem;margin-top:8px}
+
+  /* smart section */
+  .smart{background:linear-gradient(180deg,rgba(29,78,216,.10),transparent 70%);border-block:1px solid var(--line)}
+  .smart .card{background:rgba(13,21,38,.7)}
+  .smart .card h3{color:#dbe7ff}
+  .new{position:absolute;top:16px;inset-inline-start:16px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#332600;font-size:.68rem;font-weight:900;border-radius:999px;padding:3px 10px}
+
+  /* packages */
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:stretch}
+  .plan{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:30px 26px;display:flex;flex-direction:column;position:relative;transition:.25s}
+  .plan:hover{transform:translateY(-5px)}
+  .plan.hot{border:1px solid rgba(245,179,1,.5);background:linear-gradient(180deg,rgba(245,179,1,.07),rgba(255,255,255,.03));
+    box-shadow:0 0 50px rgba(245,179,1,.12)}
+  .plan .tag{position:absolute;top:-14px;inset-inline-start:24px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#332600;font-weight:900;font-size:.8rem;padding:5px 16px;border-radius:999px}
+  .plan h3{font-size:1.35rem;font-weight:900;color:#dbe7ff}
+  .plan .for{color:var(--muted);font-size:.9rem;margin-top:4px}
+  .plan ul{margin:18px 0 22px;padding-inline-start:18px;color:#b9c6e2;font-size:.95rem;flex:1}
+  .plan ul li{margin:7px 0}
+  .plan .price{font-weight:900;font-size:1.05rem;color:var(--gold2);margin-bottom:14px}
+
+  /* pills + faq */
+  .pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .pill{background:var(--glass);border:1px solid var(--line);color:#c8d4ec;font-weight:700;border-radius:999px;padding:10px 20px;transition:.2s}
+  .pill:hover{border-color:rgba(96,165,250,.5);color:#fff}
+  .faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  details{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px 22px;transition:.2s}
+  details[open]{border-color:rgba(96,165,250,.4)}
+  summary{cursor:pointer;font-weight:800;font-size:1.02rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:'+';font-size:1.4rem;color:#8fd3ff;transition:.2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);margin-top:10px;font-size:.96rem}
+
+  /* order */
+  .order-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+  @media(max-width:860px){.order-grid{grid-template-columns:1fr}}
+  .lead{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px}
+  .lead label{font-weight:800;font-size:.95rem;display:flex;flex-direction:column;gap:7px;color:#c8d4ec}
+  .lead input{border:1px solid var(--line);border-radius:12px;padding:13px;font-family:inherit;font-size:1rem;
+    background:rgba(255,255,255,.05);color:var(--ink)}
+  .lead input::placeholder{color:#5f6d8c}
+  .lead input:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+  .lead .hint{color:var(--muted);font-size:.82rem;text-align:center}
+  .ccard{background:linear-gradient(160deg,rgba(29,78,216,.35),rgba(12,20,38,.9));border:1px solid rgba(96,165,250,.3);
+    border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:11px}
+  .ccard h3{font-size:1.3rem;font-weight:900}
+  .ccard .who{color:#b9c6e2}
+  .cline{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid var(--line);
+    border-radius:13px;padding:13px 16px;font-weight:800;font-size:1.08rem;transition:.2s}
+  .cline:hover{background:rgba(255,255,255,.14)}
+  .ccard ul{margin-top:8px;padding-inline-start:18px;color:#b9c6e2;font-size:.93rem}
+  .ccard ul li{margin:5px 0}
+
+  footer{border-top:1px solid var(--line);background:rgba(7,11,20,.9);padding:38px 0;text-align:center;font-size:.92rem;color:var(--muted)}
+  footer a:hover{color:#fff}
+
+  .wa{position:fixed;inset-inline-start:18px;bottom:18px;z-index:70;background:#25d366;color:#fff;width:60px;height:60px;
+    border-radius:50%;display:grid;place-items:center;font-size:1.7rem;
+    box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,.5);animation:pulse 2.4s infinite;transition:.2s}
+  .wa:hover{transform:scale(1.08)}
+  @keyframes pulse{0%{box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,0)}}
+
+  /* reveal on scroll */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">A</span> ATTARIX</div>
+    <nav class="nav-links">
+      <a href="#smart">الذكاء</a>
+      <a href="#features">المزايا</a>
+      <a href="#plans">الباقات</a>
+      <a href="#faq">أسئلة شائعة</a>
+      <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">📖 دليل الاستخدام</a>
+      <a href="#order">اطلب العرض</a>
+    </nav>
+    <a class="btn btn-gold" id="navCta">💬 اطلب عرض السعر</a>
+    <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="offer">🔥 عرض إطلاق لفترة محدودة — السعر مفاجأة على الواتساب</span>
+      <h1>إدارة محلّك بقت <span class="grad">أذكى</span><br>بيع · مخزون · حسابات · ذكاء يفكر معاك</h1>
+      <p class="sub">ATTARIX مش مجرد كاشير — نظام عربي كامل بيقولك تشتري إيه قبل ما يخلص، يفكّرك بفلوسك عند العملاء بضغطة واتساب، ويكشف الأخطاء قبل ما تحصل. يعمل بدون إنترنت، وبدون اشتراك إجباري.</p>
+      <div class="cta">
+        <a class="btn btn-gold" href="#order">🔥 اطلب العرض والسعر الآن</a>
+        <a class="btn btn-ghost" href="#smart">شوف الذكاء بنفسك ↓</a>
+      </div>
+      <div class="badges">
+        <span class="badge">✅ عربي 100%</span>
+        <span class="badge">🔌 يعمل بدون إنترنت</span>
+        <span class="badge">🧠 ذكاء تجاري حقيقي</span>
+        <span class="badge">🛡️ استرجاع المحذوف</span>
+        <span class="badge">📦 بيع بالكرتونة والقطعة</span>
+        <span class="badge">✅ بدون اشتراك إجباري</span>
+      </div>
+    </div>
+
+    <!-- 3D laptop mockup -->
+    <div class="stage" id="stage">
+      <div class="laptop" id="laptop">
+        <div class="screen">
+          <div class="titlebar">
+            <span class="dot" style="background:#ef4444"></span>
+            <span class="dot" style="background:#fbbf24"></span>
+            <span class="dot" style="background:#34d399"></span>
+          </div>
+          <div class="app">
+            <div class="m-side">
+              <div class="it on"></div><div class="it"></div><div class="it"></div><div class="it"></div>
+              <div class="it"></div><div class="it"></div><div class="it"></div><div class="it"></div>
+            </div>
+            <div class="m-main">
+              <div class="kpis">
+                <div class="kpi"><b>1,785</b><span>مبيعات اليوم</span></div>
+                <div class="kpi"><b>+12%</b><span>عن الأسبوع الماضي</span></div>
+                <div class="kpi"><b>2.1M</b><span>صافي الأرباح</span></div>
+                <div class="kpi"><b>528</b><span>منتج</span></div>
+              </div>
+              <div class="chart">
+                <div class="bar" style="height:38%"></div><div class="bar" style="height:52%"></div>
+                <div class="bar" style="height:44%"></div><div class="bar" style="height:66%"></div>
+                <div class="bar" style="height:58%"></div><div class="bar" style="height:80%"></div>
+                <div class="bar" style="height:95%"></div>
+              </div>
+              <div class="rows"><div class="r"></div><div class="r"></div><div class="r"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float f1">🔔 اقتراح شراء ذكي<small>«شاي العروسة» هيخلص خلال 4 أيام — اشترِ 24</small></div>
+      <div class="float f2">💬 تذكير تحصيل اتبعت<small>واتساب للعميل «أحمد» — عليه 1,500 ج.م</small></div>
+      <div class="float f3">📈 +17% مبيعات<small>الشهر ده مقارنة باللي فات</small></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="trust rv">
+      <div class="t"><b data-count="17">0</b><span>قسم متكامل +</span></div>
+      <div class="t"><b>100%</b><span>عربي واجهة وتقارير</span></div>
+      <div class="t"><b>0</b><span>جنيه اشتراك شهري إجباري</span></div>
+      <div class="t"><b>24/7</b><span>يعمل بدون إنترنت</span></div>
+      <div class="t"><b data-count="8">0</b><span>ميزات ذكاء تجاري +</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SMART / AI SECTION ===== -->
+<section id="smart" class="smart">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">🧠 الذكاء التجاري — الميزة اللي مفيش زيها</span>
+      <h2>برنامج بيفكر معاك… مش بيسجّل وبس</h2>
+      <p>كل الأنظمة بتسجل اللي حصل. ATTARIX بيقولك اللي هيحصل — وإيه اللي المفروض تعمله.</p>
+    </div>
+    <div class="grid">
+      <div class="card rv" data-tilt>
+        <span class="new">جديد</span>
+        <div class="ic">🛒</div>
+        <h3>مساعد الشراء الذكي</h3>
+        <p class="d">بيحسب سرعة بيع كل صنف ويقولك: «الصنف ده هيخلص خلال X يوم — اشترِ كذا». وبضغطة واحدة يحوّل الاقتراح لفاتورة شراء جاهزة.</p>
+      </div>
+      <div class="card rv" data-tilt>
+        <span class="new">جديد</span>
+        <div class="ic">💬</div>
+        <h3>تحصيل فلوسك بالواتساب</h3>
+        <p class="d">جنب كل عميل مديون زر واتساب يبعت رسالة مهذبة جاهزة بالمبلغ المستحق — وكمان تذكير بالشيكات قبل ميعادها. فلوسك بترجع أسرع.</p>
+      </div>
+      <div class="card rv" data-tilt>
+        <span class="new">جديد</span>
+        <div class="ic">🎯</div>
+        <h3>ذاكرة آخر سعر للعميل</h3>
+        <p class="d">تختار العميل وتضيف الصنف — البرنامج فاكر آخر سعر بعته بيه للعميل ده ويطبّقه تلقائيًا. مفيش نسيان ومفيش إحراج في الجملة.</p>
+      </div>
+      <div class="card rv" data-tilt>
+        <span class="new">جديد</span>
+        <div class="ic">📦</div>
+        <h3>بيع بالكرتونة والدستة والقطعة</h3>
+        <p class="d">لكل صنف وحدات متعددة بباركود وسعر خاص لكل وحدة — امسح باركود الكرتونة تنزل 24 قطعة بسعر الكرتونة. والمخزون دايمًا مظبوط بالقطعة.</p>
+      </div>
+      <div class="card rv" data-tilt>
+        <span class="new">جديد</span>
+        <div class="ic">🛡️</div>
+        <h3>كشف الأخطاء قبل ما تحصل</h3>
+        <p class="d">فاتورة متكررة بالغلط؟ بيسألك قبل الحفظ. خصومات اليوم أعلى من الطبيعي؟ تنبيه فوري. مبيعات إمبارح نزلت فجأة؟ الجرس بيقولك.</p>
+      </div>
+      <div class="card rv" data-tilt>
+        <span class="new">جديد</span>
+        <div class="ic">🔁</div>
+        <h3>مصاريف بتتسجل لوحدها</h3>
+        <p class="d">سجّل الإيجار والمرتبات مرة واحدة — كل شهر البرنامج يفكّرك أو يقيدها تلقائيًا ويخصمها من الخزينة. محاسبتك مظبوطة من غير ما تفتكر.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES GRID ===== -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">كل حاجة في مكان واحد</span>
+      <h2>+17 قسم متكامل يغطي تشغيل المتجر بالكامل</h2>
+      <p>من أول مسح الباركود لحد الميزانية العمومية — بدون برامج إضافية.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card rv" data-tilt>
+        <div class="ic">🛒</div>
+        <h3>نقطة البيع (كاشير)</h3>
+        <ul>
+          <li>مسح باركود وبحث فوري بالاسم/الكود</li>
+          <li>شاشة كاشير مرتّبة: الأكثر مبيعًا دايمًا قدامك</li>
+          <li>دفع مختلط: نقدي + بطاقة + تحويل + آجل</li>
+          <li>بيع كاش سريع بمفتاح F8 + طباعة فورية</li>
+          <li>كوبونات خصم ونقاط ولاء وتعليق فواتير</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">📦</div>
+        <h3>المنتجات والمخزون</h3>
+        <ul>
+          <li>سعر قطاعي وجملة وشراء وضريبة لكل صنف</li>
+          <li>وحدات متعددة (كرتونة/دستة/قطعة) بباركود خاص</li>
+          <li>متغيرات (مقاس/لون) وطباعة ملصقات باركود</li>
+          <li>تواريخ صلاحية وتشغيلات + تنبيه «بيع الأقرب انتهاءً»</li>
+          <li>تنبيه نواقص حسب حد إعادة الطلب</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">🏬</div>
+        <h3>المخازن والجرد</h3>
+        <ul>
+          <li>أكثر من مخزن وأرصدة لكل مخزن</li>
+          <li>جرد فعلي وتسوية الفروقات بضغطة</li>
+          <li>تقييم المخزون بالتكلفة والبيع</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">👥</div>
+        <h3>العملاء</h3>
+        <ul>
+          <li>كشف حساب وتحصيل دفعات ونقاط ولاء</li>
+          <li>مستوى سعر تلقائي لكل عميل (قطاعي/جملة)</li>
+          <li>حد ائتمان وتنبيهات مديونية</li>
+          <li>العميل = المورد: كشف موحّد ومقاصة بضغطة</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">🚚</div>
+        <h3>الموردون والمشتريات</h3>
+        <ul>
+          <li>فواتير شراء تحدّث المخزون والتكلفة تلقائيًا</li>
+          <li>أرصدة وكشوف حساب وسندات صرف</li>
+          <li>مرتجع مشتريات وإشعارات مدين/دائن</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">📄</div>
+        <h3>عروض الأسعار والمستندات</h3>
+        <ul>
+          <li>عرض سعر / أمر بيع / إذن تسليم</li>
+          <li>تحويل المستند لفاتورة بضغطة</li>
+          <li>طباعة A4 أنيقة بشعار محلك و PDF</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">🧮</div>
+        <h3>محاسبة بقيد مزدوج</h3>
+        <ul>
+          <li>ترحيل تلقائي لكل العمليات لقيود متطابقة</li>
+          <li>قائمة دخل وميزانية وميزان مراجعة</li>
+          <li>دفتر يومية وأستاذ وشجرة حسابات</li>
+          <li>أوراق قبض ودفع (شيكات) بمتابعة استحقاق</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">📊</div>
+        <h3>تقارير تفهم منها</h3>
+        <ul>
+          <li>أرباح فعلية (إيراد − تكلفة) يومي وشهري</li>
+          <li>ربحية كل صنف وكل عميل + تصنيف ABC</li>
+          <li>أعمار ديون العملاء والموردين</li>
+          <li>تقرير ضريبة القيمة المضافة</li>
+          <li>طباعة وتصدير Excel لكل تقرير</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">🔔</div>
+        <h3>تنبيهات ولوحة تحكم</h3>
+        <ul>
+          <li>جرس ذكي: نواقص، مديونيات، صلاحيات، شيكات</li>
+          <li>مقارنات تلقائية: الأسبوع ده × اللي فاته</li>
+          <li>بحث شامل Ctrl+K يوصلك لأي حاجة في ثانية</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">🛡️</div>
+        <h3>مستخدمون وصلاحيات</h3>
+        <ul>
+          <li>أدوار (مدير/كاشير/مشاهد) بتحكم كامل</li>
+          <li>موافقة مدير على الخصومات الكبيرة</li>
+          <li>سجل عمليات يوثّق كل إجراء (Audit)</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">💾</div>
+        <h3>نسخ احتياطي وأمان بيانات</h3>
+        <ul>
+          <li>نسخ تلقائي يومي + نسخ يدوي بضغطة</li>
+          <li>تصدير/استيراد Excel وقاعدة بيانات كاملة</li>
+          <li>تأكيد قبل أي حذف + استرجاع المحذوف (Undo)</li>
+          <li>نقل بياناتك كاملة بين الأجهزة</li>
+        </ul>
+      </div>
+
+      <div class="card rv" data-tilt>
+        <div class="ic">💵</div>
+        <h3>الكاش والمصاريف</h3>
+        <ul>
+          <li>وردية كاشير (فتح/غلق الدرج) وحساب الفروقات</li>
+          <li>خزائن وحسابات نقدية وبنكية</li>
+          <li>مصاريف بالبنود مربوطة بالخزينة</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLANS ===== -->
+<section id="plans">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">الباقات</span>
+      <h2>اختار اللي يناسب شغلك</h2>
+      <p>كل الباقات تشمل كل المزايا — الفرق في الخدمة والأجهزة. السعر عرض خاص على الواتساب 🔥</p>
+    </div>
+    <div class="plans">
+      <div class="plan rv">
+        <h3>الأساسية</h3>
+        <p class="for">للمحل الواحد اللي بادئ صح</p>
+        <ul>
+          <li>جهاز واحد — كل المزايا كاملة</li>
+          <li>يعمل بدون إنترنت نهائيًا</li>
+          <li>تركيب وتفعيل</li>
+          <li>دليل استخدام واختصارات</li>
+          <li>دفعة واحدة بدون اشتراك شهري</li>
+        </ul>
+        <p class="price">السعر؟ مفاجأة الإطلاق 👇</p>
+        <a class="btn btn-ghost plan-cta" data-plan="الأساسية">اعرف سعر الأساسية</a>
+      </div>
+      <div class="plan hot rv">
+        <span class="tag">⭐ الأكثر طلبًا</span>
+        <h3>الاحترافية</h3>
+        <p class="for">للي عايز يشتغل من أول يوم بدون مجهود</p>
+        <ul>
+          <li>كل مزايا الأساسية</li>
+          <li>نقل بياناتك من النظام القديم (أصناف/عملاء/أرصدة)</li>
+          <li>تدريب كامل لك وللكاشير</li>
+          <li>دعم فني بأولوية على الواتساب</li>
+          <li>تجهيز الطابعة والباركود سكانر</li>
+          <li>سنة تحديثات مجانية</li>
+        </ul>
+        <p class="price">السعر؟ مفاجأة الإطلاق 👇</p>
+        <a class="btn btn-gold plan-cta" data-plan="الاحترافية">🔥 اعرف سعر الاحترافية</a>
+      </div>
+      <div class="plan rv">
+        <h3>السحابية</h3>
+        <p class="for">لأصحاب الفروع واللي عايز يتابع من أي مكان</p>
+        <ul>
+          <li>تفتحها من أي جهاز أو موبايل بالمتصفح</li>
+          <li>بياناتك متزامنة وآمنة</li>
+          <li>مناسبة لأكثر من فرع/جهاز</li>
+          <li>تحديثات فورية بدون تثبيت</li>
+        </ul>
+        <p class="price">حسب الطلب — كلّمنا</p>
+        <a class="btn btn-ghost plan-cta" data-plan="السحابية">اسأل عن السحابية</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHO ===== -->
+<section id="who" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">لمين؟</span>
+      <h2>مناسب لكل المحلات</h2>
+    </div>
+    <div class="pills rv">
+      <span class="pill">🛒 سوبر ماركت وبقالة</span>
+      <span class="pill">🌿 عطارة</span>
+      <span class="pill">👕 ملابس وأحذية</span>
+      <span class="pill">🔧 قطع غيار وإكسسوار</span>
+      <span class="pill">🏠 أدوات منزلية</span>
+      <span class="pill">💊 صيدليات ومستحضرات</span>
+      <span class="pill">📦 موزعون وجملة</span>
+      <span class="pill">📱 محلات إلكترونيات</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">أسئلة شائعة</span>
+      <h2>كل اللي بيسألوه قبل الشراء</h2>
+    </div>
+    <div class="faq rv">
+      <details>
+        <summary>محتاج إنترنت عشان يشتغل؟</summary>
+        <p>لأ نهائيًا. النسخة المكتبية بتشتغل 100% بدون إنترنت وبياناتك على جهازك أنت. الإنترنت بس لو حبيت تبعت تذكيرات واتساب أو تستخدم النسخة السحابية.</p>
+      </details>
+      <details>
+        <summary>لو الجهاز باظ… بياناتي بتضيع؟</summary>
+        <p>لأ. فيه نسخ احتياطي تلقائي يومي + تصدير قاعدة البيانات كاملة بضغطة، تنقلها لأي جهاز تاني وتكمل شغل عادي. وكمان أي حذف بالغلط جواه ليه زر «تراجع» يرجّعه.</p>
+      </details>
+      <details>
+        <summary>أنا شغال بدفاتر أو ببرنامج قديم — هنقل البيانات إزاي؟</summary>
+        <p>في الباقة الاحترافية بننقلك الأصناف والعملاء والأرصدة بنفسنا من النظام القديم أو من ملفات Excel — بتفتح البرنامج تلاقي محلك جاهز.</p>
+      </details>
+      <details>
+        <summary>الكاشير عندي مش متعود على الكمبيوتر…</summary>
+        <p>الشاشة مصممة زي الكاشير الحقيقي: مسح باركود وزر واحد للبيع الكاش. وبندرّبه بنفسنا في الباقة الاحترافية، وفيه دليل اختصارات جوه البرنامج بضغطة ؟</p>
+      </details>
+      <details>
+        <summary>فيه اشتراك شهري؟</summary>
+        <p>النسخة المكتبية دفعة واحدة وبدون أي اشتراك إجباري. النسخة السحابية باشتراك مريح لأنها شاملة سيرفر وتحديثات مستمرة.</p>
+      </details>
+      <details>
+        <summary>هل يدعم الضريبة والفواتير الضريبية؟</summary>
+        <p>أيوه — ضريبة قيمة مضافة اختيارية لكل فاتورة، رقم ضريبي على المطبوعات، وتقرير ضريبة كامل (مخرجات ومدخلات وصافي).</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ORDER ===== -->
+<section id="order">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker">🔥 عرض الإطلاق</span>
+      <h2>اطلب عرضك والسعر الآن</h2>
+      <p>سيبلنا بياناتك وهنبعتلك <b style="color:var(--gold2)">العرض الخاص والمفاجأة السعرية</b> على الواتساب فورًا — أو كلمنا مباشرة.</p>
+    </div>
+    <div class="order-grid rv">
+      <form id="leadForm" class="lead">
+        <label>اسمك
+          <input id="lf_name" required placeholder="الاسم بالكامل" />
+        </label>
+        <label>نوع نشاطك / محلك
+          <input id="lf_biz" placeholder="سوبر ماركت / عطارة / ملابس / قطع غيار ..." />
+        </label>
+        <label>رقم تليفونك
+          <input id="lf_phone" required inputmode="tel" placeholder="01xxxxxxxxx" />
+        </label>
+        <button class="btn btn-gold" type="submit" style="width:100%">🔥 احصل على العرض والسعر الآن</button>
+        <p class="hint">هيتفتح واتساب برسالة جاهزة — تبعتها وبس. من غير أي التزام.</p>
+      </form>
+
+      <div class="ccard">
+        <h3>تواصل مباشر</h3>
+        <p class="who" id="ownerName">م. محمود العطار</p>
+        <a class="cline" id="callLine" href="tel:+201090246299">📞 01090246299</a>
+        <a class="cline" id="waLine">💬 واتساب — رد سريع</a>
+        <ul>
+          <li>عرض حي (Demo) للبرنامج على شاشتك</li>
+          <li>تركيب وتدريب ودعم فني</li>
+          <li>نقل بياناتك من نظامك القديم</li>
+          <li>تحديثات وتطوير مستمر</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logo" style="justify-content:center;margin-bottom:10px"><span class="mark">A</span> ATTARIX</div>
+    <p>نظام إدارة المحلات الذكي — كاشير · مخزون · محاسبة · ذكاء تجاري — © 2026 ATTARIX</p>
+    <p style="margin-top:6px">م. محمود العطار — <a id="footPhone" href="tel:+201090246299">01090246299</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">📖 دليل الاستخدام الكامل</a></p>
+  </div>
+</footer>
+
+<a class="wa" id="floatWa" title="واتساب" aria-label="تواصل واتساب">💬</a>
+
+<script>
+  (function(){
+    var num = window.ATTARIX_WHATSAPP || "201090246299";
+    var tel = window.ATTARIX_PHONE || "+201090246299";
+    var waBase = "https://wa.me/" + num + "?text=";
+    var defaultMsg = encodeURIComponent("السلام عليكم م. محمود، مهتم ببرنامج ATTARIX لإدارة المحل. ممكن أعرف التفاصيل والسعر والعرض الخاص؟");
+    var defaultUrl = waBase + defaultMsg;
+
+    // generic whatsapp buttons
+    ["navCta","waLine","floatWa"].forEach(function(id){
+      var el = document.getElementById(id); if(el){ el.href = defaultUrl; el.target = "_blank"; el.rel="noopener"; }
+    });
+    // plan buttons carry the plan name
+    document.querySelectorAll('.plan-cta').forEach(function(el){
+      var plan = el.getAttribute('data-plan') || '';
+      var msg = encodeURIComponent("السلام عليكم م. محمود 👋\nمهتم ببرنامج ATTARIX — باقة «" + plan + "».\nممكن أعرف السعر والعرض الخاص؟");
+      el.href = waBase + msg; el.target = "_blank"; el.rel = "noopener";
+    });
+    // tel links
+    ["callLine","footPhone"].forEach(function(id){
+      var el = document.getElementById(id); if(el){ el.href = "tel:" + tel; }
+    });
+
+    // mobile menu toggle
+    var menuBtn = document.getElementById('menuBtn');
+    var navLinks = document.querySelector('.nav-links');
+    if(menuBtn && navLinks){
+      menuBtn.addEventListener('click', function(){
+        var open = navLinks.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuBtn.textContent = open ? '✕' : '☰';
+      });
+      navLinks.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){
+          navLinks.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded','false');
+          menuBtn.textContent = '☰';
+        });
+      });
+    }
+
+    // lead form -> prefilled whatsapp
+    var form = document.getElementById('leadForm');
+    if(form){
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var name = (document.getElementById('lf_name').value||'').trim();
+        var biz = (document.getElementById('lf_biz').value||'').trim();
+        var phone = (document.getElementById('lf_phone').value||'').trim();
+        var text = "السلام عليكم م. محمود 👋\n"
+                 + "أنا: " + (name||'-') + "\n"
+                 + "نوع النشاط: " + (biz||'-') + "\n"
+                 + "رقمي: " + (phone||'-') + "\n"
+                 + "مهتم ببرنامج ATTARIX وعايز أعرف العرض والسعر 🔥";
+        window.open(waBase + encodeURIComponent(text), "_blank", "noopener");
+      });
+    }
+
+    // ===== 3D hero tilt (mouse) =====
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var stage = document.getElementById('stage');
+    var laptop = document.getElementById('laptop');
+    if(stage && laptop && !reduced && matchMedia('(pointer:fine)').matches){
+      stage.addEventListener('mousemove', function(e){
+        var r = stage.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - .5;
+        var y = (e.clientY - r.top) / r.height - .5;
+        laptop.style.transform = 'rotateY(' + (-12 + x * -10) + 'deg) rotateX(' + (7 + y * 8) + 'deg)';
+      });
+      stage.addEventListener('mouseleave', function(){
+        laptop.style.transform = 'rotateY(-12deg) rotateX(7deg)';
+      });
+    }
+
+    // ===== card tilt =====
+    if(!reduced && matchMedia('(pointer:fine)').matches){
+      document.querySelectorAll('[data-tilt]').forEach(function(card){
+        card.addEventListener('mousemove', function(e){
+          var r = card.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - .5;
+          var y = (e.clientY - r.top) / r.height - .5;
+          card.style.transform = 'perspective(800px) rotateY(' + (x * 6) + 'deg) rotateX(' + (y * -6) + 'deg) translateY(-3px)';
+        });
+        card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+      });
+    }
+
+    // ===== scroll reveal (staggered) =====
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en, i){
+        if(en.isIntersecting){
+          setTimeout(function(){ en.target.classList.add('in'); }, (i % 6) * 90);
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+    // ===== counters =====
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        cio.unobserve(en.target);
+        var el = en.target, target = parseInt(el.getAttribute('data-count'), 10) || 0;
+        var t0 = null;
+        function step(ts){
+          if(!t0) t0 = ts;
+          var p = Math.min((ts - t0) / 1200, 1);
+          el.textContent = '+' + Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if(p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+    // smooth scroll for same-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var t = document.querySelector(this.getAttribute('href'));
+        if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+  })();
+</script>
+</body>
+</html>

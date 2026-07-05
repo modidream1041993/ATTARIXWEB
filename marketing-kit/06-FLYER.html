@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>فلاير ATTARIX — للطباعة A5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --blue:#1d4ed8; --blue2:#1e3a8a; --gold:#b45309; --ink:#111827; --muted:#4b5563; --line:#e5e7eb; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Cairo',Arial,sans-serif;background:#9ca3af;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:20px;padding:20px}
+  .hint{background:#fff;border-radius:10px;padding:10px 20px;font-size:.9rem;color:var(--muted)}
+  .hint b{color:var(--blue)}
+
+  /* A5: 148 x 210 mm */
+  .page{width:148mm;height:210mm;background:#fff;padding:9mm;display:flex;flex-direction:column;overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.3)}
+
+  .top{background:linear-gradient(140deg,var(--blue2),var(--blue));color:#fff;border-radius:5mm;padding:6mm;text-align:center}
+  .top .mark{display:inline-grid;place-items:center;width:12mm;height:12mm;border-radius:3mm;background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.35);font-weight:900;font-size:6mm;margin-bottom:2mm}
+  .top h1{font-size:8.2mm;font-weight:900;line-height:1.3}
+  .top p{font-size:3.6mm;opacity:.95;margin-top:1mm}
+
+  .offer{background:#fef3c7;border:1px dashed #d97706;color:#92400e;border-radius:3mm;text-align:center;
+    font-weight:900;font-size:4.2mm;padding:2.5mm;margin:4mm 0}
+
+  .feats{display:grid;grid-template-columns:1fr 1fr;gap:3mm;flex:1}
+  .f{border:1px solid var(--line);border-radius:3mm;padding:3mm 3.5mm}
+  .f .t{font-weight:900;font-size:3.8mm;color:var(--blue2);display:flex;align-items:center;gap:1.5mm}
+  .f p{font-size:3.1mm;color:var(--muted);line-height:1.55;margin-top:.5mm}
+
+  .badges{display:flex;justify-content:center;gap:2.5mm;margin:4mm 0;flex-wrap:wrap}
+  .badge{border:1px solid var(--blue);color:var(--blue2);border-radius:99mm;padding:1mm 4mm;font-size:3mm;font-weight:800}
+
+  .cta{background:#111827;color:#fff;border-radius:5mm;padding:5mm;text-align:center}
+  .cta .call{font-size:4mm;opacity:.9}
+  .cta .num{font-size:9.5mm;font-weight:900;letter-spacing:.5mm;direction:ltr}
+  .cta .wa{display:inline-block;background:#25d366;color:#fff;border-radius:99mm;padding:1.5mm 6mm;font-weight:900;font-size:3.6mm;margin-top:2mm}
+  .cta .name{font-size:3.2mm;opacity:.8;margin-top:2mm}
+
+  @media print{
+    body{background:#fff;padding:0;gap:0}
+    .hint{display:none}
+    .page{box-shadow:none;page-break-after:always}
+    @page{size:A5;margin:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="hint">🖨 للطباعة: <b>Ctrl+P</b> ← مقاس الورق <b>A5</b> ← الهوامش None ← فعّل Background graphics. (لو هتطبع على A4: اطبع صفحتين في ورقة)</div>
+
+<div class="page">
+  <div class="top">
+    <div class="mark">A</div>
+    <h1>محلّك يستاهل نظام<br>بيفكر معاك 🧠</h1>
+    <p>ATTARIX — كاشير · مخزون · محاسبة · ذكاء تجاري</p>
+  </div>
+
+  <div class="offer">🔥 عرض الإطلاق لأول 20 محل — ديمو مجاني بدون أي التزام</div>
+
+  <div class="feats">
+    <div class="f"><div class="t">🛒 كاشير أسرع من الورقة</div><p>باركود + بيع كاش وطباعة بزر واحد — فاتورة كاملة في 15 ثانية.</p></div>
+    <div class="f"><div class="t">🧠 يقولك تشتري إيه</div><p>«الصنف ده هيخلص خلال 4 أيام — اشترِ 24» وبضغطة تبقى فاتورة شراء.</p></div>
+    <div class="f"><div class="t">💬 يحصّل فلوسك بأدب</div><p>زر واتساب جنب كل عميل مديون يبعتله المبلغ برسالة مهذبة.</p></div>
+    <div class="f"><div class="t">📦 كرتونة ودستة وقطعة</div><p>باركود وسعر خاص لكل وحدة — والمخزون مظبوط بالقطعة لوحده.</p></div>
+    <div class="f"><div class="t">📊 مكسبك الحقيقي يوميًا</div><p>أرباح فعلية بعد التكلفة، ومكسب كل صنف وكل عميل، وميزانية لمحاسبك.</p></div>
+    <div class="f"><div class="t">🛡 بياناتك في أمان</div><p>نسخة تلقائية كل يوم + أي حذف بالغلط يرجع بزر «تراجع».</p></div>
+  </div>
+
+  <div class="badges">
+    <span class="badge">✅ عربي 100%</span>
+    <span class="badge">🔌 بدون إنترنت</span>
+    <span class="badge">💳 بدون اشتراك شهري</span>
+    <span class="badge">🎓 تركيب وتدريب</span>
+  </div>
+
+  <div class="cta">
+    <div class="call">اتصل أو ابعت «ديمو» واتساب</div>
+    <div class="num">01090246299</div>
+    <span class="wa">💬 WhatsApp</span>
+    <div class="name">م. محمود العطار — ATTARIX لأنظمة إدارة المحلات</div>
+  </div>
+</div>
+
+</body>
+</html>
