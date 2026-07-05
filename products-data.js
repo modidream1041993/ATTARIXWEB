@@ -119,7 +119,7 @@ window.ABOUT = {
     {
       "id": "hussein",
       "name": "أستاذ حسين العطار",
-      "role": "مدير شركة  ATTARIX",
+      "role": "مدير و مؤسس شركة  ATTARIX",
       "phone": "010000000000000",
       "photo": ""
     },
