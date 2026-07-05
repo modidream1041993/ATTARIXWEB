@@ -133,7 +133,7 @@ window.ABOUT = {
     {
       "id": "mostafa",
       "name": "أستاذ مصطفى العطار",
-      "role": "صاحب منتجات ATTARIX",
+      "role": "صاحب منتجات ومحل ATTARIX",
       "phone": "01001373570",
       "photo": ""
     },
