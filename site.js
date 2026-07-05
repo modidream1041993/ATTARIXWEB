@@ -126,11 +126,11 @@
 
   /* ---------- صفحة عنّنا: الفريق + المحتوى + الفزورة من window.ABOUT ---------- */
   var DEFAULT_TEAM = [
-    { id: 'mahmoud', name: 'م. محمود العطار', role: 'المطوّر — مؤسس نظام ATTARIX', photo: '' },
-    { id: 'mostafa', name: 'مصطفى العطار', role: 'صاحب المنتجات', photo: '' },
-    { id: 'mohamed', name: 'محمد العطار', role: 'مسئول المشتريات والويب ديزاين والتصاميم', photo: '' },
-    { id: 'hussein', name: 'حسين العطار', role: 'مسئول الاستيراد والتصدير', photo: '' },
-    { id: 'abdullah', name: 'عبدالله العطار', role: 'مسئول الاستيراد والتصدير', photo: '' }
+    { id: 'hussein', name: 'أستاذ حسين العطار', role: 'مدير الاستيراد والتصدير', photo: '' },
+    { id: 'mahmoud', name: 'م. محمود العطار', role: 'مهندس البرمجيات — مؤسس نظام ATTARIX', photo: '' },
+    { id: 'mostafa', name: 'أستاذ مصطفى العطار', role: 'صاحب المنتجات', photo: '' },
+    { id: 'abdullah', name: 'أستاذ عبدالله العطار', role: 'مدير الاستيراد والتصدير', photo: '' },
+    { id: 'mohamed', name: 'أستاذ محمد العطار', role: 'مدير المشتريات والويب ديزاين والتصاميم', photo: '' }
   ];
 
   function renderAbout() {
@@ -153,7 +153,7 @@
       grid.innerHTML = team.map(function (m) {
         var avatar = m.photo
           ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy">'
-          : esc((m.name || '؟').replace(/^م\.\s*/, '').trim().charAt(0));
+          : esc((m.name || '؟').replace(/^(م\.|أ\.|د\.|أستاذ|الأستاذ|مهندس|دكتور)\s*/, '').trim().charAt(0));
         return '<div class="card team-card rv">'
           + '<div class="t-avatar">' + avatar + '</div>'
           + '<h3>' + esc(m.name) + '</h3>'
