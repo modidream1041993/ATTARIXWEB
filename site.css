@@ -144,6 +144,30 @@ section{padding:44px 0;position:relative}
   border-radius:13px;padding:13px 16px;font-weight:800;font-size:1.05rem;transition:.2s;margin-top:10px}
 .cline:hover{background:rgba(255,255,255,.14)}
 
+/* ===== فريق العيلة (صفحة عنّنا) ===== */
+.team-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.team-card{text-align:center;align-items:center}
+.t-avatar{width:110px;height:110px;border-radius:50%;margin:0 auto 14px;overflow:hidden;flex-shrink:0;
+  border:3px solid rgba(96,165,250,.45);box-shadow:0 0 26px rgba(29,78,216,.3);
+  background:linear-gradient(135deg,var(--blue),var(--violet));display:grid;place-items:center;
+  font-size:2.4rem;font-weight:900;color:#fff}
+.t-avatar img{width:100%;height:100%;object-fit:cover}
+.team-card h3{font-size:1.08rem}
+.t-role{color:#8fd3ff;font-weight:700;font-size:.86rem;margin-top:4px}
+.t-bio{color:var(--muted);font-size:.85rem;margin-top:8px}
+.t-phone{display:inline-block;margin:12px auto 0;color:#c8d4ec;font-weight:800;font-size:.88rem;direction:ltr;
+  background:var(--glass2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;transition:.2s}
+.t-phone:hover{border-color:rgba(96,165,250,.5);color:#fff}
+
+/* ===== الفزورة ===== */
+.riddle-block{border-color:rgba(245,179,1,.35) !important;background:linear-gradient(180deg,rgba(245,179,1,.06),rgba(255,255,255,.03)) !important}
+.riddle-q{font-size:1.15rem;font-weight:800;color:#ffe9b0 !important;margin-top:12px !important}
+.riddle-a{font-size:1.1rem;font-weight:900;color:var(--gold2) !important;margin-top:14px !important;
+  background:rgba(245,179,1,.1);border:1px dashed rgba(245,179,1,.45);border-radius:13px;padding:14px 18px;
+  animation:pop .45s ease}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+#riddleReveal{margin-top:12px}
+
 /* ===== footer & floating whatsapp ===== */
 footer{border-top:1px solid var(--line);background:rgba(7,11,20,.9);padding:38px 0;text-align:center;font-size:.92rem;color:var(--muted);margin-top:40px}
 footer a:hover{color:#fff}

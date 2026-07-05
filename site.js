@@ -124,7 +124,15 @@
       + '</div></div>';
   }
 
-  /* ---------- صفحة عنّي: تعبئة البيانات من window.ABOUT (لو موجودة) ---------- */
+  /* ---------- صفحة عنّنا: الفريق + المحتوى + الفزورة من window.ABOUT ---------- */
+  var DEFAULT_TEAM = [
+    { id: 'mahmoud', name: 'م. محمود العطار', role: 'المطوّر — مؤسس نظام ATTARIX', photo: '' },
+    { id: 'mostafa', name: 'مصطفى العطار', role: 'صاحب المنتجات', photo: '' },
+    { id: 'mohamed', name: 'محمد العطار', role: 'مسئول المشتريات والويب ديزاين والتصاميم', photo: '' },
+    { id: 'hussein', name: 'حسين العطار', role: 'مسئول الاستيراد والتصدير', photo: '' },
+    { id: 'abdullah', name: 'عبدالله العطار', role: 'مسئول الاستيراد والتصدير', photo: '' }
+  ];
+
   function renderAbout() {
     var A = window.ABOUT || {};
     function setText(id, v) {
@@ -137,11 +145,38 @@
       var el = document.getElementById(id);
       if (el) el.innerHTML = arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('');
     }
-    var av = document.getElementById('aboutAvatar');
-    if (av && A.photo) av.innerHTML = '<img src="' + esc(A.photo) + '" alt="صورة شخصية">';
-    setText('aboutName', A.name);
-    setText('aboutRole', A.role);
-    setText('aboutTagline', A.tagline);
+
+    /* الفريق */
+    var grid = document.getElementById('teamGrid');
+    if (grid) {
+      var team = (A.team && A.team.length) ? A.team : DEFAULT_TEAM;
+      grid.innerHTML = team.map(function (m) {
+        var avatar = m.photo
+          ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy">'
+          : esc((m.name || '؟').replace(/^م\.\s*/, '').trim().charAt(0));
+        return '<div class="card team-card rv">'
+          + '<div class="t-avatar">' + avatar + '</div>'
+          + '<h3>' + esc(m.name) + '</h3>'
+          + '<p class="t-role">' + esc(m.role || '') + '</p>'
+          + (m.bio ? '<p class="t-bio">' + esc(m.bio) + '</p>' : '')
+          + (m.phone ? '<a class="t-phone" href="tel:' + esc(m.phone) + '">📞 ' + esc(m.phone) + '</a>' : '')
+          + '</div>';
+      }).join('');
+    }
+
+    /* الفزورة */
+    var riddle = A.riddle || {};
+    setText('riddleQ', riddle.q);
+    var revealBtn = document.getElementById('riddleReveal');
+    var answerEl = document.getElementById('riddleA');
+    if (revealBtn && answerEl) {
+      if (riddle.a) answerEl.textContent = riddle.a;
+      revealBtn.addEventListener('click', function () {
+        answerEl.hidden = false;
+        revealBtn.style.display = 'none';
+      });
+    }
+
     setText('aboutWhoami', A.whoami);
     setText('aboutStory', A.story);
     setList('aboutMilestones', A.milestones);
@@ -165,7 +200,7 @@
     var productRoot = document.getElementById('productRoot');
     if (productsRoot) renderProductsPage(productsRoot);
     if (productRoot) renderProductPage(productRoot);
-    if (document.getElementById('aboutAvatar')) renderAbout();
+    if (document.getElementById('teamGrid')) renderAbout();
     initCommon();
     /* أزرار الواتساب اللي عليها data-wa-msg (زي صفحة عنّي) */
     document.querySelectorAll('[data-wa-msg]').forEach(function (el) {

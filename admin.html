@@ -107,34 +107,34 @@
     </div>
   </div>
 
-  <!-- ===== 2ب) صفحة عنّي ===== -->
+  <!-- ===== 2ب) فريق العيلة ===== -->
   <div class="panel">
-    <h2>👋 صفحة «عنّي»</h2>
+    <h2>👨‍👦‍👦 فريق العيلة <span class="tip" style="font-weight:600;color:var(--muted);font-size:.8rem">(الأسماء والأدوار والأرقام والصور — بيظهروا في صفحة «عنّنا»)</span></h2>
+    <div id="teamList"></div>
+    <button class="btn btn-ghost btn-sm" id="addMember" type="button">➕ ضيف فرد جديد</button>
+  </div>
+
+  <!-- ===== 2ج) محتوى صفحة عنّنا ===== -->
+  <div class="panel">
+    <h2>📄 محتوى صفحة «عنّنا»</h2>
     <div class="fgrid">
-      <label class="f">صورتك الشخصية
-        <input type="file" accept="image/*" id="aPhotoFile" />
-        <span class="tip" id="aPhotoTip"></span>
+      <label class="f full">مين إحنا؟ (نبذة عن العيلة)
+        <textarea id="aWhoami" placeholder="إحنا عيلة العطار — إخوات بنشتغل مع بعض..."></textarea>
       </label>
-      <label class="f">الاسم
-        <input id="aName" placeholder="م. محمود العطار" />
-      </label>
-      <label class="f">اللقب / الوظيفة
-        <input id="aRole" placeholder="مطوّر برمجيات · صاحب نظام ATTARIX" />
-      </label>
-      <label class="f">سطر واحد يلخصك
-        <input id="aTagline" placeholder="بحوّل مشاكل التجار لبرامج ذكية بالعربي" />
-      </label>
-      <label class="f full">مين أنا؟ (نبذة عنك)
-        <textarea id="aWhoami" placeholder="أنا محمود العطار، مهندس ومطوّر برمجيات..."></textarea>
-      </label>
-      <label class="f full">قصتي مع ATTARIX
-        <textarea id="aStory" placeholder="شفت التجار بيتعبوا مع أنظمة معقدة فقررت..."></textarea>
+      <label class="f full">قصتنا مع ATTARIX
+        <textarea id="aStory" placeholder="شفنا التجار بيتعبوا مع أنظمة معقدة فقررنا..."></textarea>
       </label>
       <label class="f full">محطات مهمة — كل محطة في سطر لوحدها
         <textarea id="aMilestones" placeholder="بداية تطوير ATTARIX سنة 2024&#10;أول محل اشتغل بالنظام"></textarea>
       </label>
-      <label class="f full">بعمل إيه؟ — كل بند في سطر لوحده
-        <textarea id="aDoing" placeholder="تطوير نظام ATTARIX&#10;برامج حسب الطلب"></textarea>
+      <label class="f full">بنعمل إيه؟ — كل بند في سطر لوحده
+        <textarea id="aDoing" placeholder="تطوير نظام ATTARIX&#10;استيراد وتصدير"></textarea>
+      </label>
+      <label class="f">🧩 الفزورة (السؤال)
+        <input id="aRiddleQ" placeholder="إيه اللي لو شيلت عينه… طار؟" />
+      </label>
+      <label class="f">🎁 إجابة الفزورة
+        <input id="aRiddleA" placeholder="العطار! ✈️" />
       </label>
       <label class="f">رابط فيسبوك (اختياري)
         <input id="aFacebook" placeholder="https://facebook.com/..." />
@@ -221,7 +221,8 @@
   bindContact('cWhatsapp', 'whatsapp');
   bindContact('cPhone', 'phone');
 
-  /* ---------- صفحة عنّي ---------- */
+  /* ---------- محتوى صفحة عنّنا ---------- */
+  state.about.riddle = state.about.riddle || {};
   function bindAbout(id, obj, key, isList) {
     var el = $(id);
     if (isList) el.value = (obj[key] || []).join('\n');
@@ -232,35 +233,104 @@
       markDirty();
     });
   }
-  bindAbout('aName', state.about, 'name');
-  bindAbout('aRole', state.about, 'role');
-  bindAbout('aTagline', state.about, 'tagline');
   bindAbout('aWhoami', state.about, 'whoami');
   bindAbout('aStory', state.about, 'story');
   bindAbout('aMilestones', state.about, 'milestones', true);
   bindAbout('aDoing', state.about, 'doing', true);
+  bindAbout('aRiddleQ', state.about.riddle, 'q');
+  bindAbout('aRiddleA', state.about.riddle, 'a');
   bindAbout('aFacebook', state.about.socials, 'facebook');
   bindAbout('aLinkedin', state.about.socials, 'linkedin');
   bindAbout('aEmail', state.about.socials, 'email');
 
-  if (state.about.photo) $('aPhotoTip').textContent = '📷 الصورة الحالية: ' + state.about.photo;
-  $('aPhotoFile').addEventListener('change', function () {
-    var file = this.files[0];
-    if (!file) return;
+  /* ---------- فريق العيلة ---------- */
+  if (!state.about.team || !state.about.team.length) {
+    state.about.team = [
+      { id: 'mahmoud', name: 'م. محمود العطار', role: 'المطوّر — مؤسس نظام ATTARIX', phone: '', photo: '' },
+      { id: 'mostafa', name: 'مصطفى العطار', role: 'صاحب المنتجات', phone: '', photo: '' },
+      { id: 'mohamed', name: 'محمد العطار', role: 'مسئول المشتريات والويب ديزاين والتصاميم', phone: '', photo: '' },
+      { id: 'hussein', name: 'حسين العطار', role: 'مسئول الاستيراد والتصدير', phone: '', photo: '' },
+      { id: 'abdullah', name: 'عبدالله العطار', role: 'مسئول الاستيراد والتصدير', phone: '', photo: '' }
+    ];
+  }
+
+  function uploadTeamPhoto(file, m, tip) {
     if (!requireToken()) return;
     if (file.size > 3 * 1024 * 1024) { alert('الصورة أكبر من 3 ميجا — صغّرها الأول.'); return; }
-    var tip = $('aPhotoTip');
     tip.textContent = '⏳ بترفع...';
     var ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
-    var path = 'images/profile-' + Date.now() + '.' + ext;
+    var path = 'images/team-' + m.id + '-' + Date.now() + '.' + ext;
     file.arrayBuffer()
-      .then(function (buf) { return putFile(path, b64FromArrayBuffer(buf), 'رفع الصورة الشخصية'); })
+      .then(function (buf) { return putFile(path, b64FromArrayBuffer(buf), 'رفع صورة: ' + (m.name || m.id)); })
       .then(function () {
-        state.about.photo = path;
+        m.photo = path;
         markDirty();
-        tip.textContent = '✅ اترفعت (' + path + ') — متنساش «احفظ وانشر»';
+        renderTeam();
       })
       .catch(function (e) { tip.textContent = ''; alert('فشل رفع الصورة: ' + e.message); });
+  }
+
+  function renderTeam() {
+    var list = $('teamList');
+    list.innerHTML = '';
+    state.about.team.forEach(function (m, i) {
+      var card = document.createElement('div');
+      card.className = 'item-card';
+      card.innerHTML =
+        '<div class="body" style="border-top:none">'
+        + '<div class="row" style="margin-bottom:12px">'
+        + (m.photo ? '<img class="thumb-mini" src="' + m.photo.replace(/"/g, '') + '" alt="">' : '<span style="font-size:1.6rem">👤</span>')
+        + '<b class="m-title grow"></b>'
+        + '<button class="icon-btn" data-act="up" title="فوق" type="button">⬆️</button>'
+        + '<button class="icon-btn" data-act="down" title="تحت" type="button">⬇️</button>'
+        + '<button class="icon-btn del" data-act="del" title="حذف" type="button">🗑️</button>'
+        + '</div>'
+        + '<div class="fgrid">'
+        + '<label class="f">الاسم<input data-k="name" /></label>'
+        + '<label class="f">الدور / الوظيفة<input data-k="role" /></label>'
+        + '<label class="f">رقم التليفون (اختياري — بيظهر على الكارت)<input data-k="phone" inputmode="tel" placeholder="01xxxxxxxxx" /></label>'
+        + '<label class="f">الصورة<input type="file" accept="image/*" data-k="__photo" /><span class="tip photo-tip">' + (m.photo ? '📷 ' + m.photo : '') + '</span></label>'
+        + '</div></div>';
+
+      card.querySelector('.m-title').textContent = m.name || '(بدون اسم)';
+
+      card.querySelectorAll('[data-k]').forEach(function (inp) {
+        var k = inp.getAttribute('data-k');
+        if (k === '__photo') {
+          inp.addEventListener('change', function () {
+            if (inp.files[0]) uploadTeamPhoto(inp.files[0], m, card.querySelector('.photo-tip'));
+          });
+          return;
+        }
+        inp.value = m[k] || '';
+        inp.addEventListener('input', function () {
+          m[k] = inp.value.trim();
+          if (k === 'name') card.querySelector('.m-title').textContent = m.name || '(بدون اسم)';
+          markDirty();
+        });
+      });
+
+      card.querySelectorAll('button[data-act]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var act = b.getAttribute('data-act');
+          var team = state.about.team;
+          if (act === 'del') {
+            if (!confirm('تمسح «' + (m.name || 'الفرد ده') + '» من الفريق؟')) return;
+            team.splice(i, 1);
+          }
+          if (act === 'up' && i > 0) { team.splice(i - 1, 0, team.splice(i, 1)[0]); }
+          if (act === 'down' && i < team.length - 1) { team.splice(i + 1, 0, team.splice(i, 1)[0]); }
+          markDirty(); renderTeam();
+        });
+      });
+
+      list.appendChild(card);
+    });
+  }
+
+  $('addMember').addEventListener('click', function () {
+    state.about.team.push({ id: 'member-' + Date.now(), name: '', role: '', phone: '', photo: '' });
+    markDirty(); renderTeam();
   });
 
   /* ---------- الأقسام ---------- */
@@ -525,6 +595,7 @@
   });
 
   /* ---------- تشغيل ---------- */
+  renderTeam();
   renderSections();
   renderProducts();
 })();
