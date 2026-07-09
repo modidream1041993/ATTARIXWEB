@@ -128,7 +128,7 @@ window.ABOUT = {
       "name": "م. محمود العطار",
       "role": "مهندس البرمجيات — مؤسس نظام ATTARIX",
       "phone": "01090246299",
-      "photo": ""
+      "photo": "images/team-mahmoud-1783615711864.png"
     },
     {
       "id": "mostafa",
