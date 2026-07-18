@@ -142,7 +142,7 @@ window.ABOUT = {
       "id": "abdullah",
       "name": "أستاذ عبدالله العطار",
       "role": "مدير الحسابات",
-      "phone": "",
+      "phone": "01094575150",
       "photo": ""
     },
     {
