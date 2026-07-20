@@ -1,1 +1,15 @@
 .vercel
+
+# Never commit build artifacts or databases to this repo.
+# This folder is the deploy source for a PUBLIC website: anything committed here
+# can end up downloadable by anyone. An installer built before 2026-07-10 embeds
+# a real merchant's database (the seed.db incident) — those binaries must never
+# enter git history, where removing them costs a filter-repo + force-push.
+*.exe
+*.apk
+*.msi
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3

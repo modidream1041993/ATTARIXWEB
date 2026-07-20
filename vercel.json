@@ -2,5 +2,8 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/guide", "destination": "/ATTARIX-GUIDE" }
+  ],
+  "redirects": [
+    { "source": "/ATTARIX", "destination": "/", "permanent": true }
   ]
 }
