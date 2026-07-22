@@ -174,7 +174,7 @@ window.ABOUT = {
     "a": "العطار! ✈️ — شيل حرف العين من «العطار» هتلاقيه «طار» 😄"
   },
   "socials": {
-    "facebook": "",
+    "facebook": "https://www.facebook.com/attarix96/",
     "linkedin": "",
     "email": "modidream53@gmail.com"
   }
