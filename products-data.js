@@ -84,34 +84,6 @@ window.PRODUCTS = [
     "price": "✏️ 000 ج.م",
     "image": "images/shop-item-1-1783616457716.jpg",
     "isNew": true
-  },
-  {
-    "id": "shop-item-2",
-    "section": "shop",
-    "icon": "🧴",
-    "name": "✏️ منتج المحل رقم 2 (مثال — عدّله)",
-    "short": "✏️ وصف قصير للمنتج.",
-    "description": "✏️ وصف كامل للمنتج.",
-    "features": [
-      "✏️ ميزة 1",
-      "✏️ ميزة 2"
-    ],
-    "price": "✏️ 250 ج.م",
-    "image": ""
-  },
-  {
-    "id": "shop-item-3",
-    "section": "shop",
-    "icon": "🎁",
-    "name": "✏️ منتج المحل رقم 3 (مثال — عدّله)",
-    "short": "✏️ وصف قصير للمنتج.",
-    "description": "✏️ وصف كامل للمنتج.",
-    "features": [
-      "✏️ ميزة 1",
-      "✏️ ميزة 2"
-    ],
-    "price": "✏️ 80 ج.م",
-    "image": ""
   }
 ];
 
