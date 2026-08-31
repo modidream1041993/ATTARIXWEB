@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تحميل ATTARIX — تجربة مجانية ٣٠ يوم</title>
+<meta name="description" content="حمّل ATTARIX لإدارة محلك على الويندوز وجرّبه ٣٠ يوم مجانًا — من غير فيزا ومن غير تسجيل. يشتغل بدون إنترنت، وبياناتك كلها على جهازك." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="تحميل ATTARIX — تجربة مجانية ٣٠ يوم" />
+<meta property="og:description" content="نزّله على الكمبيوتر، افتحه، وابدأ تبيع. من غير فيزا ومن غير تسجيل." />
+<meta property="og:locale" content="ar_EG" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+<style>
+  /* خاص بصفحة التحميل فقط — الباقي كله من site.css */
+  .dl-wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  .dl-hero{text-align:center;padding:46px 0 8px}
+  .dl-hero h1{font-size:clamp(28px,6vw,44px);line-height:1.3;font-weight:900;margin-bottom:14px}
+  .dl-hero p{color:var(--muted);font-size:clamp(15px,3.4vw,18px)}
+
+  /* الزرار الكبير — أكبر عنصر في الصفحة، وسهل الضغط بالإصبع */
+  .dl-btn{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    width:100%;padding:20px 24px;margin:22px 0 10px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#1a1400;border-radius:18px;font-weight:900;
+    box-shadow:0 14px 40px rgba(245,179,1,.28);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .dl-btn:hover{transform:translateY(-2px);box-shadow:0 18px 50px rgba(245,179,1,.36)}
+  .dl-btn .big{font-size:clamp(19px,4.6vw,25px)}
+  .dl-btn .meta{font-size:14px;font-weight:700;opacity:.72}
+
+  .dl-free{text-align:center;color:var(--muted);font-size:15px;line-height:2}
+  .dl-free b{color:var(--ink)}
+  .dl-build{
+    text-align:center;margin-top:14px;padding:10px 14px;
+    border:1px dashed var(--line);border-radius:12px;
+    color:var(--muted);font-size:13.5px
+  }
+  .dl-build b{color:var(--ink);font-weight:800}
+
+  /* صندوق تحذير الويندوز — أوضح عنصر بعد الزرار */
+  .warn-box{
+    margin:34px 0;padding:22px;border-radius:18px;
+    background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.34)
+  }
+  .warn-box h2{font-size:clamp(19px,4.4vw,23px);color:var(--warn);margin-bottom:12px;font-weight:900}
+  .warn-box p{margin-bottom:12px;line-height:1.95}
+  .warn-steps{list-style:none;counter-reset:s;margin:16px 0 4px}
+  /* حشو منطقي مش فيزيائي: الصفحة بتتترجم تلقائيًا لأي لغة (translate.js)،
+     ولو اتقلبت لـLTR الرقم بيركب على النص لو استخدمنا padding-right ثابت */
+  .warn-steps li{
+    counter-increment:s;position:relative;
+    padding-block:11px;padding-inline-start:52px;padding-inline-end:14px;
+    margin-bottom:9px;
+    background:var(--glass);border:1px solid var(--line);border-radius:12px;line-height:1.7
+  }
+  .warn-steps li::before{
+    content:counter(s);position:absolute;inset-inline-start:14px;top:50%;transform:translateY(-50%);
+    width:26px;height:26px;border-radius:50%;
+    background:var(--warn);color:#231a00;font-weight:900;font-size:14px;
+    display:flex;align-items:center;justify-content:center
+  }
+  /* أسماء أزرار الويندوز إنجليزية — تُقرأ من الشمال لليمين مهما كان اتجاه السطر */
+  .en{display:inline-block;direction:ltr;unicode-bidi:isolate;
+      background:rgba(255,255,255,.1);border:1px solid var(--line);
+      border-radius:7px;padding:1px 8px;font-weight:800;white-space:nowrap}
+
+  .dl-sec{margin:34px 0}
+  .dl-sec h2{font-size:clamp(20px,4.6vw,26px);font-weight:900;margin-bottom:14px}
+  .does p{margin-bottom:11px;line-height:2;color:#cdd8ee}
+  .does .last{color:var(--ink);font-weight:800;margin-top:16px}
+
+  .req{display:grid;gap:11px}
+  .req div{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:14px 16px;background:var(--glass);border:1px solid var(--line);border-radius:14px
+  }
+  .req .ic{font-size:22px;line-height:1.3}
+
+  .first-steps{list-style:none;counter-reset:f;display:grid;gap:11px}
+  .first-steps li{
+    counter-increment:f;position:relative;
+    padding-block:15px;padding-inline-start:58px;padding-inline-end:16px;
+    background:var(--glass);border:1px solid var(--line);border-radius:14px;line-height:1.8
+  }
+  .first-steps li::before{
+    content:counter(f);position:absolute;inset-inline-start:16px;top:50%;transform:translateY(-50%);
+    width:30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;
+    font-weight:900;display:flex;align-items:center;justify-content:center
+  }
+
+  .help-box{
+    text-align:center;margin:38px 0 10px;padding:26px 22px;
+    background:var(--glass);border:1px solid var(--line);border-radius:18px
+  }
+  .help-box h2{font-size:clamp(19px,4.4vw,23px);font-weight:900;margin-bottom:8px}
+  .help-box p{color:var(--muted);margin-bottom:16px;line-height:1.9}
+  .help-box .btn{font-size:17px;padding:14px 26px}
+
+  @media(max-width:520px){
+    .dl-hero{padding-top:30px}
+    .warn-box{padding:17px}
+    .warn-steps li{padding-inline-end:46px}
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><span class="mark">A</span> ATTARIX</a>
+    <nav class="nav-links">
+      <a href="index.html">الرئيسية</a>
+      <a href="download.html" class="active">تحميل البرنامج</a>
+      <a href="products.html">المنتجات</a>
+      <a href="about.html">عنّنا</a>
+      <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">📖 دليل الاستخدام</a>
+    </nav>
+    <a class="btn btn-gold" id="navCta">💬 تواصل واتساب</a>
+    <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+  <div class="dl-wrap">
+
+    <section class="dl-hero rv in">
+      <h1>حمّل ATTARIX وجرّبه ٣٠ يوم مجانًا</h1>
+      <p>من غير فيزا، ومن غير ما تسجّل أي حاجة.<br>نزّله على الكمبيوتر، افتحه، وابدأ تبيع.</p>
+    </section>
+
+    <a class="dl-btn" href="ATTARIX-Setup.exe" download>
+      <span class="big">⬇️ تحميل ATTARIX للويندوز</span>
+      <span class="meta">ملف واحد · 5.1 ميجا · نسخة 2.3.0</span>
+    </a>
+
+    <p class="dl-free">
+      تجربة كاملة ٣٠ يوم — <b>كل المزايا شغالة، مفيش حاجة مقفولة</b>.<br>
+      مش هنطلب منك رقم فيزا ولا إيميل ولا حساب.
+    </p>
+
+    <p class="dl-build">
+      النسخة <b>2.3.0</b> · إصدار <b>29 أغسطس 2026</b><br>
+      لو كلّمتنا على الواتساب، قولنا الرقمين دول عشان نعرف نسختك بالظبط.
+    </p>
+
+    <!-- القسم اللي بيحدد يكمّل التثبيت ولا يقفل الصفحة -->
+    <section class="warn-box rv">
+      <h2>⚠️ الويندوز هيسألك سؤال أول مرة — وده طبيعي</h2>
+      <p>
+        أول ما تفتح الملف، الويندوز ممكن يطلّعلك شاشة زرقا مكتوب عليها
+        <span class="en">Windows protected your PC</span>.
+      </p>
+      <p>
+        ده مش فيروس ولا مشكلة في البرنامج. ده بيحصل لأي برنامج جديد لسه ماخدش
+        «شهادة الناشر» من مايكروسوفت.
+      </p>
+      <p style="font-weight:800;color:var(--ink)">عشان تكمّل التثبيت:</p>
+      <ol class="warn-steps">
+        <li>اضغط <span class="en">More info</span> (أو «مزيد من المعلومات»)</li>
+        <li>هيظهر زرار <span class="en">Run anyway</span> (أو «تشغيل على أي حال») — اضغطه</li>
+        <li>كمّل التثبيت عادي</li>
+      </ol>
+      <p style="margin-bottom:0">
+        ولو مطمنتش: <a data-wa-msg="السلام عليكم م. محمود 👋&#10;نزّلت ATTARIX وظهرلي تحذير الويندوز — ممكن تساعدني أكمّل التثبيت؟" style="color:var(--gold);font-weight:800;text-decoration:underline">ابعتلنا على الواتساب</a> ونمشيك خطوة بخطوة.
+      </p>
+    </section>
+
+    <section class="dl-sec does rv">
+      <h2>البرنامج بيعمل إيه</h2>
+      <p>ATTARIX بيمسك محلك كله في مكان واحد:</p>
+      <p>بتبيع، والبرنامج بيحسب الفاتورة ويطبعها ويخصم من المخزون لوحده.</p>
+      <p>بتشتري، بيسجّل للمورّد كام ليك وكام عليك.</p>
+      <p>عايز تعرف كسبت كام النهارده؟ رقم واحد قدامك.</p>
+      <p>الصنف قرب يخلص؟ بيقولك قبل ما يخلص.</p>
+      <p>عندك كاميرات وموبايلات بسيريال؟ بيتابع كل جهاز برقمه لحد ما يتباع.</p>
+      <p>وفي آخر اليوم بتقفل الدرج وتعرف الفلوس اللي المفروض تكون موجودة.</p>
+      <p class="last">كل ده بالعربي، ومن غير نت.</p>
+    </section>
+
+    <section class="dl-sec rv">
+      <h2>التشغيل</h2>
+      <div class="req">
+        <div><span class="ic">🖥️</span><span>ويندوز 10 أو 11</span></div>
+        <div><span class="ic">📶</span><span>بيشتغل من غير إنترنت — بياناتك كلها على جهازك انت</span></div>
+        <div><span class="ic">💾</span><span>مش محتاج جهاز قوي، أي كمبيوتر محل عادي يشغّله</span></div>
+      </div>
+    </section>
+
+    <section class="dl-sec rv">
+      <h2>أول ٣ خطوات</h2>
+      <ol class="first-steps">
+        <li>نزّل الملف وثبّته — دقيقتين</li>
+        <li>دخّل أصنافك — أو استورد ملف Excel جاهز في ثواني</li>
+        <li>ابدأ بيع — أول فاتورة في أقل من دقيقة</li>
+      </ol>
+    </section>
+
+    <section class="help-box rv">
+      <h2>💬 تحب نساعدك في التركيب؟</h2>
+      <p>بنرد بسرعة، وبنركّبلك البرنامج معاك على الشاشة لو حبيت.</p>
+      <a class="btn btn-gold" data-wa-msg="السلام عليكم م. محمود 👋&#10;نزّلت ATTARIX وعايز مساعدة في التركيب.">💬 كلّمنا على واتساب 01090246299</a>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logo" style="justify-content:center;margin-bottom:10px"><span class="mark">A</span> ATTARIX</div>
+    <p><a href="index.html">الرئيسية</a> · <a href="download.html">تحميل البرنامج</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّنا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
+    <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
+  </div>
+</footer>
+
+<a class="wa" id="floatWa" title="واتساب" aria-label="تواصل واتساب">💬</a>
+
+<script src="products-data.js"></script>
+<script src="site.js"></script>
+<script src="/translate.js" defer></script>
+</body>
+</html>
