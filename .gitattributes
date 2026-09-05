@@ -1,0 +1,17 @@
+# This repo has core.autocrlf=true, so a checkout rewrites text files to CRLF.
+# For a hook that is a silent failure waiting to happen: "#!/bin/sh\r" is a
+# "bad interpreter" error on Linux and macOS, and a hook that does not run is
+# fail-open — exactly what a guard must never be. Pin it to LF.
+.githooks/* text eol=lf
+*.sh        text eol=lf
+
+# Never normalize binary assets. (They should not be committed at all — see
+# .gitignore — but the two installers uploaded on 2026-08-31 are already here.)
+*.exe binary
+*.apk binary
+*.msi binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
