@@ -1,0 +1,32 @@
+#!/bin/sh
+# Refuses a commit that would put a binary into THIS repo's history.
+#
+# Enable (once per clone — hooks are never cloned):
+#     git config core.hooksPath .githooks
+#
+# This is the repo where it already happened: on 2026-08-31 two 5 MB installers were
+# uploaded through the GitHub web UI and are now permanent here. This repo is PUBLIC
+# and is the deploy source for the website, so a binary committed here is downloadable
+# by anyone — and an installer built before 2026-07-10 embeds a real merchant's
+# database (the seed.db incident).
+#
+# ⚠️ This hook CANNOT have prevented that upload: the GitHub web UI commits on
+# GitHub's servers, where no local hook runs. Closing that gap needs CI, which is
+# NOT wired up yet — see RELEASE-PROCESS.md, "الحارس في CI". Until it is, the only
+# thing covering web uploads is the rule: don't use them.
+#
+# The guard itself lives in the parent project (ATTARIX WEB is checked out inside
+# accounting-app), deliberately as ONE copy — a second copy would drift from the
+# first, which is the exact failure shape this project has been bitten by before.
+GUARD="$(git rev-parse --show-toplevel)/../scripts/check-no-binaries.mjs"
+
+if [ ! -f "$GUARD" ]; then
+  echo "❌ pre-commit: the binary guard is missing at:"
+  echo "     $GUARD"
+  echo "   Expected the parent project at ../ (accounting-app). If this repo was"
+  echo "   cloned standalone, the guard is not reachable — fail closed rather than"
+  echo "   let an installer through silently."
+  exit 1
+fi
+
+exec node "$GUARD" --staged
