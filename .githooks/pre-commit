@@ -15,17 +15,23 @@
 # NOT wired up yet — see RELEASE-PROCESS.md, "الحارس في CI". Until it is, the only
 # thing covering web uploads is the rule: don't use them.
 #
-# The guard itself lives in the parent project (ATTARIX WEB is checked out inside
-# accounting-app), deliberately as ONE copy — a second copy would drift from the
-# first, which is the exact failure shape this project has been bitten by before.
-GUARD="$(git rev-parse --show-toplevel)/../scripts/check-no-binaries.mjs"
+# The guard itself lives in the desktop project (accounting-app), deliberately as ONE
+# copy — a second copy would drift from the first, which is the exact failure shape this
+# project has been bitten by before. Two layouts are recognised: this repo checked out
+# INSIDE accounting-app (the old `ATTARIX WEB/` folder: ../scripts), and a standalone
+# clone BESIDE it (Desktop\attarix-web-site, since 2026-10-08: ../accounting-app/scripts).
+TOP="$(git rev-parse --show-toplevel)"
+GUARD=""
+for candidate in "$TOP/../scripts/check-no-binaries.mjs" "$TOP/../accounting-app/scripts/check-no-binaries.mjs"; do
+  if [ -f "$candidate" ]; then GUARD="$candidate"; break; fi
+done
 
-if [ ! -f "$GUARD" ]; then
-  echo "❌ pre-commit: the binary guard is missing at:"
-  echo "     $GUARD"
-  echo "   Expected the parent project at ../ (accounting-app). If this repo was"
-  echo "   cloned standalone, the guard is not reachable — fail closed rather than"
-  echo "   let an installer through silently."
+if [ -z "$GUARD" ]; then
+  echo "❌ pre-commit: the binary guard is missing. Looked at:"
+  echo "     $TOP/../scripts/check-no-binaries.mjs"
+  echo "     $TOP/../accounting-app/scripts/check-no-binaries.mjs"
+  echo "   Clone accounting-app beside this repo (or this repo inside it) — fail closed"
+  echo "   rather than let an installer through silently."
   exit 1
 fi
 
