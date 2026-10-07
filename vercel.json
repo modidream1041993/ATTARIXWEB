@@ -1,9 +1,26 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/guide", "destination": "/ATTARIX-GUIDE" }
+    {
+      "source": "/guide",
+      "destination": "/ATTARIX-GUIDE"
+    }
   ],
   "redirects": [
-    { "source": "/ATTARIX", "destination": "/", "permanent": true }
+    {
+      "source": "/ATTARIX",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ATTARIX-Setup.exe",
+      "destination": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v2.6.5/Attarix_2.6.5_x64-setup.exe",
+      "permanent": false
+    },
+    {
+      "source": "/Attarix_2.3.0_x64-setup.exe",
+      "destination": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v2.6.5/Attarix_2.6.5_x64-setup.exe",
+      "permanent": false
+    }
   ]
 }
