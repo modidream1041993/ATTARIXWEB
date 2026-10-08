@@ -20,14 +20,17 @@
 # project has been bitten by before. Two layouts are recognised: this repo checked out
 # INSIDE accounting-app (the old `ATTARIX WEB/` folder: ../scripts), and a standalone
 # clone BESIDE it (Desktop\attarix-web-site, since 2026-10-08: ../accounting-app/scripts).
+# ATTARIX_BINARY_GUARD names the guard file explicitly, for when the accounting-app checkout is
+# on a branch that does not carry it (a release worktree does). Set but missing still fails closed.
 TOP="$(git rev-parse --show-toplevel)"
 GUARD=""
-for candidate in "$TOP/../scripts/check-no-binaries.mjs" "$TOP/../accounting-app/scripts/check-no-binaries.mjs"; do
+for candidate in ${ATTARIX_BINARY_GUARD:+"$ATTARIX_BINARY_GUARD"} "$TOP/../scripts/check-no-binaries.mjs" "$TOP/../accounting-app/scripts/check-no-binaries.mjs"; do
   if [ -f "$candidate" ]; then GUARD="$candidate"; break; fi
 done
 
 if [ -z "$GUARD" ]; then
   echo "❌ pre-commit: the binary guard is missing. Looked at:"
+  [ -n "$ATTARIX_BINARY_GUARD" ] && echo "     $ATTARIX_BINARY_GUARD (ATTARIX_BINARY_GUARD)"
   echo "     $TOP/../scripts/check-no-binaries.mjs"
   echo "     $TOP/../accounting-app/scripts/check-no-binaries.mjs"
   echo "   Clone accounting-app beside this repo (or this repo inside it) — fail closed"
