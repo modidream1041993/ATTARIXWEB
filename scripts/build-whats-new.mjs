@@ -1,6 +1,11 @@
 // Builds whats-new.html («ما الجديد») from the desktop app's merchant-facing release notes.
 //
 //     node scripts/build-whats-new.mjs ../accounting-app/docs/release-notes.md 2.6.1 2.6.5
+//     … --summary "ما الجديد منذ الإصدار 2.6.5 — باختصار" --title "أهم ما في النسخة الحالية 2.7.2" --intro "…"
+//
+// `--summary` (2.7.2): a NON-version section of the notes («## <heading>» that is not «الإصدار X.Y.Z») rendered FIRST,
+// under the site's own title and intro (owner-approved, 2026-10-13); its bullets are the notes' text verbatim, and the
+// notes' own intro lines («> …», written for the file) are not shown. The per-version entries follow unchanged.
 //
 // The notes are the owner-approved formal text (accounting-app docs/release-notes.md, newest
 // first) and are copied as they are — this only turns their Markdown (## headings, **bold**,
@@ -12,9 +17,16 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const [notesPath, from, to] = process.argv.slice(2);
-if (!notesPath || !from || !to) {
-  console.error('usage: node scripts/build-whats-new.mjs <release-notes.md> <from version> <to version>');
+const positional = [];
+const opts = {};
+for (let i = 2; i < process.argv.length; i++) {
+  const a = process.argv[i];
+  if (a.startsWith('--')) opts[a.slice(2)] = process.argv[++i];
+  else positional.push(a);
+}
+const [notesPath, from, to] = positional;
+if (!notesPath || !from || !to || (opts.summary && !(opts.title && opts.intro))) {
+  console.error('usage: node scripts/build-whats-new.mjs <release-notes.md> <from version> <to version> [--summary <notes heading> --title <site title> --intro <site intro>]');
   process.exit(1);
 }
 
@@ -34,6 +46,7 @@ const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 // its note about where the technical side lives, a version still being prepared) is not shown.
 const md = readFileSync(notesPath, 'utf8').replace(/\r\n/g, '\n');
 const sections = [];
+let summary = null;
 let current = null;
 for (const line of md.split('\n')) {
   const h = line.match(/^## الإصدار (\d+\.\d+\.\d+)\s*$/);
@@ -43,11 +56,13 @@ for (const line of md.split('\n')) {
     continue;
   }
   if (line.startsWith('## ')) {
-    current = null; // a heading with anything after the version (e.g. «قيد الإصدار») is not shipped
+    // A heading with anything after the version (e.g. «قيد الإصدار») is not shipped — unless it is THE summary asked for.
+    current = opts.summary && line.slice(3).trim() === opts.summary ? (summary = { lines: [] }) : null;
     continue;
   }
   if (current) current.lines.push(line);
 }
+if (opts.summary && !summary) throw new Error(`no section «${opts.summary}» in ${notesPath}`);
 const chosen = sections
   .filter((s) => cmp(s.version, from) >= 0 && cmp(s.version, to) <= 0)
   .sort((a, b) => cmp(b.version, a.version));
@@ -78,7 +93,10 @@ const body = (lines) => {
   return out.join('\n');
 };
 
-const articles = chosen
+const summaryBlock = summary
+  ? `<article class="wn-ver wn-summary rv" id="summary">\n<h2>${esc(opts.title)}</h2>\n<p>${esc(opts.intro)}</p>\n${body(summary.lines.filter((l) => !l.startsWith('>')))}\n</article>\n\n`
+  : '';
+const articles = summaryBlock + chosen
   .map((s) => `<article class="wn-ver rv" id="v${s.version}">\n<h2>الإصدار ${s.version}</h2>\n${body(s.lines)}\n</article>`)
   .join('\n\n');
 
@@ -171,4 +189,4 @@ ${articles}
 </html>
 `;
 writeFileSync(join(ROOT, 'whats-new.html'), html);
-console.log(`whats-new.html: ${chosen.map((s) => s.version).join(', ')}`);
+console.log(`whats-new.html: ${summary ? `«${opts.title}» + ` : ''}${chosen.map((s) => s.version).join(', ')}`);
