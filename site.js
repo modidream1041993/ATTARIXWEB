@@ -19,7 +19,7 @@
   /* ---------- سلوك مشترك: واتساب + قائمة الموبايل + الظهور عند التمرير ---------- */
   function initCommon() {
     var defaultMsg = "السلام عليكم " + C.owner + "، جاي من الموقع وعايز أستفسر 👋";
-    ['navCta', 'floatWa'].forEach(function (id) {
+    ['heroWa', 'bizWa', 'floatWa'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) { el.href = waUrl(defaultMsg); el.target = "_blank"; el.rel = "noopener"; }
     });

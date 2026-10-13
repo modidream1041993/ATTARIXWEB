@@ -101,11 +101,11 @@ const articles = summaryBlock + chosen
   .join('\n\n');
 
 const NAV = [
-  ['index.html', 'الرئيسية'],
-  ['download.html', 'تحميل البرنامج'],
-  ['whats-new.html', 'ما الجديد'],
-  ['products.html', 'المنتجات'],
-  ['about.html', 'عنّنا'],
+  ['index.html#features', 'المزايا'],
+  ['index.html#plans', 'الأسعار'],
+  ['download.html', 'تحميل'],
+  ['index.html#faq', 'أسئلة'],
+  ['index.html#order', 'تواصل'],
 ];
 const nav = NAV.map(([href, label]) => `      <a href="${href}"${href === 'whats-new.html' ? ' class="active"' : ''}>${label}</a>`).join('\n');
 const foot = NAV.map(([href, label]) => `<a href="${href}">${label}</a>`).join(' · ');
@@ -154,7 +154,6 @@ const html = `<!doctype html>
     <a class="logo" href="index.html"><span class="mark">A</span> ATTARIX</a>
     <nav class="nav-links">
 ${nav}
-      <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">📖 دليل الاستخدام</a>
     </nav>
     <a class="btn btn-gold" id="navCta">💬 تواصل واتساب</a>
     <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
@@ -176,7 +175,7 @@ ${articles}
 <footer>
   <div class="wrap">
     <div class="logo" style="justify-content:center;margin-bottom:10px"><span class="mark">A</span> ATTARIX</div>
-    <p>${foot} · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
+    <p><a href="index.html">الرئيسية</a> · ${foot} · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّنا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
     <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
   </div>
 </footer>
