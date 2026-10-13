@@ -14,6 +14,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const data = JSON.parse(readFileSync(join(ROOT, 'scripts', 'latest-update.json'), 'utf8'));
 if (!/^\d+\.\d+\.\d+$/.test(data.version)) throw new Error(`bad version: ${data.version}`);
 if (!Array.isArray(data.highlights) || data.highlights.length < 1) throw new Error('no highlights');
+if (!/^\d{4}-\d{2}-\d{2}$/.test(data.released ?? '')) throw new Error(`bad released date: ${data.released}`);
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const items = data.highlights
@@ -48,3 +49,8 @@ const b = s.indexOf(END);
 if (a < 0 || b < a) throw new Error('LATEST markers not found in index.html');
 writeFileSync(path, s.slice(0, a) + section + s.slice(b + END.length));
 console.log(`index.html: latest section at ${data.version} (${data.highlights.length} highlights)`);
+
+// The app's new-version notice (ATTARIX 2.7.4) reads this public file: the version and its date ONLY — no link (the
+// app opens its own fixed download page), nothing else. It must name the version the download page serves.
+writeFileSync(join(ROOT, 'latest-update.json'), JSON.stringify({ version: data.version, released: data.released }, null, 2) + '\n');
+console.log(`latest-update.json: ${data.version} (${data.released})`);
