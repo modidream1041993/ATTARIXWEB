@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://attarixx.vercel.app/</loc>
+       <lastmod>2026-10-15T09:50:51+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://attarixx.vercel.app/download</loc>
+       <lastmod>2026-10-15T09:50:51+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://attarixx.vercel.app/whats-new</loc>
+       <lastmod>2026-10-15T09:50:51+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://attarixx.vercel.app/products</loc>
+       <lastmod>2026-10-15T09:50:51+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://attarixx.vercel.app/about</loc>
+       <lastmod>2026-10-15T09:50:51+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://attarixx.vercel.app/ATTARIX-GUIDE</loc>
+       <lastmod>2026-10-15T09:50:51+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+</urlset>
