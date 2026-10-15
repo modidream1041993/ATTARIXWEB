@@ -97,7 +97,7 @@ const summaryBlock = summary
   ? `<article class="wn-ver wn-summary rv" id="summary">\n<h2>${esc(opts.title)}</h2>\n<p>${esc(opts.intro)}</p>\n${body(summary.lines.filter((l) => !l.startsWith('>')))}\n</article>\n\n`
   : '';
 const articles = summaryBlock + chosen
-  .map((s) => `<article class="wn-ver rv" id="v${s.version}">\n<h2>الإصدار ${s.version}</h2>\n${body(s.lines)}\n</article>`)
+  .map((s) => `<article class="wn-ver rv" id="v${s.version}">\n<h2>الإصدار ${s.version}</h2>\n${body(s.lines.filter((l) => !l.startsWith('>')))}\n</article>`)
   .join('\n\n');
 
 const NAV = [
