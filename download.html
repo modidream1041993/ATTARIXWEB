@@ -9,7 +9,7 @@
 <meta property="og:title" content="تحميل ATTARIX — تجربة مجانية ٣٠ يوم" />
 <meta property="og:description" content="نزّله على الكمبيوتر، افتحه، وابدأ تبيع. من غير فيزا ومن غير تسجيل." />
 <meta property="og:locale" content="ar_EG" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -26,14 +26,14 @@
   .dl-btn{
     display:flex;flex-direction:column;align-items:center;gap:4px;
     width:100%;padding:20px 24px;margin:22px 0 10px;
-    background:linear-gradient(135deg,var(--gold),var(--gold2));
-    color:#1a1400;border-radius:18px;font-weight:900;
-    box-shadow:0 14px 40px rgba(245,179,1,.28);
+    background:var(--accent);
+    color:var(--on-accent);border-radius:18px;font-weight:900;
+    box-shadow:0 14px 34px rgba(244,149,44,.32);
     transition:transform .15s ease, box-shadow .15s ease;
   }
-  .dl-btn:hover{transform:translateY(-2px);box-shadow:0 18px 50px rgba(245,179,1,.36)}
+  .dl-btn:hover{transform:translateY(-2px);background:var(--accent-hi)}
   .dl-btn .big{font-size:clamp(19px,4.6vw,25px)}
-  .dl-btn .meta{font-size:14px;font-weight:700;opacity:.72}
+  .dl-btn .meta{font-size:14px;font-weight:700;opacity:.8}
 
   .dl-free{text-align:center;color:var(--muted);font-size:15px;line-height:2}
   .dl-free b{color:var(--ink)}
@@ -46,14 +46,14 @@
   /* بصمة الملف: تتكسر على أي عرض شاشة من غير ما تطلع برّه الصفحة */
   .dl-hash{text-align:center;margin-top:10px;color:var(--muted);font-size:13px;line-height:1.9}
   .dl-hash code{display:block;direction:ltr;word-break:break-all;color:var(--ink);font-size:12.5px;margin:4px 0}
-  .dl-hash a{color:var(--gold2);text-decoration:underline}
+  .dl-hash a{color:var(--link);text-decoration:underline}
 
   /* صندوق تحذير الويندوز — أوضح عنصر بعد الزرار */
   .warn-box{
     margin:34px 0;padding:22px;border-radius:18px;
-    background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.34)
+    background:var(--tint-accent);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent)
   }
-  .warn-box h2{font-size:clamp(19px,4.4vw,23px);color:var(--warn);margin-bottom:12px;font-weight:900}
+  .warn-box h2{font-size:clamp(19px,4.4vw,23px);color:var(--accent-ink);margin-bottom:12px;font-weight:900}
   .warn-box p{margin-bottom:12px;line-height:1.95}
   .warn-steps{list-style:none;counter-reset:s;margin:16px 0 4px}
   /* حشو منطقي مش فيزيائي: الصفحة بتتترجم تلقائيًا لأي لغة (translate.js)،
@@ -67,17 +67,17 @@
   .warn-steps li::before{
     content:counter(s);position:absolute;inset-inline-start:14px;top:50%;transform:translateY(-50%);
     width:26px;height:26px;border-radius:50%;
-    background:var(--warn);color:#231a00;font-weight:900;font-size:14px;
+    background:var(--accent);color:var(--on-accent);font-weight:900;font-size:14px;
     display:flex;align-items:center;justify-content:center
   }
   /* أسماء أزرار الويندوز إنجليزية — تُقرأ من الشمال لليمين مهما كان اتجاه السطر */
   .en{display:inline-block;direction:ltr;unicode-bidi:isolate;
-      background:rgba(255,255,255,.1);border:1px solid var(--line);
+      background:var(--bg2);border:1px solid var(--line);
       border-radius:7px;padding:1px 8px;font-weight:800;white-space:nowrap}
 
   .dl-sec{margin:34px 0}
   .dl-sec h2{font-size:clamp(20px,4.6vw,26px);font-weight:900;margin-bottom:14px}
-  .does p{margin-bottom:11px;line-height:2;color:#cdd8ee}
+  .does p{margin-bottom:11px;line-height:2;color:var(--ink)}
   .does .last{color:var(--ink);font-weight:800;margin-top:16px}
 
   .req{display:grid;gap:11px}
@@ -96,7 +96,7 @@
   .first-steps li::before{
     content:counter(f);position:absolute;inset-inline-start:16px;top:50%;transform:translateY(-50%);
     width:30px;height:30px;border-radius:50%;
-    background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;
+    background:var(--brand-grad);color:#fff;
     font-weight:900;display:flex;align-items:center;justify-content:center
   }
 
@@ -125,15 +125,15 @@
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="index.html"><span class="mark">A</span> ATTARIX</a>
+    <a class="logo" href="index.html"><img class="mark" src="brand/attarix-mark.svg" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light.svg" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark.svg" alt="ATTARIX" width="110" height="17"></picture></a>
     <nav class="nav-links">
-      <a href="index.html#features">المزايا</a>
+      <a href="index.html#pains">المزايا</a>
       <a href="index.html#plans">الأسعار</a>
       <a href="download.html" class="active">تحميل</a>
       <a href="index.html#faq">أسئلة</a>
-      <a href="index.html#order">تواصل</a>
+      <a href="index.html#start">تواصل</a>
     </nav>
-    <a class="btn btn-gold" id="navCta">💬 تواصل واتساب</a>
+    <a class="btn btn-ghost btn-sm" data-wa-msg="السلام عليكم م. محمود 👋 عندي سؤال عن تحميل ATTARIX">💬 واتساب</a>
     <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
   </div>
 </header>
@@ -185,7 +185,7 @@
         <li>كمّل التثبيت عادي</li>
       </ol>
       <p style="margin-bottom:0">
-        ولو مطمنتش: <a data-wa-msg="السلام عليكم م. محمود 👋&#10;نزّلت ATTARIX وظهرلي تحذير الويندوز — ممكن تساعدني أكمّل التثبيت؟" style="color:var(--gold);font-weight:800;text-decoration:underline">ابعتلنا على الواتساب</a> ونمشيك خطوة بخطوة.
+        ولو مطمنتش: <a data-wa-msg="السلام عليكم م. محمود 👋&#10;نزّلت ATTARIX وظهرلي تحذير الويندوز — ممكن تساعدني أكمّل التثبيت؟" style="color:var(--accent-ink);font-weight:800;text-decoration:underline">ابعتلنا على الواتساب</a> ونمشيك خطوة بخطوة.
       </p>
     </section>
 
@@ -222,7 +222,7 @@
     <section class="help-box rv">
       <h2>💬 تحب نساعدك في التركيب؟</h2>
       <p>بنرد بسرعة، وبنركّبلك البرنامج معاك على الشاشة لو حبيت.</p>
-      <a class="btn btn-gold" data-wa-msg="السلام عليكم م. محمود 👋&#10;نزّلت ATTARIX وعايز مساعدة في التركيب.">💬 كلّمنا على واتساب 01090246299</a>
+      <a class="btn btn-blue" data-wa-msg="السلام عليكم م. محمود 👋&#10;نزّلت ATTARIX وعايز مساعدة في التركيب.">💬 كلّمنا على واتساب 01090246299</a>
     </section>
 
   </div>
@@ -230,7 +230,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="logo" style="justify-content:center;margin-bottom:10px"><span class="mark">A</span> ATTARIX</div>
+    <div class="logo" style="justify-content:center;margin-bottom:10px"><img class="mark" src="brand/attarix-mark.svg" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light.svg" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark.svg" alt="ATTARIX" width="110" height="17"></picture></div>
     <p><a href="index.html">الرئيسية</a> · <a href="download.html">تحميل البرنامج</a> · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّنا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
     <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
   </div>

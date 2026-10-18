@@ -4,15 +4,15 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>دليل استخدام ATTARIX — الشرح الكامل + الاختصارات</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 <style>
   :root{
-    --blue:#1d4ed8; --blue2:#3b82f6; --ink:#111827; --muted:#5b6472;
-    --bg:#f7f9fc; --card:#ffffff; --line:#e5eaf2; --gold:#b45309; --ok:#047857;
+    --blue:#0B5590; --blue2:#1672A5; --ink:#111827; --muted:#5b6472;
+    --bg:#f7f9fc; --card:#ffffff; --line:#e5eaf2; --gold:#A85A0A; --ok:#047857;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Cairo',system-ui,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;font-size:15.5px}
@@ -20,8 +20,8 @@
   .wrap{max-width:900px;margin:0 auto;padding:0 20px}
 
   /* cover */
-  .cover{background:linear-gradient(150deg,#1e3a8a,#1d4ed8 60%,#3b82f6);color:#fff;padding:56px 0 48px;text-align:center}
-  .cover .mark{width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+  .cover{background:linear-gradient(150deg,#083F6B,#0B5590 55%,#1672A5);color:#fff;padding:56px 0 48px;text-align:center}
+  .cover .mark{width:64px;height:64px;border-radius:16px;background:#fff;border:1px solid rgba(255,255,255,.3);
     display:grid;place-items:center;font-size:2rem;font-weight:900;margin:0 auto 16px}
   .cover h1{font-size:2.1rem;font-weight:900}
   .cover p{opacity:.92;margin-top:8px;font-size:1.05rem}
@@ -43,8 +43,8 @@
   p, li{color:#374151}
   ul,ol{padding-inline-start:22px;margin:6px 0}
   li{margin:4px 0}
-  .tip{background:#eff6ff;border:1px solid #bfdbfe;border-inline-start:4px solid var(--blue);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.95rem}
-  .warn{background:#fffbeb;border:1px solid #fde68a;border-inline-start:4px solid #d97706;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.95rem}
+  .tip{background:#EAF3FB;border:1px solid #BCD8EE;border-inline-start:4px solid var(--blue);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.95rem}
+  .warn{background:#FFF4E6;border:1px solid #F7C58A;border-inline-start:4px solid #F4952C;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.95rem}
   .steps{counter-reset:st;list-style:none;padding-inline-start:0}
   .steps li{counter-increment:st;position:relative;padding-inline-start:40px;margin:8px 0}
   .steps li::before{content:counter(st);position:absolute;inset-inline-start:0;top:3px;width:26px;height:26px;border-radius:50%;
@@ -52,14 +52,14 @@
   kbd{background:#111827;color:#f9fafb;border-radius:6px;padding:2px 9px;font-family:Consolas,monospace;font-size:.85rem;
     box-shadow:0 2px 0 #000;white-space:nowrap}
   table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.93rem}
-  th{background:#eff6ff;color:#1e3a8a;font-weight:800;text-align:right;padding:9px 12px;border:1px solid var(--line)}
+  th{background:#EAF3FB;color:#083F6B;font-weight:800;text-align:right;padding:9px 12px;border:1px solid var(--line)}
   td{padding:8px 12px;border:1px solid var(--line);vertical-align:top}
   tr:nth-child(even) td{background:#fafcff}
   .badge{display:inline-block;background:#ecfdf5;color:var(--ok);border:1px solid #a7f3d0;border-radius:999px;
     padding:1px 11px;font-size:.75rem;font-weight:800;vertical-align:middle}
   .print-btn{position:fixed;bottom:20px;inset-inline-start:20px;z-index:50;background:var(--blue);color:#fff;border:0;
     border-radius:12px;padding:12px 22px;font-family:inherit;font-weight:800;font-size:.95rem;cursor:pointer;
-    box-shadow:0 8px 24px rgba(29,78,216,.35)}
+    box-shadow:0 8px 24px rgba(11,85,144,.30)}
   footer{text-align:center;color:var(--muted);font-size:.85rem;padding:26px 0 40px}
 
   @media print{
@@ -79,7 +79,7 @@
 
 <div class="cover">
   <div class="wrap">
-    <div class="mark">A</div>
+    <div class="mark"><img src="brand/attarix-mark.svg" alt="" width="46" height="39"></div>
     <h1>دليل استخدام ATTARIX الكامل</h1>
     <p>نظام إدارة المحلات الذكي — كاشير · مخزون · محاسبة · ذكاء تجاري</p>
     <p class="meta">الإصدار 2.2.0 — للدعم الفني: واتساب 01090246299 (م. محمود العطار)</p>

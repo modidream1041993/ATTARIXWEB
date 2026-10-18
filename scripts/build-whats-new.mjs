@@ -101,11 +101,11 @@ const articles = summaryBlock + chosen
   .join('\n\n');
 
 const NAV = [
-  ['index.html#features', 'المزايا'],
+  ['index.html#pains', 'المزايا'],
   ['index.html#plans', 'الأسعار'],
   ['download.html', 'تحميل'],
   ['index.html#faq', 'أسئلة'],
-  ['index.html#order', 'تواصل'],
+  ['index.html#start', 'تواصل'],
 ];
 const nav = NAV.map(([href, label]) => `      <a href="${href}"${href === 'whats-new.html' ? ' class="active"' : ''}>${label}</a>`).join('\n');
 const foot = NAV.map(([href, label]) => `<a href="${href}">${label}</a>`).join(' · ');
@@ -120,7 +120,7 @@ const html = `<!doctype html>
 <meta property="og:type" content="website" />
 <meta property="og:title" content="ما الجديد في ATTARIX" />
 <meta property="og:locale" content="ar_EG" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -133,7 +133,8 @@ const html = `<!doctype html>
   .wn-hero h1{font-size:clamp(28px,6vw,44px);line-height:1.3;font-weight:900;margin-bottom:12px}
   .wn-hero p{color:var(--muted);font-size:clamp(15px,3.4vw,18px)}
   .wn-ver{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:22px 24px;margin:18px 0}
-  .wn-ver h2{font-size:clamp(20px,4.6vw,26px);font-weight:900;margin-bottom:10px;color:var(--gold2)}
+  .wn-ver h2{font-size:clamp(20px,4.6vw,26px);font-weight:900;margin-bottom:10px;color:var(--link)}
+  .wn-summary{border:2px solid var(--brand-400)}
   .wn-ver p{line-height:2;margin:10px 0}
   .wn-ver ul{padding-inline-start:22px;margin:6px 0 10px}
   .wn-ver li{line-height:2;margin:4px 0;color:var(--ink)}
@@ -151,11 +152,11 @@ const html = `<!doctype html>
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="index.html"><span class="mark">A</span> ATTARIX</a>
+    <a class="logo" href="index.html"><img class="mark" src="brand/attarix-mark.svg" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light.svg" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark.svg" alt="ATTARIX" width="110" height="17"></picture></a>
     <nav class="nav-links">
 ${nav}
     </nav>
-    <a class="btn btn-gold" id="navCta">💬 تواصل واتساب</a>
+    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">حمّل مجانًا</a>
     <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
   </div>
 </header>
@@ -174,7 +175,7 @@ ${articles}
 
 <footer>
   <div class="wrap">
-    <div class="logo" style="justify-content:center;margin-bottom:10px"><span class="mark">A</span> ATTARIX</div>
+    <div class="logo"><img class="mark" src="brand/attarix-mark.svg" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light.svg" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark.svg" alt="ATTARIX" width="110" height="17"></picture></div>
     <p><a href="index.html">الرئيسية</a> · ${foot} · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّنا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
     <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
   </div>

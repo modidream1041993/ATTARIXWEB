@@ -3,14 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ATTARIX — نظام إدارة المحلات الذكي: كاشير، مخزون، محاسبة، تقارير</title>
-<meta name="description" content="ATTARIX نظام عربي لإدارة المتجر: كاشير سريع، مخزون بالكرتونة والقطعة، محاسبة قيد مزدوج، اقتراحات شراء، تذكيرات واتساب للتحصيل — يعمل بدون إنترنت، وتجربة 30 يوم مجانًا." />
+<title>ATTARIX — برنامج إدارة المحلات: بيع، مخزون، ورديات، وحسابات بالعربي</title>
+<meta name="description" content="ATTARIX برنامج عربي لمحلك على الويندوز: الدرج مضبوط بعدّ كل وردية، تنبيه قبل ما البضاعة تخلص، ربحك بضغطة، وكشف حساب الزبون على الواتساب. يشتغل من غير إنترنت — جرّبه 30 يوم مجانًا." />
+<meta name="theme-color" content="#0B5590" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="ATTARIX — نظام إدارة المحلات الذكي" />
-<meta property="og:description" content="كاشير + مخزون + محاسبة + اقتراحات ذكية. عربي 100%، يعمل أوفلاين، من 499 ج في الشهر لأول 10 عملاء." />
+<meta property="og:title" content="ATTARIX — محلك مضبوط، وحساباتك قدامك" />
+<meta property="og:description" content="برنامج عربي للمحلات: بيع ومخزون وورديات وديون الزباين — من غير إنترنت. جرّبه 30 يوم مجانًا." />
 <meta property="og:locale" content="ar_EG" />
+<meta property="og:image" content="https://attarixx.vercel.app/images/sale-screen.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d4ed8'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -18,233 +20,139 @@
   "name": "ATTARIX",
   "operatingSystem": "Windows",
   "applicationCategory": "BusinessApplication",
-  "description": "نظام عربي لإدارة المتاجر: نقاط بيع، مخزون، محاسبة قيد مزدوج، تقارير واقتراحات شراء.",
+  "description": "برنامج عربي لإدارة المحلات: بيع، مخزون، ورديات، حسابات وتقارير — يعمل بدون إنترنت.",
   "inLanguage": "ar",
   "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "EGP" }
 }
 </script>
-<!-- ====== بيانات التواصل ====== -->
-<script>
-  window.ATTARIX_WHATSAPP = "201090246299"; // واتساب (دولي بدون +)
-  window.ATTARIX_PHONE = "+201090246299";
-  window.ATTARIX_OWNER = "م. محمود العطار";
-</script>
+<script>window.SITE_CONTACT = { whatsapp: "201090246299", phone: "+201090246299", owner: "م. محمود العطار" };</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="brand/attarix-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="site.css">
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 <style>
-  :root{
-    --bg:#070b14; --bg2:#0a1020; --ink:#eef3ff; --muted:#93a1bd;
-    --blue:#3b82f6; --blue2:#1d4ed8; --violet:#7c3aed; --gold:#f5b301; --gold2:#ffcf40;
-    --glass:rgba(255,255,255,.045); --glass2:rgba(255,255,255,.08); --line:rgba(255,255,255,.09);
-    --ok:#34d399; --warn:#fbbf24;
+  /* ===== الصفحة الرئيسية فقط — الباقي من site.css ===== */
+  .hero{padding:40px 0 36px;background:
+      radial-gradient(900px 420px at 85% -10%,color-mix(in srgb,var(--brand-400) 18%,transparent),transparent 70%),
+      radial-gradient(700px 360px at 0% 110%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+  .hero h1{font-size:clamp(2rem,6.4vw,3.4rem);line-height:1.25;font-weight:900;letter-spacing:-.3px}
+  .hero h1 .hl{color:var(--accent-ink)}
+  .hero .sub{font-size:clamp(1.05rem,3.6vw,1.28rem);color:var(--muted);margin-top:14px;max-width:560px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+  .hero-trust{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-weight:700;font-size:.95rem}
+  .hero-trust span{display:inline-flex;align-items:center;gap:6px}
+  .hero-trust svg{width:18px;height:18px;color:var(--ok)}
+  .hero-art{position:relative;max-width:440px;margin-inline:auto;width:100%}
+  .hero-art .mark-big{width:100%;height:auto;filter:drop-shadow(0 24px 40px rgba(11,85,144,.25))}
+  .chip{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 13px;
+    box-shadow:var(--shadow);font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:8px;white-space:nowrap}
+  .chip small{display:block;font-weight:700;color:var(--muted);font-size:.74rem;line-height:1.3}
+  .chip .dot{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--tint);color:var(--link);flex-shrink:0}
+  .chip .dot svg{width:18px;height:18px}
+  .chip.c1{top:6%;inset-inline-start:-4%}
+  .chip.c2{top:44%;inset-inline-end:-6%}
+  .chip.c3{bottom:4%;inset-inline-start:2%}
+  .chip.c3 .dot{background:var(--tint-accent);color:var(--accent-ink)}
+  @media(max-width:880px){
+    .hero{padding-top:26px}
+    .hero-grid{grid-template-columns:1fr;gap:18px}
+    .hero-art{max-width:300px;order:-1}
+    .chip{font-size:.8rem;padding:7px 10px}
+    .chip .dot{width:26px;height:26px}
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Cairo',system-ui,Arial,sans-serif;color:var(--ink);background:var(--bg);
-    line-height:1.75;overflow-x:hidden;
-    background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1px);
-    background-size:26px 26px;
-  }
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  @media(max-width:420px){.hero-cta .btn{width:100%}.chip.c2{inset-inline-end:-2%}}
 
-  /* ===== glow orbs ===== */
-  .orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none;z-index:0}
-  .orb-a{width:520px;height:520px;background:#1d4ed8;top:-140px;inset-inline-end:-120px;animation:drift 16s ease-in-out infinite alternate}
-  .orb-b{width:420px;height:420px;background:#7c3aed;top:48%;inset-inline-start:-160px;animation:drift 20s ease-in-out infinite alternate-reverse}
-  .orb-c{width:380px;height:380px;background:#0ea5e9;bottom:-140px;inset-inline-end:22%;animation:drift 24s ease-in-out infinite alternate}
-  @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(-60px,50px) scale(1.12)}}
-  @media (prefers-reduced-motion: reduce){
-    .orb{animation:none}
-    *{animation-duration:.001s !important;transition-duration:.001s !important}
-  }
-  main,header,footer{position:relative;z-index:1}
+  /* المشاكل والحلول */
+  .pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .pain{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+  .pain .q{display:flex;gap:10px;align-items:center;font-weight:900;font-size:1.12rem}
+  .pain .q .ic{width:42px;height:42px;border-radius:12px;background:var(--tint);color:var(--link);display:grid;place-items:center;flex-shrink:0}
+  .pain .q .ic svg{width:24px;height:24px}
+  .pain .a{margin-top:10px;color:var(--ink);font-size:1rem}
+  .pain .a b{color:var(--link)}
+  .offline{margin-top:16px;display:flex;gap:14px;align-items:center;background:var(--brand-grad);color:#fff;border-radius:18px;padding:18px 20px}
+  .offline svg{width:34px;height:34px;flex-shrink:0}
+  .offline b{font-size:1.15rem;display:block}
+  .offline span{opacity:.92}
 
-  /* ===== buttons ===== */
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;border-radius:14px;
-    padding:14px 26px;cursor:pointer;border:0;font-size:1.02rem;transition:.22s;font-family:inherit}
-  .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#332600;
-    box-shadow:0 0 0 1px rgba(245,179,1,.4),0 10px 34px rgba(245,179,1,.28)}
-  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(245,179,1,.55),0 16px 44px rgba(245,179,1,.4)}
-  .btn-ghost{background:var(--glass);color:var(--ink);border:1px solid var(--line)}
-  .btn-ghost:hover{background:var(--glass2);border-color:rgba(255,255,255,.22)}
-  .btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 10px 30px rgba(29,78,216,.35)}
-  .btn-blue:hover{transform:translateY(-2px)}
+  /* لنشاطك */
+  .biz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:760px){.biz{grid-template-columns:repeat(2,1fr)}}
+  .biz .t{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:6px}
+  .biz .t .ic{width:44px;height:44px;border-radius:12px;background:var(--tint);color:var(--link);display:grid;place-items:center}
+  .biz .t .ic svg{width:26px;height:26px}
+  .biz .t b{font-size:1.04rem}
+  .biz .t span{color:var(--muted);font-size:.92rem;line-height:1.6}
 
-  /* ===== header ===== */
-  header{position:sticky;top:0;z-index:60;background:rgba(7,11,20,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.4rem}
-  .logo .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--blue2));
-    display:grid;place-items:center;color:#fff;font-size:1.05rem;box-shadow:0 0 22px rgba(59,130,246,.55)}
-  .nav-links{display:flex;gap:22px;font-weight:700;color:var(--muted);font-size:.95rem}
-  .nav-links a:hover{color:#fff}
-  .menu-btn{display:none;background:var(--glass);border:1px solid var(--line);color:#fff;font-size:1.3rem;
-    width:42px;height:42px;border-radius:11px;cursor:pointer;line-height:1;flex-shrink:0}
-  @media(max-width:920px){
-    .menu-btn{display:grid;place-items:center}
-    .nav-links{display:none;position:absolute;top:68px;inset-inline:0;flex-direction:column;gap:0;
-      background:rgba(7,11,20,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:6px 0}
-    .nav-links.open{display:flex}
-    .nav-links a{padding:13px 24px;border-bottom:1px solid rgba(255,255,255,.05);font-size:1.02rem}
-    .nav-links a:last-child{border-bottom:none}
-    .nav .btn-gold{padding:9px 14px;font-size:.85rem}
-  }
+  /* لقطة الشاشة */
+  .shot-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:26px;align-items:center}
+  @media(max-width:880px){.shot-grid{grid-template-columns:1fr}}
+  .shot-frame{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 22px 50px rgba(11,85,144,.18);background:#fff}
+  .shot-frame .bar{height:26px;background:var(--brand-grad);display:flex;align-items:center;gap:6px;padding:0 10px}
+  .shot-frame .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.55);display:block}
+  .shot-frame img{display:block;width:100%}
+  .shot-notes{list-style:none;display:grid;gap:12px}
+  .shot-notes li{display:flex;gap:10px;align-items:flex-start;font-weight:700}
+  .shot-notes .n{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:900;flex-shrink:0;font-size:.9rem}
+  .shot-cap{color:var(--muted);font-size:.86rem;margin-top:10px;text-align:center}
 
-  /* ===== hero ===== */
-  .hero{padding:64px 0 40px;position:relative}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
-  @media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
-  .offer{display:inline-flex;align-items:center;gap:8px;background:rgba(245,179,1,.12);color:var(--gold2);
-    border:1px solid rgba(245,179,1,.35);font-weight:800;border-radius:999px;padding:8px 18px;font-size:.92rem;margin-bottom:20px}
-  .hero h1{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:900;line-height:1.28}
-  .hero h1 .grad{background:linear-gradient(90deg,#60a5fa,#a78bfa 55%,#f5b301);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.sub{font-size:1.15rem;color:var(--muted);margin-top:16px;max-width:560px}
-  .hero .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
-  .badges{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
-  .badge{background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.82rem;font-weight:700;color:#c8d4ec}
+  /* ليه */
+  .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .why .w{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .why .w .ic{width:40px;height:40px;border-radius:11px;background:var(--brand-grad);color:#fff;display:grid;place-items:center;flex-shrink:0}
+  .why .w .ic svg{width:22px;height:22px}
+  .why .w b{display:block;font-size:1.04rem}
+  .why .w span{color:var(--muted);font-size:.93rem}
 
-  /* ===== 3D mockup ===== */
-  .stage{perspective:1400px;position:relative;padding:20px 6px}
-  .laptop{transform:rotateY(-12deg) rotateX(7deg);transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform}
-  .screen{background:#0c1426;border:1px solid rgba(120,160,255,.25);border-radius:16px;overflow:hidden;
-    box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 60px rgba(29,78,216,.28),inset 0 0 0 1px rgba(255,255,255,.04)}
-  .titlebar{height:30px;background:#0a1020;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line)}
-  .dot{width:9px;height:9px;border-radius:50%}
-  .app{display:flex;height:320px}
-  .m-side{width:88px;background:linear-gradient(180deg,#1e3a8a,#0b1220);padding:10px 8px;display:flex;flex-direction:column;gap:7px}
-  .m-side .it{height:16px;border-radius:6px;background:rgba(255,255,255,.14)}
-  .m-side .it.on{background:#fff}
-  .m-main{flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;background:#0d1526}
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .kpi{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:8px}
-  .kpi b{display:block;font-size:.78rem;color:#8fd3ff}
-  .kpi span{font-size:.6rem;color:var(--muted)}
-  .kpi:nth-child(2) b{color:#86efac}.kpi:nth-child(3) b{color:#c4b5fd}.kpi:nth-child(4) b{color:#fcd34d}
-  .chart{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;display:flex;align-items:flex-end;gap:7px;padding:12px}
-  .bar{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#60a5fa,#1d4ed8);animation:grow 1.4s ease both}
-  .bar:nth-child(odd){background:linear-gradient(180deg,#a78bfa,#6d28d9)}
-  @keyframes grow{from{height:6% !important}}
-  .rows{display:flex;flex-direction:column;gap:6px}
-  .rows .r{height:11px;border-radius:5px;background:rgba(255,255,255,.08)}
-  .rows .r:nth-child(2){width:86%}.rows .r:nth-child(3){width:70%}
-  .float{position:absolute;background:rgba(10,16,32,.92);border:1px solid rgba(120,160,255,.35);border-radius:13px;
-    padding:10px 14px;font-size:.82rem;font-weight:800;backdrop-filter:blur(6px);
-    box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 24px rgba(59,130,246,.25);white-space:nowrap}
-  .float small{display:block;font-weight:600;color:var(--muted);font-size:.7rem}
-  .f1{top:2%;inset-inline-start:-4%;animation:bob 5s ease-in-out infinite}
-  .f2{bottom:12%;inset-inline-start:-8%;animation:bob 6s ease-in-out infinite reverse;color:#86efac}
-  .f3{top:34%;inset-inline-end:-5%;animation:bob 7s ease-in-out infinite;color:#8fd3ff}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  @media(max-width:640px){.f1,.f2,.f3{display:none}.laptop{transform:none}}
+  /* الأسعار — النص كما اعتُمد */
+  .offer{display:inline-block;background:var(--tint-accent);color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--accent) 50%,transparent);border-radius:999px;padding:6px 16px;font-weight:800;font-size:.95rem}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+  @media(max-width:900px){.plans{grid-template-columns:1fr}}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;position:relative}
+  .plan.hot{border:2px solid var(--accent);box-shadow:0 18px 40px rgba(244,149,44,.18)}
+  .plan .tag{position:absolute;top:-13px;inset-inline-start:20px;background:var(--accent);color:var(--on-accent);font-weight:900;font-size:.8rem;border-radius:999px;padding:3px 12px}
+  .plan h3{font-size:1.35rem;font-weight:900}
+  .plan .for{color:var(--muted);margin-top:2px}
+  .plan ul{list-style:none;margin:14px 0;display:grid;gap:7px;flex:1;align-content:start}
+  .plan li{display:flex;gap:8px;align-items:flex-start}
+  .plan li::before{content:"";width:18px;height:18px;margin-top:5px;flex-shrink:0;border-radius:50%;
+    background:var(--tint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231672A5' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat}
+  .plan .price{font-weight:900;font-size:1.3rem;color:var(--ink);margin:6px 0 14px}
+  .plan .price s{color:var(--muted);font-weight:400;font-size:.72em}
+  .plan .price .alt{font-size:.8em;color:var(--muted)}
+  .plan .btn{width:100%}
+  #hr-addon{margin-top:14px}
+  .plans-note{text-align:center;color:var(--muted);margin-top:16px}
 
-  /* ===== counters ===== */
-  .trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:44px 0 8px}
-  .t{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center;transition:.25s}
-  .t:hover{border-color:rgba(96,165,250,.4);transform:translateY(-3px)}
-  .t b{display:block;font-size:1.7rem;color:#8fd3ff;font-weight:900}
-  .t span{color:var(--muted);font-size:.86rem;font-weight:600}
+  /* داخل البرنامج */
+  .tech{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+  .tech div{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+  .tech svg{width:22px;height:22px;color:var(--link);flex-shrink:0;margin-top:3px}
+  .tech b{display:block}
+  .tech span{color:var(--muted);font-size:.9rem}
+  .latest-strip{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:center;margin-top:16px;font-weight:700;color:var(--muted)}
+  .latest-strip a{color:var(--link);text-decoration:underline}
 
-  /* ===== sections ===== */
-  section{padding:74px 0;position:relative}
-  .sec-head{text-align:center;max-width:720px;margin:0 auto 44px}
-  .kicker{display:inline-block;color:#8fd3ff;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);
-    border-radius:999px;padding:5px 16px;font-size:.85rem;font-weight:800;margin-bottom:14px}
-  .sec-head h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:900}
-  .sec-head p{color:var(--muted);margin-top:10px;font-size:1.05rem}
+  /* الأسئلة */
+  .faq{max-width:800px;margin:0 auto;display:grid;gap:10px}
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 18px}
+  .faq summary{cursor:pointer;font-weight:800;font-size:1.04rem;padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--link);font-size:1.4rem;line-height:1}
+  .faq details[open] summary::after{content:"−"}
+  .faq details p{color:var(--muted);padding:0 0 14px}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:18px}
-  .card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:24px;position:relative;
-    transition:border-color .25s, box-shadow .25s;transform-style:preserve-3d;will-change:transform}
-  .card:hover{border-color:rgba(96,165,250,.45);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 34px rgba(29,78,216,.15)}
-  .card .ic{font-size:1.6rem;width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(59,130,246,.22),rgba(124,58,237,.18));
-    border:1px solid rgba(96,165,250,.3);display:grid;place-items:center;margin-bottom:14px}
-  .card h3{font-size:1.16rem;font-weight:800}
-  .card ul{margin-top:10px;padding-inline-start:18px;color:var(--muted);font-size:.94rem}
-  .card ul li{margin:5px 0}
-  .card p.d{color:var(--muted);font-size:.95rem;margin-top:8px}
-
-  /* smart section */
-  .smart{background:linear-gradient(180deg,rgba(29,78,216,.10),transparent 70%);border-block:1px solid var(--line)}
-  .smart .card{background:rgba(13,21,38,.7)}
-  .smart .card h3{color:#dbe7ff}
-  .new{position:absolute;top:16px;inset-inline-start:16px;background:linear-gradient(135deg,var(--gold),var(--gold2));
-    color:#332600;font-size:.68rem;font-weight:900;border-radius:999px;padding:3px 10px}
-
-  /* packages */
-  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:stretch}
-  .plan{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:30px 26px;display:flex;flex-direction:column;position:relative;transition:.25s}
-  .plan:hover{transform:translateY(-5px)}
-  .plan.hot{border:1px solid rgba(245,179,1,.5);background:linear-gradient(180deg,rgba(245,179,1,.07),rgba(255,255,255,.03));
-    box-shadow:0 0 50px rgba(245,179,1,.12)}
-  .plan .tag{position:absolute;top:-14px;inset-inline-start:24px;background:linear-gradient(135deg,var(--gold),var(--gold2));
-    color:#332600;font-weight:900;font-size:.8rem;padding:5px 16px;border-radius:999px}
-  .plan h3{font-size:1.35rem;font-weight:900;color:#dbe7ff}
-  .plan .for{color:var(--muted);font-size:.9rem;margin-top:4px}
-  .plan ul{margin:18px 0 22px;padding-inline-start:18px;color:#b9c6e2;font-size:.95rem;flex:1}
-  .plan ul li{margin:7px 0}
-  .plan .price{font-weight:900;font-size:1.05rem;color:var(--gold2);margin-bottom:14px}
-
-  /* pills + faq */
-  .pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-  .pill{background:var(--glass);border:1px solid var(--line);color:#c8d4ec;font-weight:700;border-radius:999px;padding:10px 20px;transition:.2s}
-  .pill:hover{border-color:rgba(96,165,250,.5);color:#fff}
-  .faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-  details{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px 22px;transition:.2s}
-  details[open]{border-color:rgba(96,165,250,.4)}
-  summary{cursor:pointer;font-weight:800;font-size:1.02rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:'+';font-size:1.4rem;color:#8fd3ff;transition:.2s}
-  details[open] summary::after{transform:rotate(45deg)}
-  details p{color:var(--muted);margin-top:10px;font-size:.96rem}
-
-  /* order */
-  .order-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
-  @media(max-width:860px){.order-grid{grid-template-columns:1fr}}
-  .lead{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px}
-  .lead label{font-weight:800;font-size:.95rem;display:flex;flex-direction:column;gap:7px;color:#c8d4ec}
-  .lead input{border:1px solid var(--line);border-radius:12px;padding:13px;font-family:inherit;font-size:1rem;
-    background:rgba(255,255,255,.05);color:var(--ink)}
-  .lead input::placeholder{color:#5f6d8c}
-  .lead input:focus{outline:2px solid var(--blue);border-color:var(--blue)}
-  .lead .hint{color:var(--muted);font-size:.82rem;text-align:center}
-  .ccard{background:linear-gradient(160deg,rgba(29,78,216,.35),rgba(12,20,38,.9));border:1px solid rgba(96,165,250,.3);
-    border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:11px}
-  .ccard h3{font-size:1.3rem;font-weight:900}
-  .ccard .who{color:#b9c6e2}
-  .cline{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid var(--line);
-    border-radius:13px;padding:13px 16px;font-weight:800;font-size:1.08rem;transition:.2s}
-  .cline:hover{background:rgba(255,255,255,.14)}
-  .ccard ul{margin-top:8px;padding-inline-start:18px;color:#b9c6e2;font-size:.93rem}
-  .ccard ul li{margin:5px 0}
-
-  footer{border-top:1px solid var(--line);background:rgba(7,11,20,.9);padding:38px 0;text-align:center;font-size:.92rem;color:var(--muted)}
-  footer a:hover{color:#fff}
-
-  .wa{position:fixed;inset-inline-start:18px;bottom:18px;z-index:70;background:#25d366;color:#fff;width:60px;height:60px;
-    border-radius:50%;display:grid;place-items:center;font-size:1.7rem;
-    box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,.5);animation:pulse 2.4s infinite;transition:.2s}
-  .wa:hover{transform:scale(1.08)}
-  @keyframes pulse{0%{box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 8px 26px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,0)}}
-
-  /* reveal on scroll */
-  /* آخر تحديث */
-  .latest{padding:34px 0 10px}
-  .latest-box{max-width:820px;margin:0 auto;background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:26px 28px;text-align:center}
-  .latest-box h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900}
-  .latest-date{color:var(--muted);margin-top:4px}
-  .latest-list{list-style:none;padding:0;margin:18px 0 6px;text-align:start;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
-  .latest-list li{line-height:1.9;padding-inline-start:18px;position:relative}
-  .latest-list li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--gold2);font-weight:900}
-  .latest-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
-  .latest-note{color:var(--muted);margin-top:14px;font-size:.95rem}
-  @media(max-width:720px){.latest-list{grid-template-columns:1fr}.latest-box{padding:20px 16px}}
-  .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-  .rv.in{opacity:1;transform:none}
+  /* الدعوة الأخيرة */
+  .final{background:var(--brand-grad);color:#fff;border-radius:24px;padding:34px 22px;text-align:center}
+  .final h2{font-size:clamp(1.5rem,4.4vw,2.2rem);font-weight:900;line-height:1.35}
+  .final p{opacity:.92;margin-top:8px;font-size:1.06rem}
+  .final .hero-cta{justify-content:center}
+  .final .btn-ghost{color:#fff}
+  .final .btn-ghost:hover{background:rgba(255,255,255,.12)}
+  .final .btn-wa svg{color:#fff}
 </style>
 <!-- Meta Pixel -->
 <script src="pixel.js"></script>
@@ -253,425 +161,176 @@
 <noscript><img height="1" width="1" style="display:none" alt=""
  src="https://www.facebook.com/tr?id=1393800312080250&amp;ev=PageView&amp;noscript=1" /></noscript>
 
-<div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+<!-- أيقونات مرسومة مرة واحدة ومُعاد استخدامها -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3Z"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-drawer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="9" rx="2"/><path d="M7 11V5h10v6M10 15h4M9.5 8h5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="m7 15 4-4 3 3 5-6"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 4.5a3.2 3.2 0 0 1 0 6.3M18 20a6 6 0 0 0-2.5-4.9"/></symbol>
+    <symbol id="i-wifi-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5-2.7M14.5 10.4A10 10 0 0 1 19 13M2 9.5a15 15 0 0 1 4.3-2.8M10.5 5.1A15 15 0 0 1 22 9.5"/><circle cx="12" cy="20" r=".8" fill="currentColor"/></symbol>
+    <symbol id="i-basket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-2 11H5L3 9Z"/><path d="m8 9 3-6M16 9l-3-6M9 13v4M15 13v4"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3a4 4 0 0 1-8 0Z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-9 6-14 15-15-1 9-6 15-15 15Z"/><path d="M5 19 13 11"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 2.5v3M12 2.5v3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-pc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></symbol>
+    <symbol id="i-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h10M4 19h16"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-usb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="13" rx="2"/><path d="M9 9V3h6v6M11 5.5h0M13 5.5h0"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16a3.5 3.5 0 0 1 6.4 0M14 10h4M14 14h3"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+  </defs>
+</svg>
 
 <header>
   <div class="wrap nav">
-    <div class="logo"><span class="mark">A</span> ATTARIX</div>
-    <nav class="nav-links">
-      <a href="#features">المزايا</a>
+    <a class="logo" href="index.html" aria-label="ATTARIX — الرئيسية">
+      <img class="mark" src="brand/attarix-mark.svg" alt="" width="42" height="36">
+      <picture><source srcset="brand/attarix-wordmark-light.svg" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark.svg" alt="ATTARIX" width="110" height="17"></picture>
+    </a>
+    <nav class="nav-links" aria-label="القائمة">
+      <a href="#pains">ليه محتاجه</a>
+      <a href="#biz">لنشاطك</a>
       <a href="#plans">الأسعار</a>
-      <a href="download.html">تحميل</a>
       <a href="#faq">أسئلة</a>
-      <a href="#order">تواصل</a>
+      <a href="whats-new.html">ما الجديد</a>
     </nav>
-    <a class="btn btn-gold" href="download.html">حمّل وجرّب 30 يوم مجانًا</a>
+    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">حمّل مجانًا</a>
     <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
   </div>
 </header>
 
 <main>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
+<!-- ===== ١. الوعد ===== -->
+<section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="offer">جرّب 30 يوم مجانًا — من 499 ج في الشهر لأول 10 عملاء</span>
-      <h1>إدارة محلّك بقت <span class="grad">أسهل</span><br>بيع · مخزون · حسابات · اقتراحات ذكية</h1>
-      <p class="sub">ATTARIX مش مجرد كاشير — نظام عربي كامل بيقولك تشتري إيه قبل ما يخلص، يفكّرك بفلوسك عند العملاء بضغطة واتساب، ويكشف الأخطاء قبل ما تحصل. يعمل بدون إنترنت.</p>
-      <div class="cta">
-        <a class="btn btn-gold" href="download.html">حمّل وجرّب 30 يوم مجانًا</a>
-        <a class="btn btn-ghost" id="heroWa">كلّمنا واتساب</a>
+      <h1 id="heroTitle">اعرف محلك <span class="hl">كسبان كام</span> النهارده — بضغطة واحدة.</h1>
+      <p class="sub" id="heroSub">ATTARIX بيسجّل البيع والمخزون والورديات وديون الزباين، ويقولك الفلوس اللي في الدرج والربح، من غير دفاتر ولا آلة حاسبة.</p>
+      <div class="hero-cta">
+        <a class="btn btn-cta btn-lg" href="download.html" data-fb-event="Lead"><svg aria-hidden="true"><use href="#i-down"/></svg>حمّل وجرّب 30 يوم مجانًا</a>
+        <a class="btn btn-ghost btn-lg btn-wa" id="heroWa" href="https://wa.me/201090246299"><svg aria-hidden="true"><use href="#i-wa"/></svg>كلّمنا واتساب</a>
       </div>
-      <div class="badges">
-        <span class="badge">✅ عربي 100%</span>
-        <span class="badge">🔌 يعمل بدون إنترنت</span>
-        <span class="badge">💡 اقتراحات شراء ذكية</span>
-        <span class="badge">🎯 حساباتك مظبوطة للقرش</span>
-        <span class="badge">🔒 دفاتر ما تتزوّرش</span>
-        <span class="badge">🛡️ استرجاع المحذوف</span>
-        <span class="badge">📦 بيع بالكرتونة والقطعة</span>
-        <span class="badge">🆓 تجربة 30 يوم كاملة</span>
+      <div class="hero-trust">
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg>من غير فيزا ولا تسجيل</span>
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg>يشتغل من غير نت</span>
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg>بالعربي</span>
       </div>
     </div>
+    <div class="hero-art" aria-hidden="true">
+      <img class="mark-big" src="brand/attarix-mark.svg" alt="" width="440" height="373">
+      <div class="chip c1"><span class="dot"><svg><use href="#i-drawer"/></svg></span><div>الدرج مضبوط<small>الوردية اتقفلت بعدّ</small></div></div>
+      <div class="chip c2"><span class="dot"><svg><use href="#i-chart"/></svg></span><div>ربح النهارده<small>بضغطة من التقارير</small></div></div>
+      <div class="chip c3"><span class="dot"><svg><use href="#i-box"/></svg></span><div>الزيت قرّب يخلص<small>اطلب 24 كرتونة</small></div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 3D laptop mockup -->
-    <div class="stage" id="stage">
-      <div class="laptop" id="laptop">
-        <div class="screen">
-          <div class="titlebar">
-            <span class="dot" style="background:#ef4444"></span>
-            <span class="dot" style="background:#fbbf24"></span>
-            <span class="dot" style="background:#34d399"></span>
-          </div>
-          <div class="app">
-            <div class="m-side">
-              <div class="it on"></div><div class="it"></div><div class="it"></div><div class="it"></div>
-              <div class="it"></div><div class="it"></div><div class="it"></div><div class="it"></div>
-            </div>
-            <div class="m-main">
-              <div class="kpis">
-                <div class="kpi"><b>1,785</b><span>مبيعات اليوم</span></div>
-                <div class="kpi"><b>+12%</b><span>عن الأسبوع الماضي</span></div>
-                <div class="kpi"><b>2.1M</b><span>صافي الأرباح</span></div>
-                <div class="kpi"><b>528</b><span>منتج</span></div>
-              </div>
-              <div class="chart">
-                <div class="bar" style="height:38%"></div><div class="bar" style="height:52%"></div>
-                <div class="bar" style="height:44%"></div><div class="bar" style="height:66%"></div>
-                <div class="bar" style="height:58%"></div><div class="bar" style="height:80%"></div>
-                <div class="bar" style="height:95%"></div>
-              </div>
-              <div class="rows"><div class="r"></div><div class="r"></div><div class="r"></div></div>
-            </div>
-          </div>
+<!-- ===== ٢. المشاكل والحل ===== -->
+<section id="pains" class="sec-alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>المشاكل اللي بتصحّيك بالليل… ليها حل</h2>
+      <p>مش محتاج تبقى محاسب ولا بتاع كمبيوتر.</p>
+    </div>
+    <div class="pains">
+      <div class="pain rv">
+        <div class="q"><span class="ic"><svg aria-hidden="true"><use href="#i-drawer"/></svg></span>الدرج ناقص ومش عارف مين؟</div>
+        <p class="a">كل وردية <b>بتتفتح وتتقفل بعدّ مكتوب</b>، والعجز بيتسجّل باسم الكاشير اللي مسك الدرج.</p>
+      </div>
+      <div class="pain rv">
+        <div class="q"><span class="ic"><svg aria-hidden="true"><use href="#i-box"/></svg></span>البضاعة بتخلص فجأة؟</div>
+        <p class="a">البرنامج <b>ينبّهك قبل ما الصنف يخلص</b>، ويقولك تطلب كام.</p>
+      </div>
+      <div class="pain rv">
+        <div class="q"><span class="ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></span>كسبان ولا خسران؟</div>
+        <p class="a"><b>ربح النهارده والشهر قدامك بضغطة</b>، ومين بيكسّبك أكتر من الأصناف.</p>
+      </div>
+      <div class="pain rv">
+        <div class="q"><span class="ic"><svg aria-hidden="true"><use href="#i-people"/></svg></span>الزباين عليهم فلوس؟</div>
+        <p class="a"><b>كشف حساب الزبون يوصله على الواتساب</b>، وتعرف مين عليه كام ومن إمتى.</p>
+      </div>
+    </div>
+    <div class="offline rv">
+      <svg aria-hidden="true"><use href="#i-wifi-off"/></svg>
+      <div><b>النت قطع؟ ولا يهمك.</b><span>البرنامج على كمبيوتر المحل، والبيع شغال من غير إنترنت.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ٣. لنشاطك ===== -->
+<section id="biz">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>مناسب لنشاطك</h2>
+      <p>أول ما تفتحه بتختار نوع محلك، والبرنامج يجهّزلك اللي محتاجه.</p>
+    </div>
+    <div class="biz">
+      <div class="t rv"><span class="ic"><svg aria-hidden="true"><use href="#i-basket"/></svg></span><b>بقالة وسوبر ماركت</b><span>البيع بالوزن وملصق الميزان، وتواريخ الصلاحية.</span></div>
+      <div class="t rv"><span class="ic"><svg aria-hidden="true"><use href="#i-shirt"/></svg></span><b>ملابس وأحذية</b><span>المقاسات والألوان لكل موديل.</span></div>
+      <div class="t rv"><span class="ic"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><b>موبايلات وإلكترونيات</b><span>كل جهاز بالسيريال والضمان.</span></div>
+      <div class="t rv"><span class="ic"><svg aria-hidden="true"><use href="#i-leaf"/></svg></span><b>صيدلية وعطارة</b><span>تشغيلات بتاريخ صلاحية، والبيع بالشريط أو العلبة.</span></div>
+      <div class="t rv"><span class="ic"><svg aria-hidden="true"><use href="#i-gear"/></svg></span><b>قطع غيار</b><span>رقم القطعة والموديلات اللي تركب عليها.</span></div>
+      <div class="t rv"><span class="ic"><svg aria-hidden="true"><use href="#i-cup"/></svg></span><b>كافيه ومطعم</b><span>الطاولات، وتذكرة المطبخ، والأحجام.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ٤. لقطة حقيقية ===== -->
+<section id="screen" class="sec-alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>ده شكل شاشة البيع</h2>
+      <p>لقطة حقيقية من البرنامج — ببيانات تجريبية.</p>
+    </div>
+    <div class="shot-grid">
+      <figure class="rv">
+        <div class="shot-frame">
+          <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+          <picture>
+            <source type="image/webp" srcset="images/sale-screen-sm.webp 889w, images/sale-screen.webp 1423w" sizes="(max-width: 880px) 100vw, 700px">
+            <img src="images/sale-screen.jpg" width="889" height="695" loading="lazy" decoding="async" alt="شاشة البيع في ATTARIX: أصناف البقالة، والسلة فيها شاي وأرز ولبن وزيت، والإجمالي 316 جنيه">
+          </picture>
         </div>
-      </div>
-      <div class="float f1">🔔 اقتراح شراء ذكي<small>«شاي العروسة» هيخلص خلال 4 أيام — اشترِ 24</small></div>
-      <div class="float f2">💬 تذكير تحصيل اتبعت<small>واتساب للعميل «أحمد» — عليه 1,500 ج.م</small></div>
-      <div class="float f3">📈 +17% مبيعات<small>الشهر ده مقارنة باللي فات</small></div>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="trust rv">
-      <div class="t"><b data-count="20">0</b><span>قسم متكامل +</span></div>
-      <div class="t"><b>100%</b><span>عربي واجهة وتقارير</span></div>
-      <div class="t"><b data-count="30">0</b><span>يوم تجربة كاملة مجانًا</span></div>
-      <div class="t"><b>24/7</b><span>يعمل بدون إنترنت</span></div>
-      <div class="t"><b data-count="8">0</b><span>اقتراحات وتنبيهات ذكية +</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== آخر تحديث — بيتملا من scripts/latest-update.json (node scripts/build-latest.mjs) ===== -->
-<!-- LATEST:START -->
-<section id="latest" class="latest">
-  <div class="wrap">
-    <div class="latest-box rv">
-      <h2>الجديد في نسخة 2.9.1</h2>
-      <p class="latest-date">إصدار 17 أكتوبر 2026</p>
-      <ul class="latest-list">
-        <li><b>مطعم وكافيه:</b> شاشة الطاولات: طلب على كل طاولة، تذكرة للمطبخ، تقسيم ودمج ونقل، والحساب كأي فاتورة؛ والأحجام بسعر لكل حجم.</li>
-        <li><b>ذكاء اصطناعي بمفتاح محلك:</b> قراءة إيصال المصروف، وصنف من صورته، و«اسأل محلّك» بالعربي — وكل حاجة بتتراجع قبل ما تتحفظ، وتكلفتها قدامك.</li>
-        <li><b>تنبيهات ذكية في الجرس:</b> كاشير خصوماته أو مرتجعاته أعلى من الباقي، وأصناف هتخلص قبل الشراء الجاي ومعاها الكمية المقترحة.</li>
-        <li><b>التحديث بزرار واحد:</b> «تنزيل وتثبيت» من الجرس: البرنامج بيتأكد من بصمة الملف، وبياخد نسخة احتياطية، ومش بيتثبّت غير بتأكيد المدير ومن غير وردية مفتوحة.</li>
-        <li><b>تقارير أوضح:</b> أصناف راكدة بقيمتها، وأعلى 10 و20 و50، والهامش % في الأرباح، وكشف المورد على واتساب.</li>
-        <li><b>أسرع في المحل الكبير:</b> شاشة الفواتير وتقارير الربحية بتفتح بسرعة حتى مع عشرات الآلاف من الفواتير، والبحث بيدوّر في كل التاريخ.</li>
+      </figure>
+      <ul class="shot-notes rv">
+        <li><span class="n">1</span>امسح الباركود أو دوس على الصنف — بيتضاف للفاتورة على طول.</li>
+        <li><span class="n">2</span>الإجمالي والمدفوع والباقي قدامك وانت بتبيع.</li>
+        <li><span class="n">3</span>نقدي أو آجل أو تحويل، والإيصال يطلع مطبوع.</li>
       </ul>
-      <div class="latest-cta">
-        <a class="btn btn-gold" href="download.html">نزّل النسخة الجديدة</a>
-        <a class="btn btn-ghost" href="whats-new.html">كل التحديثات</a>
-      </div>
-      <p class="latest-note">عندك نسخة قديمة؟ نزّل الجديدة وسطّبها فوقها، بياناتك بتفضل زي ما هي.</p>
-    </div>
-  </div>
-</section>
-<!-- LATEST:END -->
-
-<!-- ===== SMART / AI SECTION ===== -->
-<section id="smart" class="smart">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">اقتراحات ذكية — بيفكّرك قبل ما تنسى</span>
-      <h2>برنامج بيفكّرك… مش بيسجّل وبس</h2>
-      <p>كل الأنظمة بتسجّل اللي حصل. ATTARIX كمان بيقترح عليك تشتري إيه قبل ما يخلص، وبيفكّرك بفلوسك عند العملاء.</p>
-    </div>
-    <div class="grid">
-      <div class="card rv" data-tilt>
-        <span class="new">جديد</span>
-        <div class="ic">🔎</div>
-        <h3>سيريال وضمان لكل جهاز</h3>
-        <p class="d">للكاميرات والإلكترونيات: كل جهاز بسيرياله لوحده. تكتب السيريال تعرف فورًا اشتريته منين، وبكام، وباعته لمين، وضمانه خلص ولا لسه. والبرنامج نفسه يمنع بيع جهاز بسيريال متسجّل قبل كده.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <span class="new">جديد</span>
-        <div class="ic">🛒</div>
-        <h3>اقتراحات الشراء</h3>
-        <p class="d">بيحسب سرعة بيع كل صنف ويقولك: «الصنف ده هيخلص خلال X يوم — اشترِ كذا». وبضغطة واحدة يحوّل الاقتراح لفاتورة شراء جاهزة.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <span class="new">جديد</span>
-        <div class="ic">💬</div>
-        <h3>تحصيل فلوسك بالواتساب</h3>
-        <p class="d">جنب كل عميل مديون زر واتساب يبعت رسالة مهذبة جاهزة بالمبلغ المستحق — وكمان تذكير بالشيكات قبل ميعادها. فلوسك بترجع أسرع.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <span class="new">جديد</span>
-        <div class="ic">🎯</div>
-        <h3>ذاكرة آخر سعر للعميل</h3>
-        <p class="d">تختار العميل وتضيف الصنف — البرنامج فاكر آخر سعر بعته بيه للعميل ده ويطبّقه تلقائيًا. مفيش نسيان ومفيش إحراج في الجملة.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <span class="new">جديد</span>
-        <div class="ic">📦</div>
-        <h3>بيع بالكرتونة والدستة والقطعة</h3>
-        <p class="d">لكل صنف وحدات متعددة بباركود وسعر خاص لكل وحدة — امسح باركود الكرتونة تنزل 24 قطعة بسعر الكرتونة. والمخزون دايمًا مظبوط بالقطعة.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <span class="new">جديد</span>
-        <div class="ic">🛡️</div>
-        <h3>كشف الأخطاء قبل ما تحصل</h3>
-        <p class="d">فاتورة متكررة بالغلط؟ بيسألك قبل الحفظ. خصومات اليوم أعلى من الطبيعي؟ تنبيه فوري. مبيعات إمبارح نزلت فجأة؟ الجرس بيقولك.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <span class="new">جديد</span>
-        <div class="ic">🔁</div>
-        <h3>مصاريف بتتسجل لوحدها</h3>
-        <p class="d">سجّل الإيجار والمرتبات مرة واحدة — كل شهر البرنامج يفكّرك أو يقيدها تلقائيًا ويخصمها من الخزينة. محاسبتك مظبوطة من غير ما تفتكر.</p>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== TRUST / ACCOUNTING INTEGRITY ===== -->
-<section id="trust" class="smart">
+<!-- ===== ٥. ليه ===== -->
+<section id="why">
   <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">🔒 الأمان والثقة المحاسبية — أهم من أي ميزة</span>
-      <h2>حساباتك مظبوطة… ومحدش يقدر يلعب فيها</h2>
-      <p>ده مش كلام تسويق — ده مبني في قلب البرنامج نفسه. الأرقام صح دايمًا، والدفاتر ما تتزوّرش، وبياناتك محميّة.</p>
-    </div>
-    <div class="grid">
-      <div class="card rv" data-tilt>
-        <div class="ic">🎯</div>
-        <h3>مظبوط للقرش الصحيح</h3>
-        <p class="d">كل المبالغ محسوبة بالقرش كأرقام صحيحة — مش كسور عشرية بتقرّب وتفرّق معاك. مفيش فرق قرش في المخزون ولا الخزينة ولا الأرباح، وكل قيد متوازن: المدين = الدائن دايمًا.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <div class="ic">🔒</div>
-        <h3>دفاتر ما تتزوّرش</h3>
-        <p class="d">القيود وحركات المخزون «إضافة فقط» — مفيش تعديل ولا حذف على الدفتر نفسه. أي تصحيح بيتسجّل كقيد عكسي موثّق باسم صاحبه. حماية من أي تلاعب، حتى من جوّه البرنامج.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <div class="ic">🧾</div>
-        <h3>رقم خزينة واحد صحيح</h3>
-        <p class="d">رصيد الخزينة والحسابات محسوب لحظيًا من الحركات نفسها — مش رقم مخزّن ممكن يبوظ بالغلط. نفس الرقم بالضبط في شاشة الكاشير واللوحة والحسابات، من غير اختلاف.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <div class="ic">👤</div>
-        <h3>مين عمل إيه وإمتى</h3>
-        <p class="d">كل عملية متختمة باسم المستخدم والجهاز والوردية والفرع. سجل تدقيق كامل ما ينفعش يتمسح — تعرف مين باع، مين خصم، ومين ألغى، بالدقيقة.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <div class="ic">💾</div>
-        <h3>بياناتك محميّة قبل أي تحديث</h3>
-        <p class="d">البرنامج بياخد نسخة احتياطية أول ما يفتح، ولو النسخة فشلت بيوقف نفسه قبل ما يلمس بياناتك أصلًا. التحديث آمن دايمًا، وبياناتك على جهازك أنت بتملكها.</p>
-      </div>
-      <div class="card rv" data-tilt>
-        <div class="ic">🎁</div>
-        <h3>جرّبه شهر كامل قبل ما تدفع</h3>
-        <p class="d">النسخة المكتبية بتشتغل كاملة 30 يوم تجربة على بياناتك الحقيقية قبل التفعيل — تجرّب كل حاجة براحتك، وبعدها دفعة واحدة بدون اشتراك شهري إجباري.</p>
-      </div>
+    <div class="sec-head rv"><h2>ليه ATTARIX؟</h2></div>
+    <div class="why">
+      <div class="w rv"><span class="ic"><svg aria-hidden="true"><use href="#i-wifi-off"/></svg></span><div><b>من غير إنترنت</b><span>النت يقطع، والبيع ما يقفش.</span></div></div>
+      <div class="w rv"><span class="ic"><svg aria-hidden="true"><use href="#i-pc"/></svg></span><div><b>بياناتك عندك</b><span>على كمبيوتر محلك، مش على سيرفر حد.</span></div></div>
+      <div class="w rv"><span class="ic"><svg aria-hidden="true"><use href="#i-chat"/></svg></span><div><b>دعم مصري على الواتساب</b><span>بتكلّم ناس فاهمة شغل المحلات.</span></div></div>
+      <div class="w rv"><span class="ic"><svg aria-hidden="true"><use href="#i-ar"/></svg></span><div><b>عربي من الأول للآخر</b><span>الشاشات والإيصالات والتقارير.</span></div></div>
+      <div class="w rv"><span class="ic"><svg aria-hidden="true"><use href="#i-cal"/></svg></span><div><b>اشتراك شهري</b><span>تدفع شهر بشهر، أو سنوي وتاخد شهرين ببلاش.</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ===== FEATURES GRID ===== -->
-<section id="features">
+<!-- ===== ٦. الأسعار (النص كما اعتُمد) ===== -->
+<section id="plans" class="sec-alt">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kicker">كل حاجة في مكان واحد</span>
-      <h2>+20 قسم متكامل يغطي تشغيل المتجر بالكامل</h2>
-      <p>من أول مسح الباركود لحد الميزانية العمومية — بدون برامج إضافية.</p>
-    </div>
-    <div class="grid">
-
-      <!-- الجديد في 2.6 — أول المزايا عشان يتشاف -->
-      <div class="card rv" data-tilt>
-        <div class="ic">📷</div>
-        <h3>الأجهزة بالرقم التسلسلي</h3>
-        <p class="d">اشتري وبيع ورجّع بالجهاز نفسه مش بالعدد، اعمل جرد بمسح الأجهزة، ودوّر بالسيريال تلاقي فاتورة الشراء والبيع والضمان الباقي.</p>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🧾</div>
-        <h3>إيصال كلاسيكي</h3>
-        <p class="d">إيصال حراري 80 أو 58 مم على النمط المعروف في المحلات، وتحته QR أو باركود لرقم الفاتورة.</p>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">📱</div>
-        <h3>المحافظ وإنستاباي</h3>
-        <p class="d">فودافون كاش وإنستاباي حسابات زي البنك: الفلوس بتدخل في المحفظة الصح، ومش بتدخل في عدّ الدرج.</p>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">↩️</div>
-        <h3>المرتجع في شهره</h3>
-        <p class="d">المرتجع الجزئي بيتسجّل في الشهر اللي حصل فيه، فأرقام كل شهر صح من غير ما تلمس الفاتورة الأصلية.</p>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🛒</div>
-        <h3>نقطة البيع (كاشير)</h3>
-        <ul>
-          <li>مسح باركود وبحث فوري بالاسم/الكود</li>
-          <li>شاشة كاشير مرتّبة: الأكثر مبيعًا دايمًا قدامك</li>
-          <li>دفع مختلط: نقدي + بطاقة + تحويل + آجل</li>
-          <li>بيع كاش سريع بمفتاح F8 + طباعة فورية</li>
-          <li>إيصال حراري 58 و80 مم بشعار محلك، أو فاتورة A4</li>
-          <li>مرتجع كامل أو جزئي، وكوبونات خصم، وتعليق فواتير</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">📦</div>
-        <h3>المنتجات والمخزون</h3>
-        <ul>
-          <li>سعر قطاعي وجملة وشراء وضريبة لكل صنف</li>
-          <li>وحدات متعددة (كرتونة/دستة/قطعة) بباركود خاص</li>
-          <li>متغيرات (مقاس/لون) وطباعة ملصقات باركود</li>
-          <li>تواريخ صلاحية وتشغيلات + تنبيه «بيع الأقرب انتهاءً»</li>
-          <li>تنبيه نواقص حسب حد إعادة الطلب</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🔎</div>
-        <h3>السيريال والضمان</h3>
-        <ul>
-          <li>تسجيل سيريال كل جهاز عند الشراء ومنع تكراره</li>
-          <li>ابحث بالسيريال: اشتريته منين وبكام وباعته لمين</li>
-          <li>ضمان لكل جهاز من تاريخ بيعه هو تحديدًا</li>
-          <li>شاشة مطابقة للأجهزة المباعة بدون سيريال</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🧾</div>
-        <h3>الشيكات وأوراق القبض</h3>
-        <ul>
-          <li>شيكات العملاء والموردين بتواريخ استحقاق</li>
-          <li>تحصيل، ارتداد، وتأجيل — بأثر محاسبي صحيح</li>
-          <li>تنبيه قبل ميعاد الاستحقاق</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">↩️</div>
-        <h3>المرتجعات وإلغاء الفواتير</h3>
-        <ul>
-          <li>مرتجع كامل أو جزئي يرجّع المخزون والفلوس</li>
-          <li>إلغاء فاتورة مُرحَّلة بقيد عكسي — بدون حذف</li>
-          <li>سبب الإلغاء مسجَّل ومين عمله ومتى</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🏬</div>
-        <h3>المخازن والجرد</h3>
-        <ul>
-          <li>أكثر من مخزن وأرصدة لكل مخزن</li>
-          <li>جرد فعلي وتسوية الفروقات بضغطة</li>
-          <li>تقييم المخزون بالتكلفة والبيع</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">👥</div>
-        <h3>العملاء</h3>
-        <ul>
-          <li>كشف حساب وتحصيل دفعات وحد ائتمان لكل عميل</li>
-          <li>مستوى سعر تلقائي لكل عميل (قطاعي/جملة)</li>
-          <li>حد ائتمان وتنبيهات مديونية</li>
-          <li>العميل = المورد: كشف موحّد ومقاصة بضغطة</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🚚</div>
-        <h3>الموردون والمشتريات</h3>
-        <ul>
-          <li>فواتير شراء تحدّث المخزون والتكلفة تلقائيًا</li>
-          <li>أرصدة وكشوف حساب وسندات صرف</li>
-          <li>مرتجع مشتريات وإشعارات مدين/دائن</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">📄</div>
-        <h3>عروض الأسعار والمستندات</h3>
-        <ul>
-          <li>عرض سعر / أمر بيع / إذن تسليم</li>
-          <li>تحويل المستند لفاتورة بضغطة</li>
-          <li>طباعة A4 أنيقة بشعار محلك</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🧮</div>
-        <h3>محاسبة بقيد مزدوج</h3>
-        <ul>
-          <li>ترحيل تلقائي لكل العمليات لقيود متطابقة</li>
-          <li>قائمة دخل وميزانية وميزان مراجعة</li>
-          <li>دفتر يومية وأستاذ وشجرة حسابات</li>
-          <li>أوراق قبض ودفع (شيكات) بمتابعة استحقاق</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">📊</div>
-        <h3>تقارير تفهم منها</h3>
-        <ul>
-          <li>أرباح فعلية (إيراد − تكلفة) يومي وشهري</li>
-          <li>ربحية كل صنف وكل عميل + تصنيف ABC</li>
-          <li>أعمار ديون العملاء والموردين</li>
-          <li>تقرير ضريبة القيمة المضافة</li>
-          <li>طباعة وتصدير Excel لكل تقرير</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🔔</div>
-        <h3>تنبيهات ولوحة تحكم</h3>
-        <ul>
-          <li>جرس ذكي: نواقص، مديونيات، صلاحيات، شيكات</li>
-          <li>مقارنات تلقائية: الأسبوع ده × اللي فاته</li>
-          <li>بحث شامل Ctrl+K يوصلك لأي حاجة في ثانية</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">🛡️</div>
-        <h3>مستخدمون وصلاحيات</h3>
-        <ul>
-          <li>أدوار (مدير/كاشير/مشاهد) بتحكم كامل</li>
-          <li>موافقة مدير على الخصومات الكبيرة</li>
-          <li>سجل عمليات يوثّق كل إجراء (Audit)</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">💾</div>
-        <h3>نسخ احتياطي وأمان بيانات</h3>
-        <ul>
-          <li>نسخ تلقائي يومي + نسخ يدوي بضغطة</li>
-          <li>تصدير/استيراد Excel وقاعدة بيانات كاملة</li>
-          <li>تأكيد قبل العمليات الحسّاسة + استرجاع المحذوف (Undo)</li>
-          <li>نقل بياناتك كاملة بين الأجهزة</li>
-        </ul>
-      </div>
-
-      <div class="card rv" data-tilt>
-        <div class="ic">💵</div>
-        <h3>الكاش والمصاريف</h3>
-        <ul>
-          <li>وردية كاشير (فتح/غلق الدرج) وحساب الفروقات</li>
-          <li>خزائن وحسابات نقدية وبنكية</li>
-          <li>مصاريف بالبنود مربوطة بالخزينة</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===== PLANS ===== -->
-<section id="plans">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">الأسعار</span>
       <h2>اختار اللي يناسب شغلك</h2>
       <p>جرّب 30 يوم بباقة تاجر كاملة ومعاها الموارد البشرية، وبعدين اختار.</p>
       <p style="margin-top:12px"><span class="offer">عرض الإطلاق — خصم 50% لأول 10 عملاء، والسعر ثابت ليك طول ما اشتراكك مستمر</span></p>
@@ -687,7 +346,7 @@
           <li>ملخص المبيعات</li>
           <li>البيع بالوزن</li>
         </ul>
-        <p class="price"><s style="color:var(--muted);font-weight:400;font-size:.72em">999 ج/شهر</s> 499 ج/شهر <span style="font-size:.8em;color:var(--muted)">أو <s style="color:var(--muted);font-weight:400;font-size:.72em">9,990</s> 4,990 ج/سنة (شهرين ببلاش)</span></p>
+        <p class="price"><s>999 ج/شهر</s> 499 ج/شهر <span class="alt">أو <s>9,990</s> 4,990 ج/سنة (شهرين ببلاش)</span></p>
         <a class="btn btn-ghost" href="download.html">حمّل وجرّب 30 يوم</a>
       </div>
       <div class="plan hot rv">
@@ -704,8 +363,8 @@
           <li>الدرج التاني</li>
           <li>عروض الأسعار</li>
         </ul>
-        <p class="price"><s style="color:var(--muted);font-weight:400;font-size:.72em">3,000 ج/شهر</s> 1,500 ج/شهر <span style="font-size:.8em;color:var(--muted)">أو <s style="color:var(--muted);font-weight:400;font-size:.72em">30,000</s> 15,000 ج/سنة (شهرين ببلاش)</span></p>
-        <a class="btn btn-gold" href="download.html">حمّل وجرّب 30 يوم</a>
+        <p class="price"><s>3,000 ج/شهر</s> 1,500 ج/شهر <span class="alt">أو <s>30,000</s> 15,000 ج/سنة (شهرين ببلاش)</span></p>
+        <a class="btn btn-cta" href="download.html" data-fb-event="Lead">حمّل وجرّب 30 يوم</a>
       </div>
       <div class="plan rv">
         <h3>أعمال</h3>
@@ -717,112 +376,74 @@
           <li>تطبيق الموبايل للمتابعة</li>
         </ul>
         <p class="price">قريبًا</p>
-        <a class="btn btn-ghost" id="bizWa">كلّمنا واتساب</a>
+        <a class="btn btn-ghost btn-wa" id="bizWa" href="https://wa.me/201090246299"><svg aria-hidden="true"><use href="#i-wa"/></svg>كلّمنا واتساب</a>
       </div>
     </div>
-    <div class="plan rv" id="hr-addon" style="margin-top:18px">
+    <div class="plan rv" id="hr-addon">
       <h3>تاجر + الموارد البشرية</h3>
       <p class="for">إضافة لباقة تاجر: الموظفين والحضور وجهاز البصمة، الإجازات والسُّلف، الرواتب بقسيمة مطبوعة، وعمولة البيع</p>
-      <p class="price"><s style="color:var(--muted);font-weight:400;font-size:.72em">999 ج/شهر</s> 499 ج/شهر <span style="font-size:.8em;color:var(--muted)">أو <s style="color:var(--muted);font-weight:400;font-size:.72em">9,990</s> 4,990 ج/سنة — فوق سعر باقة تاجر</span></p>
+      <p class="price" style="margin-bottom:0"><s>999 ج/شهر</s> 499 ج/شهر <span class="alt">أو <s>9,990</s> 4,990 ج/سنة — فوق سعر باقة تاجر</span></p>
     </div>
-    <p class="rv" style="text-align:center;color:var(--muted);margin-top:18px">كل الباقات: تعمل بدون إنترنت · تجربة 30 يوم كاملة بباقة تاجر + الموارد البشرية · بدون بطاقة بنكية</p>
+    <p class="plans-note rv">كل الباقات: تعمل بدون إنترنت · تجربة 30 يوم كاملة بباقة تاجر + الموارد البشرية · بدون بطاقة بنكية</p>
   </div>
 </section>
 
-<!-- ===== WHO ===== -->
-<section id="who" style="padding-top:20px">
+<!-- ===== جوّه البرنامج كمان (المزايا التقنية باختصار) ===== -->
+<section id="inside">
   <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">لمين؟</span>
-      <h2>مناسب لكل المحلات</h2>
+    <div class="sec-head rv"><h2>وجوّه البرنامج كمان</h2></div>
+    <div class="tech rv">
+      <div><svg aria-hidden="true"><use href="#i-refresh"/></svg><p><b>تحديث بزرار واحد</b><span>بيتأكد من الملف وياخد نسخة احتياطية قبل ما يثبّت.</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-shield"/></svg><p><b>صلاحية لكل موظف</b><span>كل واحد يعمل اللي مسموحله بس، وكل حاجة متسجّلة باسمه.</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-usb"/></svg><p><b>نسخة احتياطية مشفّرة</b><span>كل يوم، وكمان على فلاشة بكلمة سر.</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-spark"/></svg><p><b>ذكاء اصطناعي بمفتاح محلك</b><span>يقرا فاتورة المورد ويجاوب على أسئلتك — في تاجر وأعلى.</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-id"/></svg><p><b>الموظفين والرواتب</b><span>حضور وإجازات وسُلف وقسيمة مرتب — إضافة لتاجر.</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-doc"/></svg><p><b>بيانات الفاتورة الإلكترونية</b><span>ملف Excel بحقول مصلحة الضرائب للمراجعة.</span></p></div>
     </div>
-    <div class="pills rv">
-      <span class="pill">🛒 سوبر ماركت وبقالة</span>
-      <span class="pill">🌿 عطارة</span>
-      <span class="pill">👕 ملابس وأحذية</span>
-      <span class="pill">🔧 قطع غيار وإكسسوار</span>
-      <span class="pill">🏠 أدوات منزلية</span>
-      <span class="pill">💊 صيدليات ومستحضرات</span>
-      <span class="pill">📦 موزعون وجملة</span>
-      <span class="pill">📱 محلات إلكترونيات</span>
-    </div>
+<!-- LATEST:START -->
+    <p class="latest-strip">آخر نسخة: <b>2.9.1</b> · إصدار 17 أكتوبر 2026 · <a href="whats-new.html">شوف الجديد</a></p>
+<!-- LATEST:END -->
   </div>
 </section>
 
-<!-- ===== FAQ ===== -->
-<section id="faq">
+<!-- ===== ٧. أسئلة ===== -->
+<section id="faq" class="sec-alt">
   <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">أسئلة شائعة</span>
-      <h2>كل اللي بيسألوه قبل الشراء</h2>
-    </div>
+    <div class="sec-head rv"><h2>أسئلة بتتسأل كتير</h2></div>
     <div class="faq rv">
       <details>
-        <summary>محتاج إنترنت عشان يشتغل؟</summary>
-        <p>لأ نهائيًا. النسخة المكتبية بتشتغل 100% بدون إنترنت وبياناتك على جهازك أنت. الإنترنت بس لو حبيت تبعت تذكيرات واتساب أو تستخدم النسخة السحابية.</p>
+        <summary>التجربة مجانية فعلًا؟</summary>
+        <p>أيوه، 30 يوم بكل المزايا (باقة تاجر ومعاها الموارد البشرية)، من غير فيزا ولا تسجيل. ولو اشتركت بعدها بتكمّل على نفس بياناتك.</p>
       </details>
       <details>
-        <summary>لو الجهاز باظ… بياناتي بتضيع؟</summary>
-        <p>لأ. فيه نسخ احتياطي تلقائي يومي + تصدير قاعدة البيانات كاملة بضغطة، تنقلها لأي جهاز تاني وتكمل شغل عادي. وكمان أي حذف بالغلط جواه ليه زر «تراجع» يرجّعه.</p>
+        <summary>بدفع إزاي؟</summary>
+        <p>اشتراك شهري أو سنوي. بتكلّمنا على الواتساب، تختار الباقة وتدفع، ونبعتلك كود التفعيل تحطه في البرنامج — وبياناتك زي ما هي.</p>
       </details>
       <details>
-        <summary>أنا شغال بدفاتر أو ببرنامج قديم — هنقل البيانات إزاي؟</summary>
-        <p>في الباقة الاحترافية بننقلك الأصناف والعملاء والأرصدة بنفسنا من النظام القديم أو من ملفات Excel — بتفتح البرنامج تلاقي محلك جاهز.</p>
+        <summary>لو الكمبيوتر باظ… بياناتي بتروح؟</summary>
+        <p>البرنامج بياخد نسخة احتياطية كل يوم لوحده، وتقدر تخليه ينسخ كمان على فلاشة ومشفّرة بكلمة سر. لو الجهاز باظ: نزّل البرنامج على جهاز تاني ورجّع آخر نسخة من الفلاشة.</p>
       </details>
       <details>
-        <summary>الكاشير عندي مش متعود على الكمبيوتر…</summary>
-        <p>الشاشة مصممة زي الكاشير الحقيقي: مسح باركود وزر واحد للبيع الكاش. وبندرّبه بنفسنا في الباقة الاحترافية، وفيه دليل اختصارات جوه البرنامج بضغطة ؟</p>
+        <summary>التحديثات بتنزل إزاي؟</summary>
+        <p>لما تنزل نسخة جديدة البرنامج يقولك في الجرس، وتثبّتها بزرار واحد بعد ما ياخد نسخة احتياطية. مفيش حاجة بتتثبّت لوحدها، وبياناتك بتفضل زي ما هي.</p>
       </details>
       <details>
-        <summary>أقدر أجرّب البرنامج الأول قبل ما أدفع؟</summary>
-        <p>أيوه — النسخة المكتبية بتشتغل كاملة 30 يوم تجربة على بياناتك الحقيقية قبل التفعيل. تجرّب كل المزايا براحتك، وبعدها تفعّل بدفعة واحدة بدون اشتراك شهري إجباري.</p>
-      </details>
-      <details>
-        <summary>فيه اشتراك شهري؟</summary>
-        <p>أيوه، اشتراك شهري أو سنوي. عرض الإطلاق لأول 10 عملاء: خصم 50%، والسعر ثابت ليك طول ما اشتراكك مستمر — كاشير 499 ج/شهر أو 4,990 ج/سنة (بدل 999 و9,990)، وتاجر 1,500 ج/شهر أو 15,000 ج/سنة (بدل 3,000 و30,000)، وإضافة الموارد البشرية لتاجر 499 ج/شهر أو 4,990 ج/سنة (بدل 999 و9,990). تجرّب 30 يوم كاملين قبل ما تدفع، وبياناتك على جهازك أنت.</p>
-      </details>
-      <details>
-        <summary>هل يدعم الضريبة والفواتير الضريبية؟</summary>
-        <p>أيوه — ضريبة قيمة مضافة اختيارية لكل فاتورة، رقم ضريبي على المطبوعات، وتقرير ضريبة كامل (مخرجات ومدخلات وصافي).</p>
+        <summary>محتاج إنترنت؟</summary>
+        <p>لأ. البيع والمخزون والحسابات كلها على جهازك من غير نت. النت بس لو حبيت تبعت على الواتساب أو تنزّل تحديث.</p>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ===== ORDER ===== -->
-<section id="order">
+<!-- ===== ٨. الدعوة الأخيرة ===== -->
+<section id="start">
   <div class="wrap">
-    <div class="sec-head rv">
-      <span class="kicker">تواصل</span>
-      <h2>عندك سؤال قبل ما تنزّل؟</h2>
-      <p>سيبلنا بياناتك وهنكلمك على الواتساب — أو كلّمنا مباشرة.</p>
-    </div>
-    <div class="order-grid rv">
-      <form id="leadForm" class="lead">
-        <label>اسمك
-          <input id="lf_name" required placeholder="الاسم بالكامل" />
-        </label>
-        <label>نوع نشاطك / محلك
-          <input id="lf_biz" placeholder="سوبر ماركت / عطارة / ملابس / قطع غيار ..." />
-        </label>
-        <label>رقم تليفونك
-          <input id="lf_phone" required inputmode="tel" placeholder="01xxxxxxxxx" />
-        </label>
-        <button class="btn btn-gold" type="submit" style="width:100%">ابعت على الواتساب</button>
-        <p class="hint">هيتفتح واتساب برسالة جاهزة — تبعتها وبس. من غير أي التزام.</p>
-      </form>
-
-      <div class="ccard">
-        <h3>تواصل مباشر</h3>
-        <p class="who" id="ownerName">م. محمود العطار</p>
-        <a class="cline" id="callLine" href="tel:+201090246299">📞 01090246299</a>
-        <a class="cline" id="waLine">💬 واتساب — رد سريع</a>
-        <ul>
-          <li>عرض حي (Demo) للبرنامج على شاشتك</li>
-          <li>تركيب وتدريب ودعم فني</li>
-          <li>نقل بياناتك من نظامك القديم</li>
-          <li>تحديثات وتطوير مستمر</li>
-        </ul>
+    <div class="final rv">
+      <h2>جرّبه على محلك 30 يوم — ببلاش</h2>
+      <p>نزّله دلوقتي، وأي سؤال إحنا على الواتساب.</p>
+      <div class="hero-cta">
+        <a class="btn btn-cta btn-lg" href="download.html" data-fb-event="Lead"><svg aria-hidden="true"><use href="#i-down"/></svg>حمّل وجرّب 30 يوم مجانًا</a>
+        <a class="btn btn-ghost btn-lg btn-wa" data-wa-msg="السلام عليكم م. محمود 👋 جاي من الموقع وعايز أستفسر عن ATTARIX" href="https://wa.me/201090246299"><svg aria-hidden="true"><use href="#i-wa"/></svg>كلّمنا واتساب</a>
       </div>
     </div>
   </div>
@@ -832,139 +453,35 @@
 
 <footer>
   <div class="wrap">
-    <div class="logo" style="justify-content:center;margin-bottom:10px"><span class="mark">A</span> ATTARIX</div>
-    <p>نظام إدارة المحلات — كاشير · مخزون · محاسبة · اقتراحات ذكية — © 2026 ATTARIX</p>
-    <p style="margin-top:6px">م. محمود العطار — <a id="footPhone" href="tel:+201090246299">01090246299</a> · <a href="download.html">⬇️ تحميل البرنامج</a> · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">🛍️ المنتجات والخدمات</a> · <a href="about.html">👋 عنّنا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">📖 دليل الاستخدام الكامل</a></p>
+    <div class="logo"><img class="mark" src="brand/attarix-mark.svg" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light.svg" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark.svg" alt="ATTARIX" width="110" height="17"></picture></div>
+    <p><a href="download.html">تحميل البرنامج</a> · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات والخدمات</a> · <a href="about.html">عنّنا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
+    <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
   </div>
 </footer>
 
-<a class="wa" id="floatWa" title="واتساب" aria-label="تواصل واتساب">💬</a>
+<a class="wa" id="floatWa" href="https://wa.me/201090246299" title="واتساب" aria-label="تواصل واتساب"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
 <script>
+  // ثلاث صيغ للوعد للاختيار في المعاينة: ?hero=1 أو 2 أو 3 (الافتراضي 1).
   (function(){
-    var num = window.ATTARIX_WHATSAPP || "201090246299";
-    var tel = window.ATTARIX_PHONE || "+201090246299";
-    var waBase = "https://wa.me/" + num + "?text=";
-    var defaultMsg = encodeURIComponent("السلام عليكم م. محمود، مهتم ببرنامج ATTARIX لإدارة المحل. ممكن أعرف التفاصيل؟");
-    var defaultUrl = waBase + defaultMsg;
-
-    // generic whatsapp buttons
-    ["navCta","waLine","floatWa"].forEach(function(id){
-      var el = document.getElementById(id); if(el){ el.href = defaultUrl; el.target = "_blank"; el.rel="noopener"; }
-    });
-    // plan buttons carry the plan name
-    document.querySelectorAll('.plan-cta').forEach(function(el){
-      var plan = el.getAttribute('data-plan') || '';
-      var msg = encodeURIComponent("السلام عليكم م. محمود 👋\nمهتم ببرنامج ATTARIX — باقة «" + plan + "».\nعندي سؤال.");
-      el.href = waBase + msg; el.target = "_blank"; el.rel = "noopener";
-    });
-    // tel links
-    ["callLine","footPhone"].forEach(function(id){
-      var el = document.getElementById(id); if(el){ el.href = "tel:" + tel; }
-    });
-
-    // mobile menu toggle
-    var menuBtn = document.getElementById('menuBtn');
-    var navLinks = document.querySelector('.nav-links');
-    if(menuBtn && navLinks){
-      menuBtn.addEventListener('click', function(){
-        var open = navLinks.classList.toggle('open');
-        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        menuBtn.textContent = open ? '✕' : '☰';
-      });
-      navLinks.querySelectorAll('a').forEach(function(a){
-        a.addEventListener('click', function(){
-          navLinks.classList.remove('open');
-          menuBtn.setAttribute('aria-expanded','false');
-          menuBtn.textContent = '☰';
-        });
-      });
+    var H = {
+      '2': ['الدرج مضبوط، والمخزون محسوب، و<span class="hl">الزباين بيدفعوا</span>.',
+            'برنامج عربي لمحلك بيعدّ كل وردية، وينبّهك قبل ما الصنف يخلص، ويبعت كشف الحساب للزبون على الواتساب.'],
+      '3': ['كل حسابات محلك في برنامج واحد… <span class="hl">يشتغل من غير نت</span>.',
+            'بيع ومخزون وورديات وديون الزباين بالعربي، على كمبيوتر المحل وبياناتك عندك.']
+    };
+    var m = /[?&]hero=([123])/.exec(location.search);
+    if (m && H[m[1]]) {
+      document.getElementById('heroTitle').innerHTML = H[m[1]][0];
+      document.getElementById('heroSub').textContent = H[m[1]][1];
     }
-
-    // lead form -> prefilled whatsapp
-    var form = document.getElementById('leadForm');
-    if(form){
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        var name = (document.getElementById('lf_name').value||'').trim();
-        var biz = (document.getElementById('lf_biz').value||'').trim();
-        var phone = (document.getElementById('lf_phone').value||'').trim();
-        var text = "السلام عليكم م. محمود 👋\n"
-                 + "أنا: " + (name||'-') + "\n"
-                 + "نوع النشاط: " + (biz||'-') + "\n"
-                 + "رقمي: " + (phone||'-') + "\n"
-                 + "مهتم ببرنامج ATTARIX وعندي سؤال.";
-        window.open(waBase + encodeURIComponent(text), "_blank", "noopener");
-      });
-    }
-
-    // ===== 3D hero tilt (mouse) =====
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var stage = document.getElementById('stage');
-    var laptop = document.getElementById('laptop');
-    if(stage && laptop && !reduced && matchMedia('(pointer:fine)').matches){
-      stage.addEventListener('mousemove', function(e){
-        var r = stage.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - .5;
-        var y = (e.clientY - r.top) / r.height - .5;
-        laptop.style.transform = 'rotateY(' + (-12 + x * -10) + 'deg) rotateX(' + (7 + y * 8) + 'deg)';
-      });
-      stage.addEventListener('mouseleave', function(){
-        laptop.style.transform = 'rotateY(-12deg) rotateX(7deg)';
-      });
-    }
-
-    // ===== card tilt =====
-    if(!reduced && matchMedia('(pointer:fine)').matches){
-      document.querySelectorAll('[data-tilt]').forEach(function(card){
-        card.addEventListener('mousemove', function(e){
-          var r = card.getBoundingClientRect();
-          var x = (e.clientX - r.left) / r.width - .5;
-          var y = (e.clientY - r.top) / r.height - .5;
-          card.style.transform = 'perspective(800px) rotateY(' + (x * 6) + 'deg) rotateX(' + (y * -6) + 'deg) translateY(-3px)';
-        });
-        card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
-      });
-    }
-
-    // ===== scroll reveal (staggered) =====
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en, i){
-        if(en.isIntersecting){
-          setTimeout(function(){ en.target.classList.add('in'); }, (i % 6) * 90);
-          io.unobserve(en.target);
-        }
-      });
-    }, { threshold: .12 });
-    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
-
-    // ===== counters =====
-    var cio = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(!en.isIntersecting) return;
-        cio.unobserve(en.target);
-        var el = en.target, target = parseInt(el.getAttribute('data-count'), 10) || 0;
-        var t0 = null;
-        function step(ts){
-          if(!t0) t0 = ts;
-          var p = Math.min((ts - t0) / 1200, 1);
-          el.textContent = '+' + Math.round(target * (1 - Math.pow(1 - p, 3)));
-          if(p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      });
-    }, { threshold: .6 });
-    document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
-
-    // smooth scroll for same-page anchors
-    document.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click', function(e){
-        var t = document.querySelector(this.getAttribute('href'));
-        if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
-      });
-    });
+    // القائمة تتقفل بعد اختيار رابط
+    var links = document.querySelector('.nav-links'), btn = document.getElementById('menuBtn');
+    if (links && btn) links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){
+      links.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.textContent = '☰'; }); });
   })();
 </script>
+<script src="site.js"></script>
 <script src="/translate.js" defer></script>
 </body>
 </html>

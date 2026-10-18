@@ -1,11 +1,9 @@
-// Fills the home page's «الجديد في نسخة X.Y.Z» section from scripts/latest-update.json.
+// Fills the home page's one-line «آخر نسخة» strip (inside the LATEST markers) from scripts/latest-update.json.
 //
 //     node scripts/build-latest.mjs
 //
-// The highlights are written in the site's everyday Arabic from that version's release notes,
-// strictly that version only, and approved by the owner before they go into the JSON. This
-// only rewrites what lies between the LATEST markers in index.html; the buttons and the line
-// for existing customers are fixed owner-approved text.
+// The home page (redone 2026-10-18) sells outcomes; what each version adds lives on «ما الجديد». This only
+// rewrites what lies between the LATEST markers in index.html: the version, its date and the link — no highlights.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,33 +11,14 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const data = JSON.parse(readFileSync(join(ROOT, 'scripts', 'latest-update.json'), 'utf8'));
 if (!/^\d+\.\d+\.\d+$/.test(data.version)) throw new Error(`bad version: ${data.version}`);
-if (!Array.isArray(data.highlights) || data.highlights.length < 1) throw new Error('no highlights');
 if (!/^\d{4}-\d{2}-\d{2}$/.test(data.released ?? '')) throw new Error(`bad released date: ${data.released}`);
+if (!data.date) throw new Error('no date line');
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const items = data.highlights
-  .map(([h, d]) => `        <li><b>${esc(h)}:</b> ${esc(d)}</li>`)
-  .join('\n');
-
 const START = '<!-- LATEST:START -->';
 const END = '<!-- LATEST:END -->';
 const section = `${START}
-<section id="latest" class="latest">
-  <div class="wrap">
-    <div class="latest-box rv">
-      <h2>الجديد في نسخة ${esc(data.version)}</h2>
-      <p class="latest-date">${esc(data.date)}</p>
-      <ul class="latest-list">
-${items}
-      </ul>
-      <div class="latest-cta">
-        <a class="btn btn-gold" href="download.html">نزّل النسخة الجديدة</a>
-        <a class="btn btn-ghost" href="whats-new.html">كل التحديثات</a>
-      </div>
-      <p class="latest-note">عندك نسخة قديمة؟ نزّل الجديدة وسطّبها فوقها، بياناتك بتفضل زي ما هي.</p>
-    </div>
-  </div>
-</section>
+    <p class="latest-strip">آخر نسخة: <b>${esc(data.version)}</b> · ${esc(data.date)} · <a href="whats-new.html">شوف الجديد</a></p>
 ${END}`;
 
 const path = join(ROOT, 'index.html');
@@ -48,7 +27,7 @@ const a = s.indexOf(START);
 const b = s.indexOf(END);
 if (a < 0 || b < a) throw new Error('LATEST markers not found in index.html');
 writeFileSync(path, s.slice(0, a) + section + s.slice(b + END.length));
-console.log(`index.html: latest section at ${data.version} (${data.highlights.length} highlights)`);
+console.log(`index.html: latest strip at ${data.version}`);
 
 // The app's new-version notice (ATTARIX 2.7.4) reads this public file: the version and its date ONLY — no link (the
 // app opens its own fixed download page), nothing else. It must name the version the download page serves.

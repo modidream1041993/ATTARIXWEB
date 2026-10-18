@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="70 60 990 840" role="img" aria-label="ATTARIX">
+  <defs>
+    <linearGradient id="ab" gradientUnits="userSpaceOnUse" x1="120" y1="900" x2="900" y2="120">
+      <stop offset="0" stop-color="#0B5590"/>
+      <stop offset=".55" stop-color="#1A82BC"/>
+      <stop offset="1" stop-color="#1E96CA"/>
+    </linearGradient>
+    <linearGradient id="ao" gradientUnits="userSpaceOnUse" x1="760" y1="330" x2="960" y2="520">
+      <stop offset="0" stop-color="#1E96CA"/>
+      <stop offset=".4" stop-color="#F4952C"/>
+      <stop offset="1" stop-color="#F4952C"/>
+    </linearGradient>
+    <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="1120" height="960">
+      <rect width="1120" height="960" fill="#fff"/>
+      <path d="M572 210 L373 585 L599 458 L700 400 L640 318 Z" fill="#000"/>
+      <path d="M40 920 L592 600 L650 566 L690 640 L678 690 L795 920 Z" fill="#000"/>
+      <path d="M547 677 L172 900 L440 900 Z" fill="#fff"/>
+      <circle cx="780" cy="512" r="168" fill="#000"/>
+      <path d="M608.5 413 A198 198 0 1 1 854 696" fill="none" stroke="#000" stroke-width="38"/>
+    </mask>
+  </defs>
+  <path mask="url(#cut)" fill="url(#ab)" d="M500 72 L640 72 L1046 892 L83 892 Z"/>
+  <g fill="none" stroke-width="31">
+    <path d="M617 571 A166 166 0 1 1 921 600" stroke="url(#ab)"/>
+    <path d="M823 351 A166 166 0 0 1 921 600" stroke="url(#ao)"/>
+    <path d="M868 653 A166 166 0 0 1 649 614" stroke="url(#ab)"/>
+  </g>
+  <circle cx="776" cy="508" r="66" fill="none" stroke="#1872AC" stroke-width="32"/>
+  <circle cx="787" cy="497" r="15" fill="#1872AC"/>
+  <path d="M766 396 A112 112 0 0 1 888 498" fill="none" stroke="#1C84BE" stroke-width="28" stroke-linecap="round"/>
+</svg>
