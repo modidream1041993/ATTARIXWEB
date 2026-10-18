@@ -57,6 +57,45 @@
   .chip.c2{top:44%;inset-inline-end:-6%}
   .chip.c3{bottom:4%;inset-inline-start:2%}
   .chip.c3 .dot{background:var(--tint-accent);color:var(--accent-ink)}
+
+  /* ===== الذكاء الاصطناعي ===== */
+  #ai{background:linear-gradient(180deg,var(--bg) 0%,var(--tint) 100%)}
+  .kicker{display:inline-flex;align-items:center;gap:6px;background:var(--tint-accent);color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:999px;padding:4px 14px;font-weight:800;font-size:.9rem;margin-bottom:10px}
+  .kicker svg{width:16px;height:16px}
+  .ai-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+  @media(max-width:900px){.ai-grid{grid-template-columns:1fr}}
+  .ai-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:560px){.ai-cards{grid-template-columns:1fr}}
+  .ai-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow)}
+  .ai-card .ic{width:44px;height:44px;border-radius:12px;background:var(--brand-grad);color:#fff;display:grid;place-items:center;flex-shrink:0}
+  .ai-card .ic svg{width:22px;height:22px}
+  .ai-card.top{grid-column:1/-1;border:2px solid color-mix(in srgb,var(--accent) 60%,transparent)}
+  .ai-card.top .ic{background:var(--accent);color:var(--on-accent)}
+  .ai-card b{display:block;font-size:1.05rem;line-height:1.45}
+  .ai-card span{display:block;color:var(--muted);font-size:.95rem;line-height:1.65;margin-top:2px}
+  .ai-vids{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .ai-vid{margin:0}
+  .ai-vid video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:18px;background:var(--bg2);border:1px solid var(--line);box-shadow:var(--shadow)}
+  .ai-vid figcaption{text-align:center;font-weight:800;font-size:.9rem;color:var(--muted);margin-top:8px}
+  .ai-trust{margin-top:22px;display:flex;gap:14px;align-items:flex-start;background:var(--brand-grad);color:#fff;border-radius:18px;padding:18px 20px}
+  .ai-trust svg{width:30px;height:30px;flex-shrink:0;margin-top:3px}
+  .ai-trust b{display:block;font-size:1.1rem}
+  .ai-trust span{display:block;opacity:.95;line-height:1.8}
+  .ai-alerts{margin-top:30px}
+  .ai-alerts h3{font-size:1.25rem;font-weight:900;margin-bottom:4px}
+  .ai-alerts > p{color:var(--muted);margin-bottom:14px}
+  .ai-alerts .row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:900px){.ai-alerts .row{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.ai-alerts .row{grid-template-columns:1fr}}
+  .ai-alerts .a{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:4px}
+  .ai-alerts .a .ic{width:36px;height:36px;border-radius:10px;background:var(--tint);color:var(--link);display:grid;place-items:center}
+  .ai-alerts .a .ic svg{width:20px;height:20px}
+  .ai-alerts .a span{color:var(--muted);font-size:.92rem;line-height:1.6}
+  .ai-plan{margin-top:18px;display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:14px 16px;color:var(--ink)}
+  .ai-plan svg{width:22px;height:22px;flex-shrink:0;color:var(--accent-ink);margin-top:3px}
+  .chip.c4{top:16%;inset-inline-end:-6%}
+  .chip.c4 .dot{background:var(--tint-accent);color:var(--accent-ink)}
+  @media(max-width:420px){.chip.c4{top:12%;inset-inline-end:-2%}}
   @media(max-width:880px){
     .hero{padding-top:26px}
     .hero-grid{grid-template-columns:1fr;gap:18px}
@@ -129,7 +168,9 @@
   .plans-note{text-align:center;color:var(--muted);margin-top:16px}
 
   /* داخل البرنامج */
-  .tech{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+  .tech{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:900px){.tech{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.tech{grid-template-columns:1fr}}
   .tech div{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
   .tech svg{width:22px;height:22px;color:var(--link);flex-shrink:0;margin-top:3px}
   .tech b{display:block}
@@ -189,6 +230,11 @@
     <symbol id="i-usb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="13" rx="2"/><path d="M9 9V3h6v6M11 5.5h0M13 5.5h0"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></symbol>
     <symbol id="i-id" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16a3.5 3.5 0 0 1 6.4 0M14 10h4M14 14h3"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 9h8M8 12h8M8 15h5"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="i-photo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4V8Z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2Z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
   </defs>
 </svg>
@@ -233,6 +279,7 @@
       <picture><source srcset="brand/attarix-mark-w880.webp" type="image/webp"><img class="mark-big" src="brand/attarix-mark-w880.png" alt="" width="440" height="375"></picture>
       <div class="chip c1"><span class="dot"><svg><use href="#i-drawer"/></svg></span><div>الدرج مضبوط<small>الوردية اتقفلت بعدّ</small></div></div>
       <div class="chip c2"><span class="dot"><svg><use href="#i-chart"/></svg></span><div>ربح النهارده<small>بضغطة من التقارير</small></div></div>
+      <div class="chip c4"><span class="dot"><svg><use href="#i-scan"/></svg></span><div>فاتورة المورد اتقرت<small>راجعها وكمّل الشراء</small></div></div>
       <div class="chip c3"><span class="dot"><svg><use href="#i-box"/></svg></span><div>الزيت قرّب يخلص<small>اطلب 24 كرتونة</small></div></div>
     </div>
   </div>
@@ -266,6 +313,57 @@
     <div class="offline rv">
       <svg aria-hidden="true"><use href="#i-wifi-off"/></svg>
       <div><b>النت قطع؟ ولا يهمك.</b><span>البرنامج على كمبيوتر المحل، والبيع شغال من غير إنترنت.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الذكاء الاصطناعي (كل سطر هنا مطابق لما يفعله البرنامج اليوم) ===== -->
+<section id="ai">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="kicker"><svg aria-hidden="true"><use href="#i-spark"/></svg>ذكاء اصطناعي بيشتغل لحسابك</span>
+      <h2>اللي كان بياخد منك ساعة… بقى دقيقة</h2>
+      <p>صوّر فاتورة المورد، واسأل عن محلك بالعربي، وسيب البرنامج يجهّزلك الشغل — وإنت اللي بتراجع وبتقرر.</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-cards">
+        <div class="ai-card top rv"><span class="ic"><svg aria-hidden="true"><use href="#i-scan"/></svg></span><p><b>فاتورة المورد تتكتب لوحدها</b><span>صوّر الفاتورة أو اختار ملف PDF: المورد والتاريخ والأصناف والكميات والأسعار بتتقري وتتطابق مع أصنافك — وإنت تراجع قبل ما تحفظ.</span></p></div>
+        <div class="ai-card top rv"><span class="ic"><svg aria-hidden="true"><use href="#i-chat"/></svg></span><p><b>اسأل محلّك بالعربي</b><span>اكتب «إيه أكتر 5 أصناف كسّبتني الشهر ده؟» والجواب بأرقام محلك، ومعاه الأرقام اللي اتبنى عليها تشوفها بعينك.</span></p></div>
+        <div class="ai-card rv"><span class="ic"><svg aria-hidden="true"><use href="#i-photo"/></svg></span><p><b>صنف جديد من صورة</b><span>صوّر المنتج: الاسم والفئة والباركود بيتقترحوا، وإنت تكمّل السعر وتحفظ.</span></p></div>
+        <div class="ai-card rv"><span class="ic"><svg aria-hidden="true"><use href="#i-receipt"/></svg></span><p><b>إيصال المصروف في ثواني</b><span>صورة الإيصال تتحول لمصروف جاهز: الجهة والتاريخ والمبلغ، تراجعه وتضيفه.</span></p></div>
+        <div class="ai-card rv"><span class="ic"><svg aria-hidden="true"><use href="#i-wa"/></svg></span><p><b>ملخّص يومك على الواتساب</b><span>سطور قليلة فيها مبيعات النهارده والدرج والمصاريف، تعدّلها وتبعتها لنفسك أو لشريكك.</span></p></div>
+        <div class="ai-card rv"><span class="ic"><svg aria-hidden="true"><use href="#i-people"/></svg></span><p><b>رسالة تذكير بالفلوس اللي برّه</b><span>رسالة مؤدبة للزبون اللي عليه فلوس، جاهزة تعدّلها وتبعتها واتساب.</span></p></div>
+      </div>
+      <div class="ai-vids rv">
+        <figure class="ai-vid">
+          <video class="lazy-vid" muted loop playsinline preload="none" poster="images/ai/ai-supplier-invoice.jpg" data-src="images/ai/ai-supplier-invoice.mp4" aria-label="فيديو قصير: قراءة فاتورة مورد ومراجعتها"></video>
+          <figcaption>فاتورة المورد — 15 ثانية</figcaption>
+        </figure>
+        <figure class="ai-vid">
+          <video class="lazy-vid" muted loop playsinline preload="none" poster="images/ai/ai-ask-your-shop.jpg" data-src="images/ai/ai-ask-your-shop.mp4" aria-label="فيديو قصير: سؤال لمحلك والجواب بأرقامه"></video>
+          <figcaption>اسأل محلّك — 15 ثانية</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="ai-trust rv">
+      <svg aria-hidden="true"><use href="#i-shield"/></svg>
+      <div><b>الذكاء الاصطناعي بيقترح… وإنت اللي بتقرر.</b><span>مفيش حاجة بتتحفظ غير لما تراجعها وتدوس حفظ بنفسك. اللي بيتبعت هو الصورة اللي إنت اخترتها، أو أرقام وأسماء ملخّصة للطلب ده بس — عمره ما بيبعت قاعدة بياناتك، ولا تليفونات ولا عناوين عملائك. ومفتاح الخدمة متخزّن على جهازك.</span></div>
+    </div>
+    <div class="ai-alerts">
+      <div class="rv">
+        <h3>وتنبيهات ذكية… من غير نت ومن غير ذكاء اصطناعي</h3>
+        <p>حسابات البرنامج نفسه، بتظهر لك في الجرس أول ما يحصل حاجة تستاهل.</p>
+      </div>
+      <div class="row">
+        <div class="a rv"><span class="ic"><svg aria-hidden="true"><use href="#i-box"/></svg></span><b>قبل ما الصنف يخلص بأيام</b><span>يحسب سرعة البيع ويقولك هيخلص إمتى وتطلب كام.</span></div>
+        <div class="a rv"><span class="ic"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><b>عين على الكاشير</b><span>لو خصومات كاشير أو مرتجعاته أعلى بكتير من الباقيين، تعرف.</span></div>
+        <div class="a rv"><span class="ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><b>البيع وقع فجأة؟</b><span>لو بيع امبارح أقل بكتير من المعتاد، ينبّهك.</span></div>
+        <div class="a rv"><span class="ic"><svg aria-hidden="true"><use href="#i-bell"/></svg></span><b>صلاحية وشيكات وديون</b><span>أصناف قرّبت صلاحيتها، شيكات قرّب ميعادها، وفواتير متأخرة عن السداد.</span></div>
+      </div>
+    </div>
+    <div class="ai-plan rv">
+      <svg aria-hidden="true"><use href="#i-key"/></svg>
+      <p><b>في باقة تاجر وأعلى.</b> الذكاء الاصطناعي بيشتغل بمفتاح خدمة باسم محلك (من Anthropic أو OpenAI)، ومحتاج إنترنت وقت الاستخدام بس. التنبيهات شغالة من غير نت ومن غير مفتاح.</p>
     </div>
   </div>
 </section>
@@ -363,6 +461,7 @@
           <li>الأجهزة بالسيريال والضمان</li>
           <li>الدرج التاني</li>
           <li>عروض الأسعار</li>
+          <li>ذكاء اصطناعي: فاتورة المورد بالصورة واسأل محلّك (بمفتاح محلك)</li>
         </ul>
         <p class="price"><s>3,000 ج/شهر</s> 1,500 ج/شهر <span class="alt">أو <s>30,000</s> 15,000 ج/سنة (شهرين ببلاش)</span></p>
         <a class="btn btn-cta" href="download.html" data-fb-event="Lead">حمّل وجرّب 30 يوم</a>
@@ -397,8 +496,8 @@
       <div><svg aria-hidden="true"><use href="#i-refresh"/></svg><p><b>تحديث بزرار واحد</b><span>بيتأكد من الملف وياخد نسخة احتياطية قبل ما يثبّت.</span></p></div>
       <div><svg aria-hidden="true"><use href="#i-shield"/></svg><p><b>صلاحية لكل موظف</b><span>كل واحد يعمل اللي مسموحله بس، وكل حاجة متسجّلة باسمه.</span></p></div>
       <div><svg aria-hidden="true"><use href="#i-usb"/></svg><p><b>نسخة احتياطية مشفّرة</b><span>كل يوم، وكمان على فلاشة بكلمة سر.</span></p></div>
-      <div><svg aria-hidden="true"><use href="#i-spark"/></svg><p><b>ذكاء اصطناعي بمفتاح محلك</b><span>يقرا فاتورة المورد ويجاوب على أسئلتك — في تاجر وأعلى.</span></p></div>
       <div><svg aria-hidden="true"><use href="#i-id"/></svg><p><b>الموظفين والرواتب</b><span>حضور وإجازات وسُلف وقسيمة مرتب — إضافة لتاجر.</span></p></div>
+      <div><svg aria-hidden="true"><use href="#i-receipt"/></svg><p><b>إيصال حراري 80 أو 58 مم</b><span>وعليه باركود أو QR للفاتورة، وإيصال للمرتجع كمان.</span></p></div>
       <div><svg aria-hidden="true"><use href="#i-doc"/></svg><p><b>بيانات الفاتورة الإلكترونية</b><span>ملف Excel بحقول مصلحة الضرائب للمراجعة.</span></p></div>
     </div>
 <!-- LATEST:START -->
@@ -481,6 +580,27 @@
     if (links && btn) links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){
       links.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.textContent = '☰'; }); });
   })();
+</script>
+<script>
+/* The AI shorts: no bytes until near view; play while on screen, pause off it; still for reduced motion. */
+(function () {
+  var vids = document.querySelectorAll('video.lazy-vid');
+  if (!vids.length) return;
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function load(v) { if (!v.getAttribute('src')) { v.setAttribute('src', v.dataset.src); } }
+  if (still || !('IntersectionObserver' in window)) {
+    vids.forEach(function (v) { v.controls = true; v.preload = 'none'; load(v); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) { load(v); var p = v.play(); if (p && p.catch) p.catch(function () { v.controls = true; }); }
+      else { v.pause(); }
+    });
+  }, { rootMargin: '200px 0px', threshold: 0.35 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
 </script>
 <script src="site.js"></script>
 <script src="/translate.js" defer></script>
