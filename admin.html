@@ -110,14 +110,14 @@
 
   <!-- ===== 2ب) فريق العيلة ===== -->
   <div class="panel">
-    <h2>👨‍👦‍👦 فريق العيلة <span class="tip" style="font-weight:600;color:var(--muted);font-size:.8rem">(الأسماء والأدوار والأرقام والصور — بيظهروا في صفحة «عنّنا»)</span></h2>
+    <h2>👨‍👦‍👦 فريق العيلة <span class="tip" style="font-weight:600;color:var(--muted);font-size:.8rem">(الأسماء والأدوار والأرقام والصور — بيظهروا في صفحة «عنّا»)</span></h2>
     <div id="teamList"></div>
     <button class="btn btn-ghost btn-sm" id="addMember" type="button">➕ ضيف فرد جديد</button>
   </div>
 
-  <!-- ===== 2ج) محتوى صفحة عنّنا ===== -->
+  <!-- ===== 2ج) محتوى صفحة عنّا ===== -->
   <div class="panel">
-    <h2>📄 محتوى صفحة «عنّنا»</h2>
+    <h2>📄 محتوى صفحة «عنّا»</h2>
     <div class="fgrid">
       <label class="f full">مين إحنا؟ (نبذة عن العيلة)
         <textarea id="aWhoami" placeholder="إحنا عيلة العطار — إخوات بنشتغل مع بعض..."></textarea>
@@ -222,7 +222,7 @@
   bindContact('cWhatsapp', 'whatsapp');
   bindContact('cPhone', 'phone');
 
-  /* ---------- محتوى صفحة عنّنا ---------- */
+  /* ---------- محتوى صفحة عنّا ---------- */
   state.about.riddle = state.about.riddle || {};
   function bindAbout(id, obj, key, isList) {
     var el = $(id);
