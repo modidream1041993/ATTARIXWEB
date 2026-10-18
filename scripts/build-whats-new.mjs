@@ -176,7 +176,7 @@ ${articles}
 <footer>
   <div class="wrap">
     <div class="logo"><img class="mark" src="brand/attarix-mark.svg" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light.svg" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark.svg" alt="ATTARIX" width="110" height="17"></picture></div>
-    <p><a href="index.html">الرئيسية</a> · ${foot} · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّنا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
+    <p><a href="index.html">الرئيسية</a> · ${foot} · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
     <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
   </div>
 </footer>
