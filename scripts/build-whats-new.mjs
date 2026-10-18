@@ -96,9 +96,11 @@ const body = (lines) => {
 const summaryBlock = summary
   ? `<article class="wn-ver wn-summary rv" id="summary">\n<h2>${esc(opts.title)}</h2>\n<p>${esc(opts.intro)}</p>\n${body(summary.lines.filter((l) => !l.startsWith('>')))}\n</article>\n\n`
   : '';
-const articles = summaryBlock + chosen
-  .map((s) => `<article class="wn-ver rv" id="v${s.version}">\n<h2>الإصدار ${s.version}</h2>\n${body(s.lines.filter((l) => !l.startsWith('>')))}\n</article>`)
-  .join('\n\n');
+// `--latest <version>` (2.9.2): that version's own entry ABOVE the summary — a release newer than the summary's span.
+const latest = opts.latest ? sections.find((s) => s.version === opts.latest) : null;
+if (opts.latest && !latest) throw new Error(`no released version ${opts.latest} in ${notesPath}`);
+const article = (s) => `<article class="wn-ver rv" id="v${s.version}">\n<h2>الإصدار ${s.version}</h2>\n${body(s.lines.filter((l) => !l.startsWith('>')))}\n</article>`;
+const articles = (latest ? `${article(latest)}\n\n` : '') + summaryBlock + chosen.map(article).join('\n\n');
 
 const NAV = [
   ['index.html#pains', 'المزايا'],
@@ -189,4 +191,4 @@ ${articles}
 </html>
 `;
 writeFileSync(join(ROOT, 'whats-new.html'), html);
-console.log(`whats-new.html: ${summary ? `«${opts.title}» + ` : ''}${chosen.map((s) => s.version).join(', ')}`);
+console.log(`whats-new.html: ${latest ? `${latest.version} + ` : ''}${summary ? `«${opts.title}» + ` : ''}${chosen.map((s) => s.version).join(', ')}`);
