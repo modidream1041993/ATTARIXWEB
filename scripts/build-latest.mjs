@@ -52,5 +52,14 @@ console.log(`index.html: latest section at ${data.version} (${data.highlights.le
 
 // The app's new-version notice (ATTARIX 2.7.4) reads this public file: the version and its date ONLY — no link (the
 // app opens its own fixed download page), nothing else. It must name the version the download page serves.
-writeFileSync(join(ROOT, 'latest-update.json'), JSON.stringify({ version: data.version, released: data.released }, null, 2) + '\n');
-console.log(`latest-update.json: ${data.version} (${data.released})`);
+// From 2.9.1 the file may be SIGNED (`npm run update:sign` in the app's repo — «تنزيل وتثبيت»); a signed file for this
+// same version is kept as it is, never replaced by the unsigned shape.
+const updatePath = join(ROOT, 'latest-update.json');
+let existing = null;
+try { existing = JSON.parse(readFileSync(updatePath, 'utf8')); } catch { existing = null; }
+if (existing && existing.version === data.version && existing.signature) {
+  console.log(`latest-update.json: ${data.version} kept (signed)`);
+} else {
+  writeFileSync(updatePath, JSON.stringify({ version: data.version, released: data.released }, null, 2) + '\n');
+  console.log(`latest-update.json: ${data.version} (${data.released})`);
+}

@@ -1,4 +1,9 @@
 {
-  "version": "2.8.0",
-  "released": "2026-10-15"
+  "version": "2.9.1",
+  "released": "2026-10-17",
+  "url": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v2.9.1/Attarix_2.9.1_x64-setup.exe",
+  "sha256": "275491905e87a9889a5ed86a4ceb8299a76c8c88dc6d7b35c12ae839998cf91e",
+  "size": 7995890,
+  "keyId": 2,
+  "signature": "24d411a2136b13ca9ab586b36fa43c10127e4bec0c5b9bffdc262fa23bd38fa9b5e1c5664685909a3f829397990a95fb688cd3a32ba09dcc01f4e2d2fd02880c"
 }
