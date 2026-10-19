@@ -56,11 +56,16 @@ test('the build of the current tree: every page rendered, the rest copied byte f
     for (const banned of ['content/', 'site-build/', 'api/', 'docs/', 'test/', 'scripts/', 'node_modules/', '.git', 'package.json', 'vercel.json', 'MARKETING_PLAN.md']) {
       assert.ok(!out.some((f) => f.startsWith(banned)), `${banned} must not be in the output`);
     }
-    assert.ok(out.includes('admin/index.html') && out.includes('admin-products.html') && out.includes('robots.txt'));
+    // site/admin carries the panel (shipped in its PREVIEW build only — a production build refuses it, below);
+    // site/public, the branch main is built from, carries none of it.
+    const hasPanel = existsSync(join(ROOT, 'admin'));
+    assert.equal(out.includes('admin/index.html'), hasPanel);
+    assert.equal(out.includes('admin-products.html'), hasPanel);
+    assert.ok(out.includes('robots.txt'));
     const robots = readFileSync(join(outDir, 'robots.txt'), 'utf8');
     assert.match(robots, /^Disallow: \/admin$/m);
     assert.match(robots, /^Disallow: \/api\/$/m);
-    assert.match(readFileSync(join(outDir, 'admin-products.html'), 'utf8'), /noindex, nofollow/);
+    if (hasPanel) assert.match(readFileSync(join(outDir, 'admin-products.html'), 'utf8'), /noindex, nofollow/);
   } finally {
     rmSync(outDir, { recursive: true, force: true });
   }
