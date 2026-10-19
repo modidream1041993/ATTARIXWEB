@@ -2,16 +2,12 @@
   "name": "attarix-web-site",
   "private": true,
   "type": "module",
-  "description": "The ATTARIX marketing site: static pages rendered from content/site.json, plus the content-admin API (api/).",
+  "description": "The ATTARIX marketing site: static pages rendered from content/site.json. No admin code here — the content panel lives on the protected site/admin preview only.",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
     "build": "node site-build/build.mjs",
-    "test": "node --test",
-    "admin:setup": "node site-build/admin-setup.mjs"
-  },
-  "dependencies": {
-    "sharp": "0.33.5"
+    "test": "node --test"
   }
 }
