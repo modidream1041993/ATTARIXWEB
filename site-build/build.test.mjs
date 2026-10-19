@@ -13,7 +13,7 @@ import { render, escapeHtml } from './lib/template.mjs';
 // keeps proving the same thing after the content is edited or the pages change: rendering THOSE templates with
 // THAT content gives back, character for character (line endings aside), the pages as they were.
 const BASE_REF = '2a4ed9a';
-const TEMPLATE_REF = 'WORKTREE'; // replaced by the template commit's sha in the commit after it
+const TEMPLATE_REF = '535308e16915'; // the commit that introduced the templates (site/admin)
 
 const lf = (s) => s.replace(/\r\n/g, '\n');
 function git(args) {
