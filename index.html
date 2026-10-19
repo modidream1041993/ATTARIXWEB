@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="brand/attarix-mark-w880.webp" type="image/webp">
+<link rel="preload" as="image" type="image/webp" imagesrcset="brand/attarix-mark-440.webp 440w, brand/attarix-mark-880.webp 880w, brand/attarix-mark-975.webp 975w" imagesizes="(max-width: 900px) 240px, 340px">
 <link rel="stylesheet" href="site.css">
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 <style>
@@ -46,17 +46,22 @@
   .hero-trust{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-weight:700;font-size:.95rem}
   .hero-trust span{display:inline-flex;align-items:center;gap:6px}
   .hero-trust svg{width:18px;height:18px;color:var(--ok)}
-  .hero-art{position:relative;max-width:440px;margin-inline:auto;width:100%}
-  .hero-art .mark-big{width:100%;height:auto;filter:saturate(1.25) contrast(1.12) drop-shadow(0 10px 22px rgba(8,63,107,.28))}
-  .chip{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 13px;
-    box-shadow:var(--shadow);font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:8px;white-space:nowrap}
+  /* The hero's centrepiece: the ORIGINAL mark, full opacity, no filter, shadow or overlay; the cards around it in a
+     grid — never on the mark, never on its ring. Dark mode: the mark sits on a soft light tile so its colours read as
+     the original. */
+  .hero-art{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;justify-items:center;max-width:460px;margin-inline:auto;width:100%}
+  .mark-tile{grid-column:1/-1;display:grid;place-items:center;border-radius:28px;padding:10px}
+  .mark-tile img{display:block;width:340px;max-width:100%;height:auto}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .mark-tile{background:#F4F8FC;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  }
+  :root[data-theme="dark"] .mark-tile{background:#F4F8FC;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 13px;width:100%;max-width:220px;
+    box-shadow:var(--shadow);font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:8px}
   .chip small{display:block;font-weight:700;color:var(--muted);font-size:.74rem;line-height:1.3}
   .chip .dot{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--tint);color:var(--link);flex-shrink:0}
   .chip .dot svg{width:18px;height:18px}
-  .chip.c1{top:6%;inset-inline-start:-4%}
-  .chip.c2{top:44%;inset-inline-end:-6%}
-  .chip.c3{bottom:4%;inset-inline-start:2%}
-  .chip.c3 .dot{background:var(--tint-accent);color:var(--accent-ink)}
+  .chip.c3 .dot,.chip.c4 .dot{background:var(--tint-accent);color:var(--accent-ink)}
 
   /* ===== الذكاء الاصطناعي ===== */
   #ai{background:linear-gradient(180deg,var(--bg) 0%,var(--tint) 100%)}
@@ -93,17 +98,15 @@
   .ai-alerts .a span{color:var(--muted);font-size:.92rem;line-height:1.6}
   .ai-plan{margin-top:18px;display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:14px 16px;color:var(--ink)}
   .ai-plan svg{width:22px;height:22px;flex-shrink:0;color:var(--accent-ink);margin-top:3px}
-  .chip.c4{top:16%;inset-inline-end:-6%}
-  .chip.c4 .dot{background:var(--tint-accent);color:var(--accent-ink)}
-  @media(max-width:420px){.chip.c4{top:12%;inset-inline-end:-2%}}
   @media(max-width:880px){
     .hero{padding-top:26px}
     .hero-grid{grid-template-columns:1fr;gap:18px}
-    .hero-art{max-width:300px;order:-1}
+    .hero-art{max-width:420px;order:-1;gap:8px}
+    .mark-tile img{width:240px}
     .chip{font-size:.8rem;padding:7px 10px}
     .chip .dot{width:26px;height:26px}
   }
-  @media(max-width:420px){.hero-cta .btn{width:100%}.chip.c2{inset-inline-end:-2%}}
+  @media(max-width:420px){.hero-cta .btn{width:100%}}
 
   /* المشاكل والحلول */
   .pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
@@ -276,10 +279,15 @@
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <picture><source srcset="brand/attarix-mark-w880.webp" type="image/webp"><img class="mark-big" src="brand/attarix-mark-w880.png" alt="" width="440" height="375"></picture>
       <div class="chip c1"><span class="dot"><svg><use href="#i-drawer"/></svg></span><div>الدرج مضبوط<small>الوردية اتقفلت بعدّ</small></div></div>
-      <div class="chip c2"><span class="dot"><svg><use href="#i-chart"/></svg></span><div>ربح النهارده<small>بضغطة من التقارير</small></div></div>
       <div class="chip c4"><span class="dot"><svg><use href="#i-scan"/></svg></span><div>فاتورة المورد اتقرت<small>راجعها وكمّل الشراء</small></div></div>
+      <div class="mark-tile">
+        <picture>
+          <source type="image/webp" srcset="brand/attarix-mark-440.webp 440w, brand/attarix-mark-880.webp 880w, brand/attarix-mark-975.webp 975w" sizes="(max-width: 900px) 240px, 340px">
+          <img src="brand/attarix-mark-440.png" srcset="brand/attarix-mark-440.png 440w, brand/attarix-mark-880.png 880w, brand/attarix-mark-975.png 975w" sizes="(max-width: 900px) 240px, 340px" alt="" width="340" height="290" fetchpriority="high">
+        </picture>
+      </div>
+      <div class="chip c2"><span class="dot"><svg><use href="#i-chart"/></svg></span><div>ربح النهارده<small>بضغطة من التقارير</small></div></div>
       <div class="chip c3"><span class="dot"><svg><use href="#i-box"/></svg></span><div>الزيت قرّب يخلص<small>اطلب 24 كرتونة</small></div></div>
     </div>
   </div>

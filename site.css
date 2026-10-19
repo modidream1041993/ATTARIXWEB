@@ -62,7 +62,7 @@ main,header,footer{position:relative;z-index:1}
 header{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
 .logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:1.3rem;color:var(--ink)}
-.logo img.mark,.logo .mark-img{height:36px;width:auto;display:block;filter:saturate(1.25) contrast(1.12)}
+.logo img.mark,.logo .mark-img{height:36px;width:auto;display:block}
 .logo .word{height:17px;width:auto;display:block}
 .logo picture{display:block;line-height:0}
 /* شعار قديم بحرف داخل مربّع (لو بقي في صفحة) */
