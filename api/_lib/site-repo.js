@@ -6,6 +6,7 @@
 // adds a restoring commit of those same files on top of main («تراجع»). It never force-moves a branch.
 import { HttpError } from './http.js';
 import { BRAND_FILES } from '../../site-build/lib/schema.mjs';
+import { PRODUCTS_PATH, UPLOADED_IMAGE_RE, parseProductsData, ProductsDataFormatError } from './products-data.js';
 
 export const MAIN = 'main';
 export const PREVIEW = 'site/preview';
@@ -13,8 +14,10 @@ export const CONTENT_PATH = 'content/site.json';
 // main is built from the content file only once this file is on it (the owner merges site/public into main).
 export const BUILD_PATH = 'site-build/build.mjs';
 
-// Every file the panel manages: the content and the brand files (the generated sizes and the kept originals).
-export const isManagedPath = (p) => p === CONTENT_PATH || Object.values(BRAND_FILES).includes(p) || /^brand\/original\/[a-z-]+\.(?:png|webp|svg)$/.test(p);
+// Every file the panel manages — the ONLY files «نشر» and «تراجع» ever write on main: the content, the brand files
+// (the generated sizes and the kept originals), the products / «عنّا» data file, and the images uploaded for it.
+export const isManagedPath = (p) => p === CONTENT_PATH || p === PRODUCTS_PATH || UPLOADED_IMAGE_RE.test(p)
+  || Object.values(BRAND_FILES).includes(p) || /^brand\/original\/[a-z-]+\.(?:png|webp|svg)$/.test(p);
 
 // Makes sure site/preview exists and carries everything main has (so a preview shows the site as it is today plus
 // the unpublished edits). Created from main when missing; main merged into it when it is behind.
@@ -44,6 +47,19 @@ export async function readContent(gh) {
   let content;
   try { content = JSON.parse(f.text); } catch { throw new HttpError(500, "ملف المحتوى تالف"); }
   return { content, source, sha: f.sha };
+}
+
+// The products / «عنّا» data on a branch: { data: {sections, products, about}, contact, sha, text } or null when the file
+// is missing. A file not in the generated format is an error the owner sees (it is never evaluated).
+export async function readProductsData(gh, ref) {
+  const f = await gh.getText(PRODUCTS_PATH, ref);
+  if (!f) return null;
+  let d;
+  try { d = parseProductsData(f.text); } catch (e) {
+    if (e instanceof ProductsDataFormatError) throw new HttpError(409, `ملف المنتجات (products-data.js) بصيغة غير متوقعة: ${e.message}`);
+    throw e;
+  }
+  return { data: { sections: d.sections, products: d.products, about: d.about }, contact: d.contact, sha: f.sha, text: f.text };
 }
 
 // The changes that make the managed files of currentMap equal those of desiredMap (path → blob sha): an entry

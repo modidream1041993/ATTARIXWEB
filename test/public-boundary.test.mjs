@@ -18,6 +18,8 @@ import uploadLogo from '../api/upload-logo.js';
 import publish from '../api/publish.js';
 import rollback from '../api/rollback.js';
 import logEp from '../api/log.js';
+import saveProducts from '../api/save-products.js';
+import uploadImage from '../api/upload-image.js';
 
 const CONTENT_TEXT = readFileSync(new URL('../content/site.json', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
 const KEY = Buffer.from('0123456789abcdefghij');
@@ -44,7 +46,7 @@ test('production: every admin endpoint answers 404 and touches nothing, even wit
   const callsBefore = fake.calls.length;
   for (const [fn, method, body] of [[login, 'POST', { password: PASSWORD, totp: code() }], [logout, 'POST', {}], [session, 'GET'],
     [contentEp, 'GET'], [logEp, 'GET'], [save, 'POST', { content: {} }], [publish, 'POST', {}], [rollback, 'POST', {}],
-    [uploadLogo, 'POST', {}]]) {
+    [uploadLogo, 'POST', {}], [saveProducts, 'POST', {}], [uploadImage, 'POST', {}]]) {
     const r = await call(fn, { method, body });
     assert.equal(r.statusCode, 404, fn.name);
     assert.equal(r.headers['set-cookie'], undefined);
@@ -71,7 +73,7 @@ test('publish: refused while main is not built from content/site.json — nothin
 
 test('publish: only content/site.json and brand/* reach main, in one plain commit; the panel code never does', async () => {
   // main gains the build pipeline (what the owner merges from site/public); the old panel is gone from it.
-  const m = fake.commits.get(fake.refs.get('main')).tree;
+  const m = new Map(fake.commits.get(fake.refs.get('main')).tree);
   m.delete('admin.html');
   for (const [p, v] of Object.entries({ 'content/site.json': CONTENT_TEXT, 'site-build/build.mjs': 'build', 'brand/attarix-mark-h108.png': 'old-mark' })) m.set(p, fake.blob(Buffer.from(v)));
   fake.refs.set('main', fake.commit(m, [fake.refs.get('main')], 'site/public merged'));
@@ -94,7 +96,7 @@ test('publish: only content/site.json and brand/* reach main, in one plain commi
 });
 
 test('rollback: restores only content and brand files on main; everything else on main is left as it is', async () => {
-  const m = fake.commits.get(fake.refs.get('main')).tree;
+  const m = new Map(fake.commits.get(fake.refs.get('main')).tree);
   m.set('index.html', fake.blob(Buffer.from('a page changed on main by a release')));
   fake.refs.set('main', fake.commit(m, [fake.refs.get('main')], 'a release'));
   const r = await call(rollback, { method: 'POST', body: {}, cookie });

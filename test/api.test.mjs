@@ -18,6 +18,8 @@ import uploadLogo from '../api/upload-logo.js';
 import publish from '../api/publish.js';
 import rollback from '../api/rollback.js';
 import logEp from '../api/log.js';
+import saveProducts from '../api/save-products.js';
+import uploadImage from '../api/upload-image.js';
 
 const CONTENT_TEXT = readFileSync(new URL('../content/site.json', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
 const KEY = Buffer.from('0123456789abcdefghij');
@@ -47,7 +49,7 @@ before(async () => {
 
 test('without a session every admin endpoint answers 401', async () => {
   for (const [fn, method, body] of [[contentEp, 'GET'], [logEp, 'GET'], [session, 'GET'],
-    [save, 'POST', { content: {} }], [publish, 'POST', {}], [rollback, 'POST', {}], [uploadLogo, 'POST', {}]]) {
+    [save, 'POST', { content: {} }], [publish, 'POST', {}], [rollback, 'POST', {}], [uploadLogo, 'POST', {}], [saveProducts, 'POST', { productsData: {} }], [uploadImage, 'POST', {}]]) {
     const r = await call(fn, { method, body, cookie: `${COOKIE}=v1.9999999999999.AAAAAAAAAAAAAAAAAAAAAA.${'A'.repeat(43)}` });
     assert.equal(r.statusCode, 401, fn.name);
     assert.equal(r.json.ok, false);

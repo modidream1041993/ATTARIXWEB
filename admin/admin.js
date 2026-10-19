@@ -16,11 +16,14 @@
   var SECTION_NAMES = { pains: 'المشاكل والحل', ai: 'الذكاء الاصطناعي', biz: 'لنشاطك', screen: 'لقطة الشاشة', why: 'ليه ATTARIX',
     plans: 'الأسعار', inside: 'جوّه البرنامج', faq: 'الأسئلة', start: 'الدعوة الأخيرة' };
   var ACTION_NAMES = { login: 'دخول', 'login-locked': 'قفل الدخول', save: 'حفظ في المعاينة', 'upload-logo': 'رفع شعار',
-    publish: 'نشر', rollback: 'تراجع' };
+    publish: 'نشر', rollback: 'تراجع', 'save-products': 'حفظ المنتجات/عنّا', 'upload-image': 'رفع صورة' };
   var MAX_LOGO = 2 * 1024 * 1024;
+  var MAX_PHOTO = 3 * 1024 * 1024;
 
   var draft = null;       // the content being edited
   var savedJson = '';     // the content as last loaded/saved
+  var pd = null;          // the products page + «عنّا» (products-data.js): {sections, products, about}, or null
+  var pdSavedJson = '';
   var previewUrl = '';
 
   // ---------- small DOM helpers (text only) ----------
@@ -101,22 +104,24 @@
   }
 
   // ---------- fields bound to the draft ----------
+  function contentDirty() { return JSON.stringify(draft) !== savedJson; }
+  function pdDirty() { return pd !== null && JSON.stringify(pd) !== pdSavedJson; }
   function markDirty() {
-    var dirty = JSON.stringify(draft) !== savedJson;
+    var dirty = contentDirty() || pdDirty();
     var b = $('saveBtn');
     b.textContent = 'حفظ في المعاينة';
     if (dirty) b.appendChild(el('span', { class: 'dirty-dot', 'aria-label': 'تعديلات غير محفوظة' }));
   }
   function textField(label, obj, key, path, o) {
     o = o || {};
-    var input = o.multiline ? el('textarea', { rows: 3 }) : el('input', { type: 'text' });
-    input.value = obj[key];
+    var input = o.multiline ? el('textarea', { rows: o.rows || 3 }) : el('input', { type: 'text' });
+    input.value = obj[key] === undefined || obj[key] === null ? '' : obj[key];
     input.dataset.path = path;
     if (o.max) input.setAttribute('maxlength', o.max);
     if (o.ltr) input.classList.add('ltr');
     if (o.inputmode) input.setAttribute('inputmode', o.inputmode);
     input.addEventListener('input', function () {
-      var v = oneLine(input.value);
+      var v = o.keepLines ? input.value.replace(/\r\n?/g, '\n') : oneLine(input.value);
       if (o.digits) v = toLatinDigits(v);
       obj[key] = v;
       input.classList.remove('invalid');
@@ -165,28 +170,36 @@
           el('button', { type: 'button', class: 'icon-btn del', 'aria-label': 'حذف', onclick: function () { remove(i); }, disabled: arr.length <= (o.min || 0) }, '✕'));
         box.appendChild(el('div', { class: 'item', 'data-path': p }, head, o.render(item, i, p)));
       });
-      if (arr.length < o.max) box.appendChild(el('button', { type: 'button', class: 'btn btn-sm add', onclick: function () { arr.push(o.make()); redraw(); markDirty(); } }, '+ ' + o.addLabel));
+      if (arr.length < o.max) box.appendChild(el('button', { type: 'button', class: 'btn btn-sm add', onclick: function () { arr.push(o.make()); changed(); } }, '+ ' + o.addLabel));
     }
-    function move(i, d) { var j = i + d; if (j < 0 || j >= arr.length) return; var t = arr[i]; arr[i] = arr[j]; arr[j] = t; redraw(); markDirty(); }
-    function remove(i) { if (arr.length <= (o.min || 0)) return; arr.splice(i, 1); redraw(); markDirty(); }
+    function changed() { redraw(); markDirty(); if (o.onChange) o.onChange(); }
+    function move(i, d) { var j = i + d; if (j < 0 || j >= arr.length) return; var t = arr[i]; arr[i] = arr[j]; arr[j] = t; changed(); }
+    function remove(i) {
+      if (arr.length <= (o.min || 0)) return;
+      if (!o.confirmRemove) { arr.splice(i, 1); changed(); return; }
+      confirmBox('حذف', o.confirmRemove(arr[i]), 'نعم، احذف').then(function (yes) { if (yes) { arr.splice(i, 1); changed(); } });
+    }
     redraw();
+    box.redraw = redraw;
     return box;
   }
   // A list of short strings (bullets, trust items).
+  // o.attach(arr): for an optional list absent from the data until its first item (a product's features).
   function stringList(arr, path, o) {
     var box = el('div');
+    function touched() { if (o.attach) o.attach(arr); markDirty(); }
     function redraw() {
       box.textContent = '';
       arr.forEach(function (v, i) {
         var input = el('input', { type: 'text', maxlength: o.maxLen || 160 });
         input.value = v;
         input.dataset.path = path + '[' + i + ']';
-        input.addEventListener('input', function () { arr[i] = oneLine(input.value); input.classList.remove('invalid'); markDirty(); });
+        input.addEventListener('input', function () { arr[i] = oneLine(input.value); input.classList.remove('invalid'); touched(); });
         box.appendChild(el('div', { class: 'mini' }, input,
-          el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'لفوق', disabled: i === 0, onclick: function () { var t = arr[i - 1]; arr[i - 1] = arr[i]; arr[i] = t; redraw(); markDirty(); } }, '▲'),
-          el('button', { type: 'button', class: 'icon-btn del', 'aria-label': 'حذف', disabled: arr.length <= (o.min || 0), onclick: function () { arr.splice(i, 1); redraw(); markDirty(); } }, '✕')));
+          el('button', { type: 'button', class: 'icon-btn', 'aria-label': 'لفوق', disabled: i === 0, onclick: function () { var t = arr[i - 1]; arr[i - 1] = arr[i]; arr[i] = t; redraw(); touched(); } }, '▲'),
+          el('button', { type: 'button', class: 'icon-btn del', 'aria-label': 'حذف', disabled: arr.length <= (o.min || 0), onclick: function () { arr.splice(i, 1); redraw(); touched(); } }, '✕')));
       });
-      if (arr.length < o.max) box.appendChild(el('button', { type: 'button', class: 'btn btn-sm add', onclick: function () { arr.push(''); redraw(); markDirty(); } }, '+ ' + o.addLabel));
+      if (arr.length < o.max) box.appendChild(el('button', { type: 'button', class: 'btn btn-sm add', onclick: function () { arr.push(''); redraw(); touched(); } }, '+ ' + o.addLabel));
     }
     redraw();
     return box;
@@ -308,6 +321,10 @@
       textField('سطر الحقوق', c.footer, 'copyright', 'footer.copyright', { max: 80 }),
       textField('الاسم في تذييل صفحة «عنّا»', c.footer, 'aboutByline', 'footer.aboutByline', { max: 60 }))));
 
+    // The products page and «عنّا» (products-data.js — the same file the old panel edits)
+    if (pd) productsAndAboutPanels(root);
+    else root.appendChild(panel('صفحة المنتجات و«عنّا»', el('p', { class: 'hint', text: 'ملف المنتجات (products-data.js) مش موجود في الفرع ده.' })));
+
     // Logo
     root.appendChild(panel('الشعار', logoEditor()));
 
@@ -316,6 +333,127 @@
     var logPanel = panel('سجل التغييرات', logBox);
     logPanel.addEventListener('toggle', function () { if (logPanel.open) loadLog(logBox); });
     root.appendChild(logPanel);
+  }
+
+  function productsIn(sectionId) { return pd.products.filter(function (p) { return p.section === sectionId; }).length; }
+  function sectionTitle(id) { var sec = pd.sections.filter(function (x) { return x.id === id; })[0]; return sec ? sec.title : '(قسم محذوف)'; }
+
+  function productsAndAboutPanels(root) {
+    var productsBox = null;
+    root.appendChild(panel('صفحة المنتجات — الأقسام', frag(
+      el('p', { class: 'hint', text: 'الأقسام بالترتيب اللي بتظهر بيه في صفحة المنتجات. قسم من غير منتجات ما بيظهرش.' }),
+      listEditor(pd.sections, 'pd.sections', {
+        min: 0, max: 30, addLabel: 'قسم',
+        title: function (sec) { return (sec.icon ? sec.icon + ' ' : '') + (sec.title || '(قسم من غير اسم)') + ' — ' + productsIn(sec.id) + ' منتج'; },
+        make: function () { return { id: 'sec-' + Date.now(), icon: '📂', title: 'قسم جديد', note: '' }; },
+        confirmRemove: function (sec) {
+          var n = productsIn(sec.id);
+          return n ? 'القسم «' + sec.title + '» فيه ' + n + ' منتج — لو اتحذف، المنتجات دي مش هتظهر في الصفحة لحد ما تنقلها لقسم تاني. تكمّل؟' : 'تحذف القسم «' + sec.title + '»؟';
+        },
+        onChange: function () { if (productsBox) productsBox.redraw(); },
+        render: function (sec, i, path) {
+          return frag(
+            textField('اسم القسم', sec, 'title', path + '.title', { max: 120 }),
+            textField('الأيقونة (إيموجي)', sec, 'icon', path + '.icon', { max: 16 }),
+            textField('سطر وصف تحت الاسم', sec, 'note', path + '.note', { max: 300, hint: 'سيبه فاضي لو مش محتاجه' }));
+        },
+      }))));
+
+    productsBox = listEditor(pd.products, 'pd.products', {
+      min: 0, max: 300, addLabel: 'منتج',
+      title: function (p, i) { return (i + 1) + '. ' + (p.name || '(منتج من غير اسم)') + ' — ' + sectionTitle(p.section); },
+      make: function () { return { id: 'p-' + Date.now(), section: pd.sections.length ? pd.sections[0].id : 'shop', icon: '📦', name: '', short: '', description: '', features: [], price: '', image: '' }; },
+      confirmRemove: function (p) { return 'تحذف «' + (p.name || 'المنتج ده') + '» من صفحة المنتجات؟'; },
+      render: function (p, i, path) {
+        var opts = pd.sections.map(function (sec) { return [sec.id, sec.title]; });
+        if (!pd.sections.some(function (sec) { return sec.id === p.section; })) opts.unshift([p.section, '(قسم محذوف — اختار قسم)']);
+        return frag(
+          textField('اسم المنتج', p, 'name', path + '.name', { max: 300 }),
+          el('div', { class: 'row2' },
+            selectField('القسم', p, 'section', path + '.section', opts),
+            textField('الأيقونة (إيموجي — بتظهر لو مفيش صورة)', p, 'icon', path + '.icon', { max: 16 })),
+          textField('السعر (زي ما تحب يظهر)', p, 'price', path + '.price', { max: 120, hint: 'مثال: 150 ج.م — سيبه فاضي لو مفيش' }),
+          textField('وصف قصير (على الكارت)', p, 'short', path + '.short', { max: 4000, multiline: true, keepLines: true }),
+          textField('الوصف الكامل (في صفحة المنتج)', p, 'description', path + '.description', { max: 10000, multiline: true, keepLines: true, rows: 6 }),
+          el('p', { class: 'hint', text: 'المميزات (كل ميزة سطر):' }),
+          stringList(p.features || [], path + '.features', { min: 0, max: 60, maxLen: 500, addLabel: 'ميزة', attach: function (arr) { p.features = arr; } }),
+          photoField('صورة المنتج', p, 'image', path + '.image', 'product', p.id),
+          checkField('شارة «جديد»', p, 'isNew', path + '.isNew'),
+          p.page ? el('p', { class: 'hint', text: 'المنتج ده بيفتح صفحة خاصة بيه: ' + p.page }) : null);
+      },
+    });
+    root.appendChild(panel('صفحة المنتجات — المنتجات', productsBox));
+
+    var a = pd.about;
+    root.appendChild(panel('صفحة «عنّا» — الفريق', listEditor(a.team, 'pd.about.team', {
+      min: 0, max: 40, addLabel: 'فرد',
+      title: function (m, i) { return (i + 1) + '. ' + (m.name || '(من غير اسم)'); },
+      make: function () { return { id: 'member-' + Date.now(), name: '', role: '', phone: '', photo: '' }; },
+      confirmRemove: function (m) { return 'تشيل «' + (m.name || 'الفرد ده') + '» من الفريق؟'; },
+      render: function (m, i, path) {
+        return frag(
+          textField('الاسم', m, 'name', path + '.name', { max: 120 }),
+          textField('الدور / الوظيفة', m, 'role', path + '.role', { max: 200 }),
+          textField('رقم التليفون (بيظهر على الكارت)', m, 'phone', path + '.phone', { max: 20, ltr: true, digits: true, inputmode: 'tel', hint: 'سيبه فاضي لو مش عايزه يظهر' }),
+          photoField('الصورة', m, 'photo', path + '.photo', 'team', m.id));
+      },
+    })));
+    root.appendChild(panel('صفحة «عنّا» — النصوص', frag(
+      textField('مين إحنا؟ (نبذة عن العيلة)', a, 'whoami', 'pd.about.whoami', { max: 4000, multiline: true, keepLines: true, rows: 5 }),
+      textField('قصتنا مع ATTARIX', a, 'story', 'pd.about.story', { max: 6000, multiline: true, keepLines: true, rows: 6 }),
+      el('p', { class: 'hint', text: 'محطات مهمة:' }),
+      stringList(a.milestones, 'pd.about.milestones', { min: 0, max: 40, maxLen: 300, addLabel: 'محطة' }),
+      el('p', { class: 'hint', text: 'بنعمل إيه؟' }),
+      stringList(a.doing, 'pd.about.doing', { min: 0, max: 40, maxLen: 300, addLabel: 'بند' }),
+      textField('الفزورة (السؤال)', a.riddle, 'q', 'pd.about.riddle.q', { max: 300 }),
+      textField('إجابة الفزورة', a.riddle, 'a', 'pd.about.riddle.a', { max: 300 }),
+      textField('رابط فيسبوك', a.socials, 'facebook', 'pd.about.socials.facebook', { max: 300, ltr: true, hint: 'يبدأ بـ https:// — سيبه فاضي لإخفائه' }),
+      textField('رابط لينكد إن', a.socials, 'linkedin', 'pd.about.socials.linkedin', { max: 300, ltr: true, hint: 'يبدأ بـ https:// — سيبه فاضي لإخفائه' }),
+      textField('الإيميل', a.socials, 'email', 'pd.about.socials.email', { max: 120, ltr: true }),
+      el('p', { class: 'hint', text: 'رقم الواتساب والتليفون والاسم في صفحات المنتجات و«عنّا» بيتعدّلوا من قسم «التواصل» فوق.' }))));
+  }
+
+  // An image of a product or a team member: the current one, a file to upload (it goes to the preview at once, like
+  // the old panel), a path typed by hand, and «بدون صورة». The link to it is saved with «حفظ في المعاينة».
+  function photoField(label, obj, key, path, owner, id) {
+    var shown = el('div', { class: 'imgs' });
+    function showImg(src, caption) {
+      shown.textContent = '';
+      if (!src) { shown.appendChild(el('p', { class: 'hint', text: 'مفيش صورة.' })); return; }
+      var img = el('img', { src: src, alt: '' });
+      img.addEventListener('error', function () { shown.textContent = ''; shown.appendChild(el('p', { class: 'hint', text: 'الصورة مش ظاهرة هنا (ممكن تكون في المعاينة بس): ' + (obj[key] || '') })); });
+      shown.appendChild(el('figure', {}, img, el('figcaption', { text: caption })));
+    }
+    showImg(obj[key] ? '/' + obj[key] : '', obj[key] || '');
+    var pathInput = el('input', { type: 'text', class: 'ltr', maxlength: 160 });
+    pathInput.value = obj[key] || '';
+    pathInput.dataset.path = path;
+    pathInput.addEventListener('input', function () { obj[key] = oneLine(pathInput.value).trim(); pathInput.classList.remove('invalid'); markDirty(); });
+    var pick = el('input', { type: 'file', accept: 'image/jpeg,image/png,image/webp,image/gif' });
+    var info = el('p', { class: 'hint' });
+    pick.addEventListener('change', function () {
+      var file = pick.files && pick.files[0] ? pick.files[0] : null;
+      if (!file) return;
+      if (file.size > MAX_PHOTO) { info.textContent = 'الصورة أكبر من 3 ميجابايت — صغّرها الأول.'; pick.value = ''; return; }
+      info.textContent = 'جاري رفع الصورة للمعاينة…';
+      var reader = new FileReader();
+      reader.onload = function () {
+        var data = String(reader.result || '');
+        api('/api/upload-image', 'POST', { owner: owner, id: id, filename: file.name, dataBase64: data.slice(data.indexOf(',') + 1) }).then(function (r) {
+          obj[key] = r.path;
+          pathInput.value = r.path;
+          showImg(URL.createObjectURL(file), r.path);
+          info.textContent = 'اترفعت (' + r.width + '×' + r.height + '). اضغط «حفظ في المعاينة» عشان تتربط بال' + (owner === 'team' ? 'فرد.' : 'منتج.');
+          markDirty();
+        }).catch(function (e) { info.textContent = e.message; }).then(function () { pick.value = ''; });
+      };
+      reader.onerror = function () { info.textContent = 'تعذّر قراءة الملف'; };
+      reader.readAsDataURL(file);
+    });
+    var clear = el('button', { type: 'button', class: 'btn btn-sm', onclick: function () { obj[key] = ''; pathInput.value = ''; showImg('', ''); markDirty(); } }, 'بدون صورة');
+    return el('div', { class: 'item' }, el('b', { text: label }), shown,
+      el('label', { class: 'f' }, el('span', { text: 'صورة جديدة (JPEG أو PNG أو WebP، حتى 3 ميجابايت)' }), pick), info,
+      el('label', { class: 'f' }, el('span', { text: 'أو مسار الصورة' }), el('small', { text: 'مثال: images/item.jpg' }), pathInput), clear);
   }
 
   function logoEditor() {
@@ -415,6 +553,8 @@
     return api('/api/content').then(function (r) {
       draft = r.content;
       savedJson = JSON.stringify(draft);
+      pd = r.productsData || null;
+      pdSavedJson = JSON.stringify(pd);
       $('sourceNote').textContent = r.source === 'site/preview'
         ? 'بتعدّل نسخة المعاينة (فيها تعديلات لسه ما اتنشرتش أو اتنشرت).'
         : 'بتعدّل نسخة الموقع المنشور (مفيش معاينة لسه).';
@@ -425,16 +565,27 @@
     });
   }
 
+  // The content first (a changed contact is carried into products-data.js there), then the products page / «عنّا».
   function save() {
     setStatus('جاري الحفظ…', 'busy');
     $('saveBtn').disabled = true;
+    var any = false;
     return api('/api/save', 'POST', { content: draft }).then(function (r) {
       savedJson = JSON.stringify(draft);
+      if (!r.unchanged) any = true;
+      if (!pdDirty()) return null;
+      var sent = JSON.stringify(pd);
+      return api('/api/save-products', 'POST', { productsData: pd }).then(function (r2) {
+        pdSavedJson = sent;
+        if (!r2.unchanged) any = true;
+      });
+    }).then(function () {
       markDirty();
       showErrors(null);
-      setStatus(r.unchanged ? 'مفيش تغيير عن آخر حفظ.' : 'اتحفظ في المعاينة. المعاينة بتتبني خلال دقيقة أو اتنين — بعدها افتحها.', 'ok');
+      setStatus(any ? 'اتحفظ في المعاينة. المعاينة بتتبني خلال دقيقة أو اتنين — بعدها افتحها.' : 'مفيش تغيير عن آخر حفظ.', 'ok');
       return true;
     }).catch(function (e) {
+      markDirty();
       if (e.data && e.data.errors) showErrors(e.data.errors);
       setStatus(e.message, 'err');
       return false;
@@ -442,7 +593,7 @@
   }
 
   function publish() {
-    var dirty = JSON.stringify(draft) !== savedJson;
+    var dirty = contentDirty() || pdDirty();
     var text = dirty
       ? 'فيه تعديلات لسه ما اتحفظتش في المعاينة — دي مش هتتنشر. اللي هيتنشر هو آخر حاجة اتحفظت في المعاينة. تكمّل؟'
       : 'اللي في المعاينة هيطلع على الموقع الحقيقي للزباين خلال دقيقة أو اتنين. تكمّل؟';
@@ -456,7 +607,7 @@
   }
 
   function rollback() {
-    confirmBox('تراجع عن آخر نشر', 'المحتوى والشعار على الموقع هيرجعوا زي ما كانوا قبل آخر نشر، والمعاينة كمان. أي تعديل محفوظ في المعاينة ولسه ما اتنشرش هيضيع. تكمّل؟', 'نعم، تراجع').then(function (yes) {
+    confirmBox('تراجع عن آخر نشر', 'المحتوى والشعار وصفحة المنتجات و«عنّا» على الموقع هيرجعوا زي ما كانوا قبل آخر نشر، والمعاينة كمان — وأي تعديل اتعمل من اللوحة القديمة بعد النشر ده هيرجع هو كمان. أي تعديل محفوظ في المعاينة ولسه ما اتنشرش هيضيع. تكمّل؟', 'نعم، تراجع').then(function (yes) {
       if (!yes) return;
       setStatus('جاري التراجع…', 'busy');
       api('/api/rollback', 'POST', {}).then(function (r) {
@@ -497,7 +648,7 @@
       }).then(function () { btn.disabled = false; });
     });
     window.addEventListener('beforeunload', function (e) {
-      if (draft && JSON.stringify(draft) !== savedJson) { e.preventDefault(); e.returnValue = ''; }
+      if (draft && (contentDirty() || pdDirty())) { e.preventDefault(); e.returnValue = ''; }
     });
     api('/api/session').then(function (s) { previewUrl = s.previewUrl || ''; return loadContent(); })
       .catch(function (e) { if (e.status === 401) showLogin(''); else showLogin(e.message); });
