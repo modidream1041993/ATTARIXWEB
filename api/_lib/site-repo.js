@@ -1,14 +1,17 @@
 // The site repository's two branches the panel works with:
 //   main          production — Vercel deploys it to the live site
 //   site/preview  where «حفظ في المعاينة» commits; Vercel builds a preview of it
-// The panel only ever commits to site/preview, merges site/preview into main («نشر»), and adds a restoring commit
-// on top of main («تراجع»). It never force-moves a branch.
+// The panel only ever commits to site/preview, copies the content and brand files from site/preview onto main as one
+// plain commit («نشر» — never a merge: site/preview may carry the panel's own code, which must never reach main), and
+// adds a restoring commit of those same files on top of main («تراجع»). It never force-moves a branch.
 import { HttpError } from './http.js';
 import { BRAND_FILES } from '../../site-build/lib/schema.mjs';
 
 export const MAIN = 'main';
 export const PREVIEW = 'site/preview';
 export const CONTENT_PATH = 'content/site.json';
+// main is built from the content file only once this file is on it (the owner merges site/public into main).
+export const BUILD_PATH = 'site-build/build.mjs';
 
 // Every file the panel manages: the content and the brand files (the generated sizes and the kept originals).
 export const isManagedPath = (p) => p === CONTENT_PATH || Object.values(BRAND_FILES).includes(p) || /^brand\/original\/[a-z-]+\.(?:png|webp|svg)$/.test(p);

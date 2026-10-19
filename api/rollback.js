@@ -1,5 +1,6 @@
 // POST /api/rollback («تراجع») → undoes the most recent publish not yet undone: a NEW commit on main (never a force
-// push) whose content/site.json and brand files equal those of the commit recorded before that publish. site/preview
+// push) whose content/site.json and brand files equal those of the commit recorded before that publish — ONLY those
+// files (restoreEntries keeps to the managed paths), so main's own pages and code are never touched. site/preview
 // is brought to the same state (fast-forward when it can, else a restoring commit on it). Pressed again, it undoes
 // the publish before that one.
 import { handler, send, readJson, HttpError } from './_lib/http.js';

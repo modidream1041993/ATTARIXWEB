@@ -38,6 +38,7 @@ before(async () => {
   globalThis.fetch = fake.fetch;
   fake.seed('main', {
     'content/site.json': CONTENT_TEXT,
+    'site-build/build.mjs': 'build',
     'index.html': '<!doctype html>{{hero.sub}}',
     'brand/attarix-mark-h108.png': Buffer.from('old-mark'),
     'brand/attarix-wordmark-blue-h51.png': Buffer.from('old-word'),
@@ -116,13 +117,12 @@ test('save: a valid edit lands on site/preview only; main is untouched', async (
   assert.equal((await call(contentEp, { method: 'GET', cookie })).json.source, 'site/preview');
 });
 
-test('publish: records main, then merges site/preview into main with a merge commit', async () => {
+test('publish: records main, then copies the content onto main as one plain commit (never a merge)', async () => {
   const mainBefore = fake.refs.get('main');
   const r = await call(publish, { method: 'POST', body: {}, cookie });
   assert.equal(r.statusCode, 200, JSON.stringify(r.json));
   const merged = fake.commits.get(fake.refs.get('main'));
-  assert.equal(merged.parents.length, 2, 'a normal merge commit');
-  assert.equal(merged.parents[0], mainBefore);
+  assert.deepEqual(merged.parents, [mainBefore], 'one commit on top of main');
   assert.equal(JSON.parse(fake.textAt('main', 'content/site.json')).plans.items[0].monthly, 599);
   const history = JSON.parse(fake.textAt(STATE_BRANCH, 'publish-history.json'));
   assert.equal(history.at(-1).mainBefore, mainBefore);

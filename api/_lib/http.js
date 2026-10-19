@@ -71,8 +71,15 @@ export async function readJson(req, maxBytes) {
 
 // Wraps a handler: HttpError → its status and message; anything else → 500 with a generic message. The server log
 // gets a short code and the error's name only (never its message: a GitHub error could echo a request).
+//
+// The owner's rule (2026-10-19): the panel NEVER runs on the public site. On a Production deployment every endpoint
+// answers 404 before it reads a header, a body, an env var or GitHub — so admin code that reached main by mistake,
+// even with every secret set, logs nobody in and never reads or moves the lockout counter.
+export const isProduction = (env = process.env) => env.VERCEL_ENV === 'production';
+
 export function handler(fn) {
   return async (req, res) => {
+    if (isProduction()) return send(res, 404, { ok: false, error: 'غير موجود' });
     try {
       await fn(req, res);
     } catch (e) {
