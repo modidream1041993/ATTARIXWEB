@@ -106,12 +106,11 @@ test('the engine: lists, conditions, and standalone block lines that leave no tr
 });
 
 // The owner's rule (2026-10-19): the admin panel never runs on the public site. A PRODUCTION build refuses while any
-// admin code is in the tree (the new panel's admin/ and api/, site/admin's copy admin-products.html); a preview build is
-// unaffected. Whatever branch this runs on, the real tree either is refused or ships none of it. The old token panel at
-// its live path (admin.html) stays allowed until the owner says remove it (2026-10-19) — a separate final commit.
+// admin code is in the tree (the new panel's admin/ and api/, the old token panel admin.html / admin-products.html); a
+// preview build is unaffected. Whatever branch this runs on, the real tree either is refused or ships none of it.
 test('production: the build refuses a tree that carries admin code, and names each piece', () => {
   const problems = productionProblems(['index.html', 'api', 'admin', 'admin-products.html', 'admin.html', 'site.css']);
-  assert.deepEqual(problems, ['admin', 'admin-products.html', 'api'], 'admin.html (the old panel) is kept for now');
+  assert.deepEqual(problems, ['admin', 'admin-products.html', 'admin.html', 'api']);
   assert.deepEqual(productionProblems(['index.html', 'content', 'site-build']), []);
 });
 
@@ -124,7 +123,7 @@ test('production: this branch is either refused or builds with no admin route; p
       assert.match(refused.message, /admin code/);
       assert.equal(readdirSync(out).length, 0, 'nothing is written when the build is refused');
     } else {
-      for (const p of ['admin', 'api', 'admin-products.html']) assert.equal(existsSync(join(out, p)), false, p);
+      for (const p of ['admin', 'api', 'admin-products.html', 'admin.html']) assert.equal(existsSync(join(out, p)), false, p);
     }
     build({ outDir: out, env: { VERCEL_ENV: 'preview' } });
     assert.ok(existsSync(join(out, 'index.html')));

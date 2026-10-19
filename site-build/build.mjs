@@ -33,11 +33,9 @@ const EXCLUDE_TOP = new Set([
 ]);
 const excluded = (top) => EXCLUDE_TOP.has(top) || top.startsWith('.git');
 
-// Top-level names that are admin code: the new panel (admin/, api/) and site/admin's copy of the old token panel.
-// The OLD token panel at its live path (admin.html → /admin) is NOT here yet: the owner keeps it on the live site until
-// he has tested the new panel (2026-10-19). Its removal is one separate, final commit that deletes admin.html AND adds
-// it to this list (branch site/public-drop-old-panel).
-const ADMIN_TOP = ['admin', 'admin-products.html', 'api'];
+// Top-level names that are admin code: the new panel (admin/, api/) and the old token panel (admin.html at /admin,
+// admin-products.html on site/admin) — removed from the public site once the owner had tested the new panel.
+const ADMIN_TOP = ['admin', 'admin-products.html', 'admin.html', 'api'];
 export const productionProblems = (topNames) => ADMIN_TOP.filter((n) => topNames.includes(n));
 
 const groupThousands = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
