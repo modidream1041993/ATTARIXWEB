@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var C = window.SITE_CONTACT || { whatsapp: "201090246299", phone: "+201090246299", owner: "م. محمود العطار" };
+  var C = window.SITE_CONTACT || { whatsapp: {{js:contact.whatsapp}}, phone: {{js:contact.phoneTel}}, owner: {{js:contact.ownerName}} };
   var WA_BASE = "https://wa.me/" + C.whatsapp + "?text=";
 
   function waUrl(msg) { return WA_BASE + encodeURIComponent(msg); }

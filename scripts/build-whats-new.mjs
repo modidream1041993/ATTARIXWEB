@@ -12,6 +12,9 @@
 // "- " bullets, paragraphs) into the site's HTML. The generated page is committed; Vercel
 // serves it as a plain static file (this folder is in .vercelignore). Re-run it after each
 // release, with the new upper version.
+//
+// The header and footer carry {{placeholders}} (logo paths, the header button, the contact line): the site build
+// (site-build/build.mjs) fills them from content/site.json, as it does for every page — edit those in the admin panel.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -122,8 +125,8 @@ const html = `<!doctype html>
 <meta property="og:type" content="website" />
 <meta property="og:title" content="ما الجديد في ATTARIX" />
 <meta property="og:locale" content="ar_EG" />
-<link rel="icon" href="/brand/attarix-mark-square-32.png" type="image/png" sizes="32x32" />
-<link rel="icon" href="/brand/attarix-mark-square-64.png" type="image/png" sizes="64x64" />
+<link rel="icon" href="/{{brand.square32}}" type="image/png" sizes="32x32" />
+<link rel="icon" href="/{{brand.square64}}" type="image/png" sizes="64x64" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -155,11 +158,11 @@ const html = `<!doctype html>
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="index.html"><img class="mark" src="brand/attarix-mark-h108.png" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light-h51.png" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark-blue-h51.png" alt="ATTARIX" width="109" height="17"></picture></a>
+    <a class="logo" href="index.html"><img class="mark" src="{{brand.markH108}}" alt="" width="42" height="36"><picture><source srcset="{{brand.wordmarkLight}}" media="(prefers-color-scheme: dark)"><img class="word" src="{{brand.wordmarkBlue}}" alt="ATTARIX" width="109" height="17"></picture></a>
     <nav class="nav-links">
 ${nav}
     </nav>
-    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">حمّل مجانًا</a>
+    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">{{buttons.headerDownload}}</a>
     <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
   </div>
 </header>
@@ -178,9 +181,9 @@ ${articles}
 
 <footer>
   <div class="wrap">
-    <div class="logo"><img class="mark" src="brand/attarix-mark-h108.png" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light-h51.png" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark-blue-h51.png" alt="ATTARIX" width="109" height="17"></picture></div>
+    <div class="logo"><img class="mark" src="{{brand.markH108}}" alt="" width="42" height="36"><picture><source srcset="{{brand.wordmarkLight}}" media="(prefers-color-scheme: dark)"><img class="word" src="{{brand.wordmarkBlue}}" alt="ATTARIX" width="109" height="17"></picture></div>
     <p><a href="index.html">الرئيسية</a> · ${foot} · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
-    <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
+    <p style="margin-top:6px">{{contact.ownerName}} — <a data-tel href="tel:{{contact.phoneTel}}">{{contact.phoneDisplay}}</a> · {{footer.copyright}}</p>
   </div>
 </footer>
 

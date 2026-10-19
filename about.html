@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>عنّا — عيلة العطار | ATTARIX</title>
 <meta name="description" content="اتعرف على عيلة العطار — فريق ATTARIX: تطوير برمجيات، منتجات، مشتريات وتصاميم، واستيراد وتصدير. إخوات بيشتغلوا مع بعض." />
-<link rel="icon" href="/brand/attarix-mark-square-32.png" type="image/png" sizes="32x32" />
-<link rel="icon" href="/brand/attarix-mark-square-64.png" type="image/png" sizes="64x64" />
+<link rel="icon" href="/{{brand.square32}}" type="image/png" sizes="32x32" />
+<link rel="icon" href="/{{brand.square64}}" type="image/png" sizes="64x64" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="index.html"><img class="mark" src="brand/attarix-mark-h108.png" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light-h51.png" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark-blue-h51.png" alt="ATTARIX" width="109" height="17"></picture></a>
+    <a class="logo" href="index.html"><img class="mark" src="{{brand.markH108}}" alt="" width="42" height="36"><picture><source srcset="{{brand.wordmarkLight}}" media="(prefers-color-scheme: dark)"><img class="word" src="{{brand.wordmarkBlue}}" alt="ATTARIX" width="109" height="17"></picture></a>
     <nav class="nav-links">
       <a href="index.html#pains">المزايا</a>
       <a href="index.html#plans">الأسعار</a>
@@ -31,7 +31,7 @@
       <a href="index.html#faq">أسئلة</a>
       <a href="index.html#start">تواصل</a>
     </nav>
-    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">حمّل مجانًا</a>
+    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">{{buttons.headerDownload}}</a>
     <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
   </div>
 </header>
@@ -99,7 +99,7 @@
       </div>
       <div class="card-actions" style="margin-top:16px">
         <a class="btn btn-blue" data-wa-msg="السلام عليكم 👋 جاي من الموقع وحابب أتكلم معاكم">💬 ابعتلنا واتساب</a>
-        <a class="btn btn-ghost" data-tel href="tel:+201090246299">📞 اتصل بينا</a>
+        <a class="btn btn-ghost" data-tel href="tel:{{contact.phoneTel}}">📞 اتصل بينا</a>
       </div>
     </div>
 
@@ -110,9 +110,9 @@
 
 <footer>
   <div class="wrap">
-    <div class="logo" style="justify-content:center;margin-bottom:10px"><img class="mark" src="brand/attarix-mark-h108.png" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light-h51.png" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark-blue-h51.png" alt="ATTARIX" width="109" height="17"></picture></div>
+    <div class="logo" style="justify-content:center;margin-bottom:10px"><img class="mark" src="{{brand.markH108}}" alt="" width="42" height="36"><picture><source srcset="{{brand.wordmarkLight}}" media="(prefers-color-scheme: dark)"><img class="word" src="{{brand.wordmarkBlue}}" alt="ATTARIX" width="109" height="17"></picture></div>
     <p><a href="index.html">الرئيسية</a> · <a href="download.html">تحميل البرنامج</a> · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات</a> · <a href="about.html">عنّا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
-    <p style="margin-top:6px">عيلة العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
+    <p style="margin-top:6px">{{footer.aboutByline}} — <a data-tel href="tel:{{contact.phoneTel}}">{{contact.phoneDisplay}}</a> · {{footer.copyright}}</p>
   </div>
 </footer>
 

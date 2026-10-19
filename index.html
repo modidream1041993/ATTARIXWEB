@@ -12,8 +12,8 @@
 <meta property="og:locale" content="ar_EG" />
 <meta property="og:image" content="https://attarixx.vercel.app/images/sale-screen.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/brand/attarix-mark-square-32.png" type="image/png" sizes="32x32" />
-<link rel="icon" href="/brand/attarix-mark-square-64.png" type="image/png" sizes="64x64" />
+<link rel="icon" href="/{{brand.square32}}" type="image/png" sizes="32x32" />
+<link rel="icon" href="/{{brand.square64}}" type="image/png" sizes="64x64" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,11 +26,11 @@
   "offers": { "@type": "Offer", "availability": "https://schema.org/InStock", "priceCurrency": "EGP" }
 }
 </script>
-<script>window.SITE_CONTACT = { whatsapp: "201090246299", phone: "+201090246299", owner: "م. محمود العطار" };</script>
+<script>window.SITE_CONTACT = { whatsapp: {{js:contact.whatsapp}}, phone: {{js:contact.phoneTel}}, owner: {{js:contact.ownerName}} };</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
-<link rel="preload" as="image" type="image/webp" imagesrcset="brand/attarix-mark-440.webp 440w, brand/attarix-mark-880.webp 880w, brand/attarix-mark-975.webp 975w" imagesizes="(max-width: 900px) 240px, 340px">
+<link rel="preload" as="image" type="image/webp" imagesrcset="{{brand.mark440Webp}} 440w, {{brand.mark880Webp}} 880w, {{brand.mark975Webp}} 975w" imagesizes="(max-width: 900px) 240px, 340px">
 <link rel="stylesheet" href="site.css">
 <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 <style>
@@ -245,8 +245,8 @@
 <header>
   <div class="wrap nav">
     <a class="logo" href="index.html" aria-label="ATTARIX — الرئيسية">
-      <img class="mark" src="brand/attarix-mark-h108.png" alt="" width="42" height="36">
-      <picture><source srcset="brand/attarix-wordmark-light-h51.png" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark-blue-h51.png" alt="ATTARIX" width="109" height="17"></picture>
+      <img class="mark" src="{{brand.markH108}}" alt="" width="42" height="36">
+      <picture><source srcset="{{brand.wordmarkLight}}" media="(prefers-color-scheme: dark)"><img class="word" src="{{brand.wordmarkBlue}}" alt="ATTARIX" width="109" height="17"></picture>
     </a>
     <nav class="nav-links" aria-label="القائمة">
       <a href="#pains">ليه محتاجه</a>
@@ -255,7 +255,7 @@
       <a href="#faq">أسئلة</a>
       <a href="whats-new.html">ما الجديد</a>
     </nav>
-    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">حمّل مجانًا</a>
+    <a class="btn btn-cta btn-sm" href="download.html" data-fb-event="Lead">{{buttons.headerDownload}}</a>
     <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
   </div>
 </header>
@@ -266,29 +266,33 @@
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <h1 id="heroTitle">اعرف محلك <span class="hl">كسبان كام</span> النهارده — بضغطة واحدة.</h1>
-      <p class="sub" id="heroSub">ATTARIX بيسجّل البيع والمخزون والورديات وديون الزباين، ويقولك الفلوس اللي في الدرج والربح، من غير دفاتر ولا آلة حاسبة — ومن غير نت.</p>
+      <h1 id="heroTitle">{{hero.titleBefore}}<span class="hl">{{hero.titleHighlight}}</span>{{hero.titleAfter}}</h1>
+      <p class="sub" id="heroSub">{{hero.sub}}</p>
       <div class="hero-cta">
-        <a class="btn btn-cta btn-lg" href="download.html" data-fb-event="Lead"><svg aria-hidden="true"><use href="#i-down"/></svg>حمّل وجرّب 30 يوم مجانًا</a>
-        <a class="btn btn-ghost btn-lg btn-wa" id="heroWa" href="https://wa.me/201090246299"><svg aria-hidden="true"><use href="#i-wa"/></svg>كلّمنا واتساب</a>
+        <a class="btn btn-cta btn-lg" href="download.html" data-fb-event="Lead"><svg aria-hidden="true"><use href="#i-down"/></svg>{{buttons.mainDownload}}</a>
+        <a class="btn btn-ghost btn-lg btn-wa" id="heroWa" href="https://wa.me/{{contact.whatsapp}}"><svg aria-hidden="true"><use href="#i-wa"/></svg>{{buttons.whatsapp}}</a>
       </div>
+{{#if hero.trust}}
       <div class="hero-trust">
-        <span><svg aria-hidden="true"><use href="#i-check"/></svg>من غير فيزا ولا تسجيل</span>
-        <span><svg aria-hidden="true"><use href="#i-check"/></svg>يشتغل من غير نت</span>
-        <span><svg aria-hidden="true"><use href="#i-check"/></svg>بالعربي</span>
+{{#each hero.trust}}
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg>{{.}}</span>
+{{/each}}
       </div>
+{{/if}}
     </div>
     <div class="hero-art" aria-hidden="true">
-      <div class="chip c1"><span class="dot"><svg><use href="#i-drawer"/></svg></span><div>الدرج مضبوط<small>الوردية اتقفلت بعدّ</small></div></div>
-      <div class="chip c4"><span class="dot"><svg><use href="#i-scan"/></svg></span><div>فاتورة المورد اتقرت<small>راجعها وكمّل الشراء</small></div></div>
+{{#each hero.cardsBefore}}
+      <div class="chip {{style}}"><span class="dot"><svg><use href="#{{icon}}"/></svg></span><div>{{title}}<small>{{small}}</small></div></div>
+{{/each}}
       <div class="mark-tile">
         <picture>
-          <source type="image/webp" srcset="brand/attarix-mark-440.webp 440w, brand/attarix-mark-880.webp 880w, brand/attarix-mark-975.webp 975w" sizes="(max-width: 900px) 240px, 340px">
-          <img src="brand/attarix-mark-440.png" srcset="brand/attarix-mark-440.png 440w, brand/attarix-mark-880.png 880w, brand/attarix-mark-975.png 975w" sizes="(max-width: 900px) 240px, 340px" alt="" width="340" height="290" fetchpriority="high">
+          <source type="image/webp" srcset="{{brand.mark440Webp}} 440w, {{brand.mark880Webp}} 880w, {{brand.mark975Webp}} 975w" sizes="(max-width: 900px) 240px, 340px">
+          <img src="{{brand.mark440Png}}" srcset="{{brand.mark440Png}} 440w, {{brand.mark880Png}} 880w, {{brand.mark975Png}} 975w" sizes="(max-width: 900px) 240px, 340px" alt="" width="340" height="290" fetchpriority="high">
         </picture>
       </div>
-      <div class="chip c2"><span class="dot"><svg><use href="#i-chart"/></svg></span><div>ربح النهارده<small>بضغطة من التقارير</small></div></div>
-      <div class="chip c3"><span class="dot"><svg><use href="#i-box"/></svg></span><div>الزيت قرّب يخلص<small>اطلب 24 كرتونة</small></div></div>
+{{#each hero.cardsAfter}}
+      <div class="chip {{style}}"><span class="dot"><svg><use href="#{{icon}}"/></svg></span><div>{{title}}<small>{{small}}</small></div></div>
+{{/each}}
     </div>
   </div>
 </section>
@@ -297,8 +301,10 @@
 <section id="pains" class="sec-alt">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2>المشاكل اللي بتصحّيك بالليل… ليها حل</h2>
-      <p>مش محتاج تبقى محاسب ولا بتاع كمبيوتر.</p>
+      <h2>{{sections.pains.title}}</h2>
+{{#if sections.pains.sub}}
+      <p>{{sections.pains.sub}}</p>
+{{/if}}
     </div>
     <div class="pains">
       <div class="pain rv">
@@ -329,9 +335,13 @@
 <section id="ai">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="kicker"><svg aria-hidden="true"><use href="#i-spark"/></svg>ذكاء اصطناعي بيشتغل لحسابك</span>
-      <h2>اللي كان بياخد منك ساعة… بقى دقيقة</h2>
-      <p>صوّر فاتورة المورد، واسأل عن محلك بالعربي، وسيب البرنامج يجهّزلك الشغل — وإنت اللي بتراجع وبتقرر.</p>
+{{#if sections.ai.kicker}}
+      <span class="kicker"><svg aria-hidden="true"><use href="#i-spark"/></svg>{{sections.ai.kicker}}</span>
+{{/if}}
+      <h2>{{sections.ai.title}}</h2>
+{{#if sections.ai.sub}}
+      <p>{{sections.ai.sub}}</p>
+{{/if}}
     </div>
     <div class="ai-grid">
       <div class="ai-cards">
@@ -380,8 +390,10 @@
 <section id="biz">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2>مناسب لنشاطك</h2>
-      <p>أول ما تفتحه بتختار نوع محلك، والبرنامج يجهّزلك اللي محتاجه.</p>
+      <h2>{{sections.biz.title}}</h2>
+{{#if sections.biz.sub}}
+      <p>{{sections.biz.sub}}</p>
+{{/if}}
     </div>
     <div class="biz">
       <div class="t rv"><span class="ic"><svg aria-hidden="true"><use href="#i-basket"/></svg></span><b>بقالة وسوبر ماركت</b><span>البيع بالوزن وملصق الميزان، وتواريخ الصلاحية.</span></div>
@@ -398,8 +410,10 @@
 <section id="screen" class="sec-alt">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2>ده شكل شاشة البيع</h2>
-      <p>لقطة حقيقية من البرنامج — ببيانات تجريبية.</p>
+      <h2>{{sections.screen.title}}</h2>
+{{#if sections.screen.sub}}
+      <p>{{sections.screen.sub}}</p>
+{{/if}}
     </div>
     <div class="shot-grid">
       <figure class="rv">
@@ -423,7 +437,7 @@
 <!-- ===== ٥. ليه ===== -->
 <section id="why">
   <div class="wrap">
-    <div class="sec-head rv"><h2>ليه ATTARIX؟</h2></div>
+    <div class="sec-head rv"><h2>{{sections.why.title}}</h2>{{#if sections.why.sub}}<p>{{sections.why.sub}}</p>{{/if}}</div>
     <div class="why">
       <div class="w rv"><span class="ic"><svg aria-hidden="true"><use href="#i-wifi-off"/></svg></span><div><b>من غير إنترنت</b><span>النت يقطع، والبيع ما يقفش.</span></div></div>
       <div class="w rv"><span class="ic"><svg aria-hidden="true"><use href="#i-pc"/></svg></span><div><b>بياناتك عندك</b><span>على كمبيوتر محلك، مش على سيرفر حد.</span></div></div>
@@ -438,68 +452,51 @@
 <section id="plans" class="sec-alt">
   <div class="wrap">
     <div class="sec-head rv">
-      <h2>اختار اللي يناسب شغلك</h2>
-      <p>جرّب 30 يوم بباقة تاجر كاملة ومعاها الموارد البشرية، وبعدين اختار.</p>
-      <p style="margin-top:12px"><span class="offer">عرض الإطلاق — خصم 50% لأول 10 عملاء، والسعر ثابت ليك طول ما اشتراكك مستمر</span></p>
+      <h2>{{sections.plans.title}}</h2>
+{{#if sections.plans.sub}}
+      <p>{{sections.plans.sub}}</p>
+{{/if}}
+{{#if plans.offer}}
+      <p style="margin-top:12px"><span class="offer">{{plans.offer}}</span></p>
+{{/if}}
     </div>
     <div class="plans">
-      <div class="plan rv">
-        <h3>كاشير</h3>
-        <p class="for">للمحل اللي بيبيع ويحاسب وبس</p>
+{{#each plans.items}}
+      <div class="plan{{#if highlight}} hot{{/if}} rv">
+{{#if tag}}
+        <span class="tag">{{tag}}</span>
+{{/if}}
+        <h3>{{name}}</h3>
+        <p class="for">{{for}}</p>
         <ul>
-          <li>بيع نقدي وآجل بسيط</li>
-          <li>مستخدمين اتنين</li>
-          <li>ورديات وتقرير Z</li>
-          <li>ملخص المبيعات</li>
-          <li>البيع بالوزن</li>
+{{#each bullets}}
+          <li>{{.}}</li>
+{{/each}}
         </ul>
-        <p class="price"><s>999 ج/شهر</s> 499 ج/شهر <span class="alt">أو <s>9,990</s> 4,990 ج/سنة (شهرين ببلاش)</span></p>
-        <a class="btn btn-ghost" href="download.html">حمّل وجرّب 30 يوم</a>
+        <p class="price">{{#if priceText}}{{priceText}}{{else}}{{#if monthlyWas}}<s>{{monthlyWas}} ج/شهر</s> {{/if}}{{monthly}} ج/شهر{{#if yearly}} <span class="alt">أو {{#if yearlyWas}}<s>{{yearlyWas}}</s> {{/if}}{{yearly}} ج/سنة{{#if yearlyNote}} {{yearlyNote}}{{/if}}</span>{{/if}}{{/if}}</p>
+{{#if btnWhatsapp}}
+        <a class="{{btnClass}}"{{#if btnId}} id="{{btnId}}"{{/if}} href="https://wa.me/{{contact.whatsapp}}"><svg aria-hidden="true"><use href="#i-wa"/></svg>{{button.text}}</a>
+{{else}}
+        <a class="{{btnClass}}" href="download.html"{{#if highlight}} data-fb-event="Lead"{{/if}}>{{button.text}}</a>
+{{/if}}
       </div>
-      <div class="plan hot rv">
-        <span class="tag">الأكثر طلبًا</span>
-        <h3>تاجر</h3>
-        <p class="for">كل المزايا</p>
-        <ul>
-          <li>مستخدمين بلا حد</li>
-          <li>المحاسبة والتقارير</li>
-          <li>الشيكات</li>
-          <li>المخازن</li>
-          <li>الجرد</li>
-          <li>الأجهزة بالسيريال والضمان</li>
-          <li>الدرج التاني</li>
-          <li>عروض الأسعار</li>
-          <li>ذكاء اصطناعي: فاتورة المورد بالصورة واسأل محلّك (بمفتاح محلك)</li>
-        </ul>
-        <p class="price"><s>3,000 ج/شهر</s> 1,500 ج/شهر <span class="alt">أو <s>30,000</s> 15,000 ج/سنة (شهرين ببلاش)</span></p>
-        <a class="btn btn-cta" href="download.html" data-fb-event="Lead">حمّل وجرّب 30 يوم</a>
-      </div>
-      <div class="plan rv">
-        <h3>أعمال</h3>
-        <p class="for">لأصحاب الفروع</p>
-        <ul>
-          <li>كل مزايا تاجر</li>
-          <li>الموارد البشرية والرواتب</li>
-          <li>مزامنة بين الفروع</li>
-          <li>تطبيق الموبايل للمتابعة</li>
-        </ul>
-        <p class="price">قريبًا</p>
-        <a class="btn btn-ghost btn-wa" id="bizWa" href="https://wa.me/201090246299"><svg aria-hidden="true"><use href="#i-wa"/></svg>كلّمنا واتساب</a>
-      </div>
+{{/each}}
     </div>
     <div class="plan rv" id="hr-addon">
-      <h3>تاجر + الموارد البشرية</h3>
-      <p class="for">إضافة لباقة تاجر: الموظفين والحضور وجهاز البصمة، الإجازات والسُّلف، الرواتب بقسيمة مطبوعة، وعمولة البيع</p>
-      <p class="price" style="margin-bottom:0"><s>999 ج/شهر</s> 499 ج/شهر <span class="alt">أو <s>9,990</s> 4,990 ج/سنة — فوق سعر باقة تاجر</span></p>
+      <h3>{{plans.hrAddon.name}}</h3>
+      <p class="for">{{plans.hrAddon.text}}</p>
+      <p class="price" style="margin-bottom:0">{{#if plans.hrAddon.monthlyWas}}<s>{{plans.hrAddon.monthlyWas}} ج/شهر</s> {{/if}}{{plans.hrAddon.monthly}} ج/شهر{{#if plans.hrAddon.yearly}} <span class="alt">أو {{#if plans.hrAddon.yearlyWas}}<s>{{plans.hrAddon.yearlyWas}}</s> {{/if}}{{plans.hrAddon.yearly}} ج/سنة{{#if plans.hrAddon.note}} {{plans.hrAddon.note}}{{/if}}</span>{{/if}}</p>
     </div>
-    <p class="plans-note rv">كل الباقات: تعمل بدون إنترنت · تجربة 30 يوم كاملة بباقة تاجر + الموارد البشرية · بدون بطاقة بنكية</p>
+{{#if plans.note}}
+    <p class="plans-note rv">{{plans.note}}</p>
+{{/if}}
   </div>
 </section>
 
 <!-- ===== جوّه البرنامج كمان (المزايا التقنية باختصار) ===== -->
 <section id="inside">
   <div class="wrap">
-    <div class="sec-head rv"><h2>وجوّه البرنامج كمان</h2></div>
+    <div class="sec-head rv"><h2>{{sections.inside.title}}</h2>{{#if sections.inside.sub}}<p>{{sections.inside.sub}}</p>{{/if}}</div>
     <div class="tech rv">
       <div><svg aria-hidden="true"><use href="#i-refresh"/></svg><p><b>تحديث بزرار واحد</b><span>بيتأكد من الملف وياخد نسخة احتياطية قبل ما يثبّت.</span></p></div>
       <div><svg aria-hidden="true"><use href="#i-shield"/></svg><p><b>صلاحية لكل موظف</b><span>كل واحد يعمل اللي مسموحله بس، وكل حاجة متسجّلة باسمه.</span></p></div>
@@ -517,28 +514,14 @@
 <!-- ===== ٧. أسئلة ===== -->
 <section id="faq" class="sec-alt">
   <div class="wrap">
-    <div class="sec-head rv"><h2>أسئلة بتتسأل كتير</h2></div>
+    <div class="sec-head rv"><h2>{{sections.faq.title}}</h2>{{#if sections.faq.sub}}<p>{{sections.faq.sub}}</p>{{/if}}</div>
     <div class="faq rv">
+{{#each faq}}
       <details>
-        <summary>التجربة مجانية فعلًا؟</summary>
-        <p>أيوه، 30 يوم بكل المزايا (باقة تاجر ومعاها الموارد البشرية)، من غير فيزا ولا تسجيل. ولو اشتركت بعدها بتكمّل على نفس بياناتك.</p>
+        <summary>{{q}}</summary>
+        <p>{{a}}</p>
       </details>
-      <details>
-        <summary>بدفع إزاي؟</summary>
-        <p>اشتراك شهري أو سنوي. بتكلّمنا على الواتساب، تختار الباقة وتدفع، ونبعتلك كود التفعيل تحطه في البرنامج — وبياناتك زي ما هي.</p>
-      </details>
-      <details>
-        <summary>لو الكمبيوتر باظ… بياناتي بتروح؟</summary>
-        <p>البرنامج بياخد نسخة احتياطية كل يوم لوحده، وتقدر تخليه ينسخ كمان على فلاشة ومشفّرة بكلمة سر. لو الجهاز باظ: نزّل البرنامج على جهاز تاني ورجّع آخر نسخة من الفلاشة.</p>
-      </details>
-      <details>
-        <summary>التحديثات بتنزل إزاي؟</summary>
-        <p>لما تنزل نسخة جديدة البرنامج يقولك في الجرس، وتثبّتها بزرار واحد بعد ما ياخد نسخة احتياطية. مفيش حاجة بتتثبّت لوحدها، وبياناتك بتفضل زي ما هي.</p>
-      </details>
-      <details>
-        <summary>محتاج إنترنت؟</summary>
-        <p>لأ. البيع والمخزون والحسابات كلها على جهازك من غير نت. النت بس لو حبيت تبعت على الواتساب أو تنزّل تحديث.</p>
-      </details>
+{{/each}}
     </div>
   </div>
 </section>
@@ -547,11 +530,13 @@
 <section id="start">
   <div class="wrap">
     <div class="final rv">
-      <h2>جرّبه على محلك 30 يوم — ببلاش</h2>
-      <p>نزّله دلوقتي، وأي سؤال إحنا على الواتساب.</p>
+      <h2>{{sections.start.title}}</h2>
+{{#if sections.start.sub}}
+      <p>{{sections.start.sub}}</p>
+{{/if}}
       <div class="hero-cta">
-        <a class="btn btn-cta btn-lg" href="download.html" data-fb-event="Lead"><svg aria-hidden="true"><use href="#i-down"/></svg>حمّل وجرّب 30 يوم مجانًا</a>
-        <a class="btn btn-ghost btn-lg btn-wa" data-wa-msg="السلام عليكم م. محمود 👋 جاي من الموقع وعايز أستفسر عن ATTARIX" href="https://wa.me/201090246299"><svg aria-hidden="true"><use href="#i-wa"/></svg>كلّمنا واتساب</a>
+        <a class="btn btn-cta btn-lg" href="download.html" data-fb-event="Lead"><svg aria-hidden="true"><use href="#i-down"/></svg>{{buttons.mainDownload}}</a>
+        <a class="btn btn-ghost btn-lg btn-wa" data-wa-msg="{{contact.waMessage}}" href="https://wa.me/{{contact.whatsapp}}"><svg aria-hidden="true"><use href="#i-wa"/></svg>{{buttons.whatsapp}}</a>
       </div>
     </div>
   </div>
@@ -561,13 +546,13 @@
 
 <footer>
   <div class="wrap">
-    <div class="logo"><img class="mark" src="brand/attarix-mark-h108.png" alt="" width="42" height="36"><picture><source srcset="brand/attarix-wordmark-light-h51.png" media="(prefers-color-scheme: dark)"><img class="word" src="brand/attarix-wordmark-blue-h51.png" alt="ATTARIX" width="109" height="17"></picture></div>
+    <div class="logo"><img class="mark" src="{{brand.markH108}}" alt="" width="42" height="36"><picture><source srcset="{{brand.wordmarkLight}}" media="(prefers-color-scheme: dark)"><img class="word" src="{{brand.wordmarkBlue}}" alt="ATTARIX" width="109" height="17"></picture></div>
     <p><a href="download.html">تحميل البرنامج</a> · <a href="whats-new.html">ما الجديد</a> · <a href="products.html">المنتجات والخدمات</a> · <a href="about.html">عنّا</a> · <a href="ATTARIX-GUIDE.html" target="_blank" rel="noopener">دليل الاستخدام</a></p>
-    <p style="margin-top:6px">م. محمود العطار — <a data-tel href="tel:+201090246299">01090246299</a> · © 2026 ATTARIX</p>
+    <p style="margin-top:6px">{{contact.ownerName}} — <a data-tel href="tel:{{contact.phoneTel}}">{{contact.phoneDisplay}}</a> · {{footer.copyright}}</p>
   </div>
 </footer>
 
-<a class="wa" id="floatWa" href="https://wa.me/201090246299" title="واتساب" aria-label="تواصل واتساب"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+<a class="wa" id="floatWa" href="https://wa.me/{{contact.whatsapp}}" title="واتساب" aria-label="تواصل واتساب"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
 <script>
   // ثلاث صيغ للوعد للاختيار في المعاينة: ?hero=1 أو 2 أو 3 (الافتراضي 1).

@@ -13,3 +13,8 @@
 *.db-shm
 *.sqlite
 *.sqlite3
+
+# The site build output and the admin API dependencies (Vercel installs them itself).
+dist/
+node_modules/
+test-results/
