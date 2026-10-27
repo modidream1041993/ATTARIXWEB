@@ -41,6 +41,15 @@
       <button type="submit" class="btn btn-primary btn-block" id="loginBtn">دخول</button>
       <p id="loginMsg" class="msg err" hidden></p>
     </form>
+    <details class="forgot">
+      <summary>نسيت كلمة السر؟</summary>
+      <ol>
+        <li>على جهازك، من فولدر الموقع: <code dir="ltr">npm run admin:reset-password</code> واكتب كلمة سر جديدة مرتين.</li>
+        <li>في Vercel ← Settings ← Environment Variables: بدّل <code dir="ltr">ADMIN_PASSWORD_HASH</code> و<code dir="ltr">ADMIN_SESSION_SECRET</code> بالسطرين اللي في الملف الجديد في <code dir="ltr">ATTARIX-SECRETS\site-admin</code>.</li>
+        <li>Deployments ← <b>Redeploy</b>، وادخل بكلمة السر الجديدة والكود من الموبايل (الكود ما بيتغيّرش).</li>
+      </ol>
+      <p class="hint">لأسباب الأمان، كلمة السر ما بتتغيّرش من هنا ولا بتتبعت على إيميل.</p>
+    </details>
   </section>
 
   <section id="loadingView"><p class="hint">جاري التحميل…</p></section>

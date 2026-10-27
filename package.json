@@ -9,7 +9,8 @@
   "scripts": {
     "build": "node site-build/build.mjs",
     "test": "node --test",
-    "admin:setup": "node site-build/admin-setup.mjs"
+    "admin:setup": "node site-build/admin-setup.mjs",
+    "admin:reset-password": "node site-build/admin-setup.mjs --reset-password"
   },
   "dependencies": {
     "sharp": "0.33.5"

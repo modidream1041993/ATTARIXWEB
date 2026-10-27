@@ -1,7 +1,7 @@
 // The owner's setup script: the secrets it makes, and the offline QR page (the CLI's prompts and writes are not run).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { makeSecrets, MIN_PASSWORD } from '../site-build/admin-setup.mjs';
+import { makeSecrets, makePasswordReset, resetFileName, MIN_PASSWORD } from '../site-build/admin-setup.mjs';
 import { verifyPassword, parseHash } from '../api/_lib/password.js';
 import { base32Decode, verifyTotp, hotp, stepAt } from '../api/_lib/totp.js';
 import { createToken, verifyToken } from '../api/_lib/session.js';
@@ -37,4 +37,22 @@ test('the QR page is made offline: an inline SVG, no script, no network, the sec
   assert.ok(!/<script/i.test(s.qrHtml));
   assert.ok(!/https?:\/\//.test(s.qrHtml.replace(/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, '')), 'nothing is loaded from the network');
   assert.ok(!s.qrHtml.includes(s.totpSecret), 'the secret is only inside the QR drawing');
+});
+
+test('a forgotten password: a new hash and a new session secret, the TOTP secret NOT touched', async () => {
+  const r = await makePasswordReset('the new long password');
+  assert.equal(await verifyPassword('the new long password', r.passwordHash), true);
+  assert.equal(await verifyPassword('the old long password', r.passwordHash), false);
+  assert.equal(Buffer.from(r.sessionSecret, 'base64url').length, 32);
+  const lines = r.envText.split('\n').filter((l) => /^[A-Z_]+=/.test(l));
+  assert.deepEqual(lines.map((l) => l.split('=')[0]), ['ADMIN_PASSWORD_HASH', 'ADMIN_SESSION_SECRET']);
+  assert.ok(!/^ADMIN_TOTP_SECRET=/m.test(r.envText), 'the phone code stays as it is');
+  assert.ok(!r.envText.includes('the new long password'), 'the password itself is never written');
+  await assert.rejects(() => makePasswordReset('x'.repeat(MIN_PASSWORD - 1)));
+  const again = await makePasswordReset('the new long password');
+  assert.notEqual(again.sessionSecret, r.sessionSecret);
+});
+
+test('each reset writes its own file, named by the local time', () => {
+  assert.equal(resetFileName(new Date(2026, 9, 27, 9, 5, 3)), 'password-reset-2026-10-27-090503.txt');
 });

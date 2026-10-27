@@ -38,6 +38,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .login{max-width:420px;margin:40px auto}
 .login h2{font-size:1.3rem;font-weight:900;margin-bottom:6px}
 .login p{color:var(--muted);margin-bottom:14px}
+.forgot{margin-top:14px;font-size:.9rem}
+.forgot summary{cursor:pointer;color:var(--muted);font-weight:700}
+.forgot ol{padding-inline-start:20px;margin:8px 0;line-height:1.8}
+.forgot code{font-size:.82rem;overflow-wrap:anywhere}
 
 label.f{display:block;margin:12px 0}
 label.f > span{display:block;font-weight:800;font-size:.92rem;margin-bottom:4px}

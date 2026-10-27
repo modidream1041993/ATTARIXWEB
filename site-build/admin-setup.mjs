@@ -38,6 +38,28 @@ export async function makeSecrets(password, { random = randomBytes } = {}) {
   return { passwordHash, totpSecret, sessionSecret, envText, uri, qrHtml: qrPage(uri) };
 }
 
+// Pure: a forgotten password. A new hash and a new session secret (every open session is signed out); the TOTP
+// secret is NOT touched, so the phone's code keeps working and the login still needs both factors.
+export async function makePasswordReset(password, { random = randomBytes } = {}) {
+  if (typeof password !== 'string' || [...password].length < MIN_PASSWORD) throw new Error(`password shorter than ${MIN_PASSWORD}`);
+  const sessionSecret = random(32).toString('base64url');
+  const passwordHash = await hashPassword(password);
+  const envText = [
+    '# ATTARIX site admin — PASSWORD RESET. Replace these TWO variables in Vercel (Production AND Preview), then Redeploy.',
+    '# ADMIN_TOTP_SECRET stays as it is. Keep this file here only. Never paste it in a chat, never commit it.',
+    `ADMIN_PASSWORD_HASH=${passwordHash}`,
+    `ADMIN_SESSION_SECRET=${sessionSecret}`,
+    '',
+  ].join('\n');
+  return { passwordHash, sessionSecret, envText };
+}
+
+// The reset file's name carries the local time, so a second reset never overwrites the first.
+export function resetFileName(d = new Date()) {
+  const p = (n) => String(n).padStart(2, '0');
+  return `password-reset-${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}.txt`;
+}
+
 function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -105,10 +127,29 @@ function lockFolder(dir) {
   }
 }
 
+async function resetPassword(dir) {
+  console.log('ATTARIX site admin — forgotten password. Type a NEW password (hidden, at least 12 characters).');
+  console.log('The Google Authenticator code is not changed.');
+  const p1 = await askHidden('New admin password: ');
+  const p2 = await askHidden('Again: ');
+  if (p1 !== p2) throw new Error('the two passwords differ — nothing written');
+  const s = await makePasswordReset(p1);
+  mkdirSync(dir, { recursive: true });
+  const lock = lockFolder(dir);
+  const file = join(dir, resetFileName());
+  writeFileSync(file, s.envText, { flag: 'wx' });
+  console.log(`\nWritten to: ${file}`);
+  console.log(`Folder permissions: ${lock}`);
+  console.log('Next (docs/ADMIN-SETUP-AR.md, section 8):');
+  console.log('  1. Vercel → Settings → Environment Variables: replace ADMIN_PASSWORD_HASH and ADMIN_SESSION_SECRET with the two lines of that file.');
+  console.log('  2. Deployments → Redeploy. Then log in with the new password and the code from the phone.');
+}
+
 async function main() {
   const home = process.env.USERPROFILE || process.env.HOME;
   if (!home) throw new Error('no USERPROFILE');
   const dir = join(home, 'ATTARIX-SECRETS', 'site-admin');
+  if (process.argv.includes('--reset-password')) return resetPassword(dir);
   const envFile = join(dir, 'vercel-env.txt');
   const qrFile = join(dir, 'totp-qr.html');
   if (existsSync(envFile) || existsSync(qrFile)) {
