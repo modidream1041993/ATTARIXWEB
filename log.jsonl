@@ -4,3 +4,4 @@
 {"at":"2026-10-19T08:27:23.612Z","who":"owner","action":"save","summary":"حفظ في المعاينة: plans.items[1].yearlyWas"}
 {"at":"2026-10-22T20:52:06.796Z","who":"owner","action":"login-locked","summary":"5 محاولات دخول خاطئة متتالية — قُفل الدخول 15 دقيقة"}
 {"at":"2026-10-31T11:51:36.702Z","who":"owner","action":"login","summary":"تسجيل دخول"}
+{"at":"2026-10-31T11:53:18.752Z","who":"owner","action":"publish","summary":"نشر — plans.items[1].monthly، plans.items[1].monthlyWas، plans.items[1].yearly، plans.items[1].yearlyWas","mainBefore":"b34f56ffa0a8","mergeSha":"97f7edf49789"}
