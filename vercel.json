@@ -17,12 +17,12 @@
     },
     {
       "source": "/ATTARIX-Setup.exe",
-      "destination": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v2.9.2/Attarix_2.9.2_x64-setup.exe",
+      "destination": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.1.0/Attarix_3.1.0_x64-setup.exe",
       "permanent": false
     },
     {
       "source": "/Attarix_2.3.0_x64-setup.exe",
-      "destination": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v2.9.2/Attarix_2.9.2_x64-setup.exe",
+      "destination": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.1.0/Attarix_3.1.0_x64-setup.exe",
       "permanent": false
     },
     {
