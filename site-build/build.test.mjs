@@ -5,7 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync, mkdtempSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { tmpdir } from 'node:os';
-import { build, renderPage, TEMPLATES, ROOT } from './build.mjs';
+import { build, renderPage, productionProblems, TEMPLATES, ROOT } from './build.mjs';
 import { render, escapeHtml } from './lib/template.mjs';
 
 // THE MIGRATION PROOF. BASE_REF = the last commit whose pages were hand-written HTML (site/2.9.2, 2026-10-18).
@@ -56,11 +56,16 @@ test('the build of the current tree: every page rendered, the rest copied byte f
     for (const banned of ['content/', 'site-build/', 'api/', 'docs/', 'test/', 'scripts/', 'node_modules/', '.git', 'package.json', 'vercel.json', 'MARKETING_PLAN.md']) {
       assert.ok(!out.some((f) => f.startsWith(banned)), `${banned} must not be in the output`);
     }
-    assert.ok(out.includes('admin/index.html') && out.includes('admin-products.html') && out.includes('robots.txt'));
+    // site/admin carries the panel (shipped in its PREVIEW build only — a production build refuses it, below);
+    // site/public, the branch main is built from, carries none of it.
+    const hasPanel = existsSync(join(ROOT, 'admin'));
+    assert.equal(out.includes('admin/index.html'), hasPanel);
+    assert.equal(out.includes('admin-products.html'), hasPanel);
+    assert.ok(out.includes('robots.txt'));
     const robots = readFileSync(join(outDir, 'robots.txt'), 'utf8');
     assert.match(robots, /^Disallow: \/admin$/m);
     assert.match(robots, /^Disallow: \/api\/$/m);
-    assert.match(readFileSync(join(outDir, 'admin-products.html'), 'utf8'), /noindex, nofollow/);
+    if (hasPanel) assert.match(readFileSync(join(outDir, 'admin-products.html'), 'utf8'), /noindex, nofollow/);
   } finally {
     rmSync(outDir, { recursive: true, force: true });
   }
@@ -98,4 +103,30 @@ test('the engine: lists, conditions, and standalone block lines that leave no tr
   const out = render(tpl, { price: 'p', items: [{ name: 'a', tag: 't' }, { name: 'b', tag: '' }], none: [] });
   assert.equal(out, '<ul>\n  <li>a [t] p</li>\n  <li>b p</li>\n</ul>\nY\n');
   assert.equal(render('a\r\n{{#if x}}\r\nb\r\n{{/if}}\r\nc', { x: true }), 'a\r\nb\r\nc', 'CRLF templates work too');
+});
+
+// The owner's rule (2026-10-19): the admin panel never runs on the public site. A PRODUCTION build refuses while any
+// admin code is in the tree (the new panel's admin/ and api/, site/admin's copy admin-products.html); a preview build is
+// unaffected. Whatever branch this runs on, the real tree either is refused or ships none of it. The old token panel at
+// its live path (admin.html) stays allowed until the owner says remove it (2026-10-19) — a separate final commit.
+test('production: the build refuses a tree that carries admin code, and names each piece', () => {
+  const problems = productionProblems(['index.html', 'api', 'admin', 'admin-products.html', 'admin.html', 'site.css']);
+  assert.deepEqual(problems, ['admin', 'admin-products.html', 'api'], 'admin.html (the old panel) is kept for now');
+  assert.deepEqual(productionProblems(['index.html', 'content', 'site-build']), []);
+});
+
+test('production: this branch is either refused or builds with no admin route; preview builds are unaffected', () => {
+  const out = mkdtempSync(join(tmpdir(), 'site-prod-'));
+  try {
+    let refused = null;
+    try { build({ outDir: out, env: { VERCEL_ENV: 'production' } }); } catch (e) { refused = e; }
+    if (refused) {
+      assert.match(refused.message, /admin code/);
+      assert.equal(readdirSync(out).length, 0, 'nothing is written when the build is refused');
+    } else {
+      for (const p of ['admin', 'api', 'admin-products.html']) assert.equal(existsSync(join(out, p)), false, p);
+    }
+    build({ outDir: out, env: { VERCEL_ENV: 'preview' } });
+    assert.ok(existsSync(join(out, 'index.html')));
+  } finally { rmSync(out, { recursive: true, force: true }); }
 });

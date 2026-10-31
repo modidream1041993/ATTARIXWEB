@@ -9,6 +9,9 @@
 //    the package files, vercel.json, .vercelignore, MARKETING_PLAN.md.
 // 3. Renders the TEMPLATES below (the site's own pages, carrying {{placeholders}}) with the content, every value
 //    HTML-escaped (site-build/lib/template.mjs), and refuses a page that would still hold a placeholder.
+// 4. On PRODUCTION (Vercel sets VERCEL_ENV) it refuses, before writing anything, a tree that carries admin code: the
+//    panel never runs on the public site (owner, 2026-10-19). Vercel deploys api/ as functions whatever the output
+//    folder holds, so leaving it out of dist/ would not be enough — the build itself fails instead.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync, copyFileSync, existsSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +32,13 @@ const EXCLUDE_TOP = new Set([
   'package.json', 'package-lock.json', 'vercel.json', '.vercelignore', 'MARKETING_PLAN.md', '.vercel',
 ]);
 const excluded = (top) => EXCLUDE_TOP.has(top) || top.startsWith('.git');
+
+// Top-level names that are admin code: the new panel (admin/, api/) and site/admin's copy of the old token panel.
+// The OLD token panel at its live path (admin.html → /admin) is NOT here yet: the owner keeps it on the live site until
+// he has tested the new panel (2026-10-19). Its removal is one separate, final commit that deletes admin.html AND adds
+// it to this list (branch site/public-drop-old-panel).
+const ADMIN_TOP = ['admin', 'admin-products.html', 'api'];
+export const productionProblems = (topNames) => ADMIN_TOP.filter((n) => topNames.includes(n));
 
 const groupThousands = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const price = (n) => (n === null ? '' : groupThousands(n));
@@ -80,7 +90,11 @@ function walk(dir, base, out) {
   return out;
 }
 
-export function build({ root = ROOT, outDir = join(root, 'dist'), content } = {}) {
+export function build({ root = ROOT, outDir = join(root, 'dist'), content, env = process.env } = {}) {
+  if (env.VERCEL_ENV === 'production') {
+    const problems = productionProblems(readdirSync(root));
+    if (problems.length) throw new Error(`production build refused: admin code must never reach the public site — remove ${problems.join(', ')} from this branch`);
+  }
   const c = content ?? JSON.parse(readFileSync(join(root, 'content', 'site.json'), 'utf8'));
   assertValidContent(c);
   const files = walk(root, root, []);

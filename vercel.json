@@ -24,6 +24,11 @@
       "source": "/Attarix_2.3.0_x64-setup.exe",
       "destination": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v2.9.2/Attarix_2.9.2_x64-setup.exe",
       "permanent": false
+    },
+    {
+      "source": "/developer",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "headers": [
