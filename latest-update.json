@@ -1,9 +1,11 @@
 {
-  "version": "2.9.2",
-  "released": "2026-10-18",
-  "url": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v2.9.2/Attarix_2.9.2_x64-setup.exe",
-  "sha256": "4eb9f00f5611e162590d6022b0a1cafc623deda84153113f0ea1cb2346efa06a",
-  "size": 8022489,
+  "version": "3.1.3",
+  "released": "2026-11-08",
+  "url": "https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.1.3/Attarix_3.1.3_x64-setup.exe",
+  "sha256": "700b9c4b2483c7258be9a63dd2c271ea92c82090b17545789cbafba82cb5d967",
+  "size": 8774891,
   "keyId": 2,
-  "signature": "5b1364cebff4989e183d40d0b965954603d93481fdede34453b6bba42a02070ea3875f0ff81b152afbff14237b40a8f78b967a0d2694ee3ab80cfd9e3526540b"
+  "signature": "eadfa051f66ce7614e996eeb650f4e8563cd82d2b334d4451e9b1281b8c1e6a35ef6849a82d64b9920138e692a24aabb6c6a8a21497e93156f15e05ea5858001",
+  "message": "عند استخدام المزامنة: يُحدَّث الجهاز الرئيسي أولًا، ثم باقي الأجهزة.",
+  "messageSignature": "e412ca8f89926661e0abe341c76997030952c1ec6a7216a65dc09d13153dd1076b96d313cbf0c07eac0b073719ff08d6d3babd177962a4c200d87dcc7909930a"
 }
