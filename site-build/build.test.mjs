@@ -5,7 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync, mkdtempSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { tmpdir } from 'node:os';
-import { build, renderPage, productionProblems, isProduction, TEMPLATES, ROOT } from './build.mjs';
+import { build, renderPage, productionProblems, isProduction, isInternalFile, TEMPLATES, ROOT } from './build.mjs';
 import { render, escapeHtml } from './lib/template.mjs';
 
 // THE MIGRATION PROOF. BASE_REF = the last commit whose pages were hand-written HTML (site/2.9.2, 2026-10-18).
@@ -146,5 +146,28 @@ test('production: this branch is either refused or builds with no admin route; p
     }
     build({ outDir: out, env: { VERCEL_ENV: 'preview' } });
     assert.ok(existsSync(join(out, 'index.html')));
+  } finally { rmSync(out, { recursive: true, force: true }); }
+});
+
+// Owner, 2026-11-16: /marketing-kit/* (the leads tracker, WhatsApp scripts, notes for Claude) was downloadable on the
+// live site. Internal material never reaches dist/ — the folder by name, and working documents by extension anywhere.
+test('internal material is never published: marketing-kit/ and every .md/.csv/spreadsheet/document', () => {
+  for (const p of ['marketing-kit/04-LEADS_TRACKER.csv', 'marketing-kit/06-FLYER.html', 'marketing-kit/ATTARIX-FOR-CLAUDE.md',
+    'MARKETING_PLAN.md', 'images/notes.md', 'brand/list.CSV', 'x/leads.xlsx', 'a/b/report.docx', 'deep/marketing-kit/a.html']) {
+    assert.equal(isInternalFile(p), true, p);
+  }
+  for (const p of ['index.html', 'latest-update.json', 'sitemap.xml', 'robots.txt', 'videos/6-hr.mp4', 'images/sale-screen.jpg', 'site.js']) {
+    assert.equal(isInternalFile(p), false, p);
+  }
+  const out = mkdtempSync(join(tmpdir(), 'site-internal-'));
+  try {
+    const { files } = build({ outDir: out, env: {} });
+    const leaked = files.filter((f) => isInternalFile(f));
+    assert.deepEqual(leaked, [], 'nothing internal in the file list');
+    assert.equal(existsSync(join(out, 'marketing-kit')), false, 'no marketing-kit/ in the output');
+    const walkOut = (d) => readdirSync(d).flatMap((n) => (statSync(join(d, n)).isDirectory() ? walkOut(join(d, n)) : [join(d, n)]));
+    const bad = walkOut(out).filter((f) => /\.(md|csv|tsv|xlsx?|docx?)$/i.test(f));
+    assert.deepEqual(bad, [], 'no working documents anywhere in the output');
+    assert.ok(existsSync(join(out, 'latest-update.json')), 'the signed update file still ships');
   } finally { rmSync(out, { recursive: true, force: true }); }
 });

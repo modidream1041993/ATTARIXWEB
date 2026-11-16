@@ -31,7 +31,14 @@ const EXCLUDE_TOP = new Set([
   'content', 'site-build', 'api', 'docs', 'test', 'scripts', 'node_modules', 'dist', 'test-results',
   'package.json', 'package-lock.json', 'vercel.json', '.vercelignore', 'MARKETING_PLAN.md', '.vercel',
   'wrangler.jsonc', '.wrangler',
+  // Internal sales material (owner, 2026-11-16): the leads tracker, WhatsApp scripts, notes for Claude. Never public.
+  'marketing-kit',
 ]);
+
+// Working documents are never part of the site, wherever they sit: notes, spreadsheets, exports. A page links to
+// .html/.js/.css/images/video/json/xml/txt — never to one of these. Checked per FILE, so a new folder cannot leak them.
+const INTERNAL_EXT = /\.(md|markdown|csv|tsv|xlsx?|ods|docx?|odt|log|env)$/i;
+export const isInternalFile = (rel) => INTERNAL_EXT.test(rel) || rel.split('/').includes('marketing-kit');
 
 // Is this the PUBLIC site's build? Vercel (until 2026-11-16) says so with VERCEL_ENV; Cloudflare Workers Builds (since)
 // with WORKERS_CI and the branch it builds — only main is the public site there.
@@ -91,7 +98,7 @@ function walk(dir, base, out) {
     const rel = relative(base, abs).split(sep).join('/');
     if (dir === base && excluded(name)) continue;
     if (statSync(abs).isDirectory()) walk(abs, base, out);
-    else out.push(rel);
+    else if (!isInternalFile(rel)) out.push(rel);
   }
   return out;
 }
