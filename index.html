@@ -130,6 +130,15 @@
   .biz .t b{font-size:1.04rem}
   .biz .t span{color:var(--muted);font-size:.92rem;line-height:1.6}
 
+  /* شوف ATTARIX شغال */
+  .demo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:980px;margin:0 auto}
+  @media(min-width:768px){.demo-grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+  .demo-vid{margin:0}
+  .demo-vid video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:18px;background:var(--bg2);border:1px solid var(--line);box-shadow:var(--shadow)}
+  .demo-vid figcaption{text-align:center;font-weight:800;font-size:.92rem;line-height:1.55;color:var(--ink);margin-top:10px}
+  .demo-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  @media(max-width:420px){.demo-cta .btn{width:100%}}
+
   /* لقطة الشاشة */
   .shot-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:26px;align-items:center}
   @media(max-width:880px){.shot-grid{grid-template-columns:1fr}}
@@ -406,6 +415,45 @@
   </div>
 </section>
 
+<!-- ===== شوف ATTARIX شغال ===== -->
+<section id="demo">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>شوف ATTARIX شغال</h2>
+    </div>
+    <div class="demo-grid">
+      <figure class="demo-vid rv">
+        <video class="lazy-vid" muted loop playsinline preload="none" width="406" height="720" data-poster="videos/posters/1-phones.jpg" data-src="videos/1-phones.mp4" aria-label="فيديو قصير: بيع موبايل بالسيريال ومعرفة الضمان"></video>
+        <figcaption>موبايلات واكسسوارات: سيريال وضمان لكل جهاز</figcaption>
+      </figure>
+      <figure class="demo-vid rv">
+        <video class="lazy-vid" muted loop playsinline preload="none" width="406" height="720" data-poster="videos/posters/2-clothes.jpg" data-src="videos/2-clothes.mp4" aria-label="فيديو قصير: مرتجع قطعة ملابس وإيصال المرتجع"></video>
+        <figcaption>محلات الملابس: المرتجع يرجع للمخزون بإيصال</figcaption>
+      </figure>
+      <figure class="demo-vid rv">
+        <video class="lazy-vid" muted loop playsinline preload="none" width="406" height="720" data-poster="videos/posters/3-ai-photo.jpg" data-src="videos/3-ai-photo.mp4" aria-label="فيديو قصير: تصوير فاتورة المورد وقراءتها بالذكاء الاصطناعي"></video>
+        <figcaption>صوّر فاتورة المورد بالذكاء الاصطناعي</figcaption>
+      </figure>
+      <figure class="demo-vid rv">
+        <video class="lazy-vid" muted loop playsinline preload="none" width="406" height="720" data-poster="videos/posters/4-attara.jpg" data-src="videos/4-attara.mp4" aria-label="فيديو قصير: تنبيه الأصناف اللي قربت صلاحيتها في العطارة"></video>
+        <figcaption>العطارة: تنبيه الصلاحية قبل ما تخلص</figcaption>
+      </figure>
+      <figure class="demo-vid rv">
+        <video class="lazy-vid" muted loop playsinline preload="none" width="406" height="720" data-poster="videos/posters/5-ai-ask.jpg" data-src="videos/5-ai-ask.mp4" aria-label="فيديو قصير: سؤال لمحلك بالعربي والجواب بأرقامه"></video>
+        <figcaption>اسأل محلّك بالعربي والجواب من أرقامك</figcaption>
+      </figure>
+      <figure class="demo-vid rv">
+        <video class="lazy-vid" muted loop playsinline preload="none" width="406" height="720" data-poster="videos/posters/6-hr.jpg" data-src="videos/6-hr.mp4" aria-label="فيديو قصير: الحضور والسلف والمرتبات"></video>
+        <figcaption>الموظفين والمرتبات بخصم السلف والغياب</figcaption>
+      </figure>
+    </div>
+    <div class="demo-cta rv">
+      <a class="btn btn-cta btn-lg" href="download.html" data-fb-event="Lead"><svg aria-hidden="true"><use href="#i-down"/></svg>جرّب 30 يوم ببلاش</a>
+      <a class="btn btn-ghost btn-lg btn-wa" href="https://wa.me/{{contact.whatsapp}}"><svg aria-hidden="true"><use href="#i-wa"/></svg>{{buttons.whatsapp}}</a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== ٤. لقطة حقيقية ===== -->
 <section id="screen" class="sec-alt">
   <div class="wrap">
@@ -581,11 +629,17 @@
   var vids = document.querySelectorAll('video.lazy-vid');
   if (!vids.length) return;
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function load(v) { if (!v.getAttribute('src')) { v.setAttribute('src', v.dataset.src); } }
+  function poster(v) { if (v.dataset.poster && !v.getAttribute('poster')) { v.setAttribute('poster', v.dataset.poster); } }
+  function load(v) { poster(v); if (!v.getAttribute('src')) { v.setAttribute('src', v.dataset.src); } }
   if (still || !('IntersectionObserver' in window)) {
     vids.forEach(function (v) { v.controls = true; v.preload = 'none'; load(v); });
     return;
   }
+  /* Posters given as data-poster arrive a screen or so before the card does, so they never compete with the first paint. */
+  var near = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { poster(e.target); near.unobserve(e.target); } });
+  }, { rootMargin: '800px 0px' });
+  vids.forEach(function (v) { if (v.dataset.poster) near.observe(v); });
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       var v = e.target;
