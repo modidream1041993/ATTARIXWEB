@@ -30,7 +30,7 @@ export const TEMPLATES = [
 const EXCLUDE_TOP = new Set([
   'content', 'site-build', 'api', 'docs', 'test', 'scripts', 'node_modules', 'dist', 'test-results',
   'package.json', 'package-lock.json', 'vercel.json', '.vercelignore', 'MARKETING_PLAN.md', '.vercel',
-  'wrangler.jsonc', '.wrangler',
+  'wrangler.jsonc', '.wrangler', 'worker',
   // Internal sales material (owner, 2026-11-16): the leads tracker, WhatsApp scripts, notes for Claude. Never public.
   'marketing-kit',
 ]);

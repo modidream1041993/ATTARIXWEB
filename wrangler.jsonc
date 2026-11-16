@@ -1,15 +1,20 @@
-// Cloudflare Workers (static assets only — no Worker script) for https://attarix.net.
+// Cloudflare Workers (static assets + one tiny script) for https://attarix.net.
 // Workers Builds runs `node site-build/build.mjs` (→ dist/) and then `npx wrangler deploy` on every push to main.
 // Clean URLs: html_handling "auto-trailing-slash" serves /download from download.html and sends /download.html → /download.
 // Redirects and headers live in _redirects and _headers (copied into dist/ by the build). No secrets here, ever.
+// worker/index.js runs ONLY for /videos/* (run_worker_first) to answer Range requests with 206 — Safari needs it to
+// play video. Everything else never touches the script.
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "attarix-web",
+  "main": "worker/index.js",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "none"
+    "not_found_handling": "none",
+    "run_worker_first": ["/videos/*"]
   },
   "routes": [
     { "pattern": "attarix.net", "custom_domain": true }
