@@ -5,7 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync, mkdtempSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { tmpdir } from 'node:os';
-import { build, renderPage, productionProblems, TEMPLATES, ROOT } from './build.mjs';
+import { build, renderPage, productionProblems, isProduction, TEMPLATES, ROOT } from './build.mjs';
 import { render, escapeHtml } from './lib/template.mjs';
 
 // THE MIGRATION PROOF. BASE_REF = the last commit whose pages were hand-written HTML (site/2.9.2, 2026-10-18).
@@ -113,6 +113,24 @@ test('production: the build refuses a tree that carries admin code, and names ea
   const problems = productionProblems(['index.html', 'api', 'admin', 'admin-products.html', 'admin.html', 'site.css']);
   assert.deepEqual(problems, ['admin', 'admin-products.html', 'api'], 'admin.html (the old panel) is kept for now');
   assert.deepEqual(productionProblems(['index.html', 'content', 'site-build']), []);
+});
+
+test('production is Vercel production OR Cloudflare building main — never a Cloudflare preview branch', () => {
+  assert.equal(isProduction({ VERCEL_ENV: 'production' }), true);
+  assert.equal(isProduction({ WORKERS_CI: '1', WORKERS_CI_BRANCH: 'main' }), true);
+  assert.equal(isProduction({ WORKERS_CI: '1', WORKERS_CI_BRANCH: 'site/admin' }), false);
+  assert.equal(isProduction({ VERCEL_ENV: 'preview' }), false);
+  assert.equal(isProduction({}), false);
+});
+
+test('Cloudflare on main refuses admin code exactly like Vercel production', () => {
+  const out = mkdtempSync(join(tmpdir(), 'site-cf-'));
+  try {
+    let refused = null;
+    try { build({ outDir: out, env: { WORKERS_CI: '1', WORKERS_CI_BRANCH: 'main' } }); } catch (e) { refused = e; }
+    if (refused) assert.match(refused.message, /admin code/);
+    else for (const p of ['admin', 'api', 'admin-products.html', 'wrangler.jsonc']) assert.equal(existsSync(join(out, p)), false, p);
+  } finally { rmSync(out, { recursive: true, force: true }); }
 });
 
 test('production: this branch is either refused or builds with no admin route; preview builds are unaffected', () => {

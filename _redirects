@@ -1,0 +1,15 @@
+# Cloudflare redirects for attarix.net (Workers static assets). Ported 1:1 from vercel.json (2026-11-16).
+# First match wins. Each release: point both installer lines at the new GitHub asset (302 - never permanent).
+
+# vercel.json "rewrites": /guide shows the guide without changing the address
+/guide  /ATTARIX-GUIDE  200
+
+# old address of the home page (Vercel: permanent = 308)
+/ATTARIX  /  308
+
+# installer links (Vercel: permanent false = 302 for external)
+/ATTARIX-Setup.exe  https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.1.3/Attarix_3.1.3_x64-setup.exe  302
+/Attarix_2.3.0_x64-setup.exe  https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.1.3/Attarix_3.1.3_x64-setup.exe  302
+
+# the app (2.9.3+) opens /developer - TEMPORARY to the home page (307, so it can move later)
+/developer  /  307

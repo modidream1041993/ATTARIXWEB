@@ -1,0 +1,19 @@
+// Cloudflare Workers (static assets only — no Worker script) for https://attarix.net.
+// Workers Builds runs `node site-build/build.mjs` (→ dist/) and then `npx wrangler deploy` on every push to main.
+// Clean URLs: html_handling "auto-trailing-slash" serves /download from download.html and sends /download.html → /download.
+// Redirects and headers live in _redirects and _headers (copied into dist/ by the build). No secrets here, ever.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "attarix-web",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "routes": [
+    { "pattern": "attarix.net", "custom_domain": true }
+  ],
+  "workers_dev": false,
+  "preview_urls": false
+}

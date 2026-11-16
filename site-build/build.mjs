@@ -9,7 +9,7 @@
 //    the package files, vercel.json, .vercelignore, MARKETING_PLAN.md.
 // 3. Renders the TEMPLATES below (the site's own pages, carrying {{placeholders}}) with the content, every value
 //    HTML-escaped (site-build/lib/template.mjs), and refuses a page that would still hold a placeholder.
-// 4. On PRODUCTION (Vercel sets VERCEL_ENV) it refuses, before writing anything, a tree that carries admin code: the
+// 4. On PRODUCTION (Vercel's VERCEL_ENV, or Cloudflare Workers Builds on main — see isProduction) it refuses, before writing anything, a tree that carries admin code: the
 //    panel never runs on the public site (owner, 2026-10-19). Vercel deploys api/ as functions whatever the output
 //    folder holds, so leaving it out of dist/ would not be enough — the build itself fails instead.
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync, copyFileSync, existsSync } from 'node:fs';
@@ -30,7 +30,13 @@ export const TEMPLATES = [
 const EXCLUDE_TOP = new Set([
   'content', 'site-build', 'api', 'docs', 'test', 'scripts', 'node_modules', 'dist', 'test-results',
   'package.json', 'package-lock.json', 'vercel.json', '.vercelignore', 'MARKETING_PLAN.md', '.vercel',
+  'wrangler.jsonc', '.wrangler',
 ]);
+
+// Is this the PUBLIC site's build? Vercel (until 2026-11-16) says so with VERCEL_ENV; Cloudflare Workers Builds (since)
+// with WORKERS_CI and the branch it builds — only main is the public site there.
+export const isProduction = (env) =>
+  env.VERCEL_ENV === 'production' || (env.WORKERS_CI === '1' && env.WORKERS_CI_BRANCH === 'main');
 const excluded = (top) => EXCLUDE_TOP.has(top) || top.startsWith('.git');
 
 // Top-level names that are admin code: the new panel (admin/, api/) and site/admin's copy of the old token panel.
@@ -91,7 +97,7 @@ function walk(dir, base, out) {
 }
 
 export function build({ root = ROOT, outDir = join(root, 'dist'), content, env = process.env } = {}) {
-  if (env.VERCEL_ENV === 'production') {
+  if (isProduction(env)) {
     const problems = productionProblems(readdirSync(root));
     if (problems.length) throw new Error(`production build refused: admin code must never reach the public site — remove ${problems.join(', ')} from this branch`);
   }

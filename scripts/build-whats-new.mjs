@@ -121,8 +121,10 @@ const html = `<!doctype html>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ما الجديد في ATTARIX</title>
+<link rel="canonical" href="https://attarix.net/whats-new" />
 <meta name="description" content="كل نسخة جديدة من ATTARIX وأهم اللي اتغيّر فيها، الأحدث الأول." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://attarix.net/whats-new" />
 <meta property="og:title" content="ما الجديد في ATTARIX" />
 <meta property="og:locale" content="ar_EG" />
 <link rel="icon" href="/{{brand.square32}}" type="image/png" sizes="32x32" />
@@ -131,7 +133,6 @@ const html = `<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 <style>
   /* خاص بصفحة «ما الجديد» فقط — الباقي كله من site.css */
   .wn-wrap{max-width:760px;margin:0 auto;padding:0 20px}
