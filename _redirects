@@ -8,8 +8,8 @@
 /ATTARIX  /  308
 
 # installer links (Vercel: permanent false = 302 for external)
-/ATTARIX-Setup.exe  https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.1.3/Attarix_3.1.3_x64-setup.exe  302
-/Attarix_2.3.0_x64-setup.exe  https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.1.3/Attarix_3.1.3_x64-setup.exe  302
+/ATTARIX-Setup.exe  https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.2.1/Attarix_3.2.1_x64-setup.exe  302
+/Attarix_2.3.0_x64-setup.exe  https://github.com/modidream1041993/ATTARIXWEB/releases/download/v3.2.1/Attarix_3.2.1_x64-setup.exe  302
 
 # the app (2.9.3+) opens /developer - TEMPORARY to the developer's page (307, so it can move again later)
 /developer  /mad-genius  307
